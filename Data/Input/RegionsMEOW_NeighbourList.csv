@@ -1,0 +1,563 @@
+Region;MEOW;Action
+Albania;Adriatic Sea;
+Austria;Adriatic Sea;remove
+Bosnia and Herzegovina;Adriatic Sea;
+Croatia;Adriatic Sea;
+Greece;Adriatic Sea;remove
+Italy;Adriatic Sea;
+Macedonia;Adriatic Sea;remove
+Montenegro;Adriatic Sea;
+San Marino;Adriatic Sea;remove
+Serbia;Adriatic Sea;remove
+Slovenia;Adriatic Sea;
+Albania;Aegean Sea;remove
+Bulgaria;Aegean Sea;remove
+Crete;Aegean Sea;
+Greece;Aegean Sea;
+Macedonia;Aegean Sea;remove
+Turkey;Aegean Sea;
+South Africa;Agulhas Bank;
+Algeria;Alboran Sea;
+Gibraltar;Alboran Sea;
+Morocco;Alboran Sea;
+Spain;Alboran Sea;
+Alaska;Aleutian Islands;add
+United States;Aleutian Islands;remove
+Brazil;Amazonia;
+French Guiana;Amazonia;
+Suriname;Amazonia;
+Amsterdam Island;Amsterdam-St Paul;
+Saint Paul (France);Amsterdam-St Paul;
+Antarctica;Amundsen/Bellingshausen Sea;
+Andaman and Nicobar Islands;Andaman and Nicobar Islands;
+Malaysia;Andaman Sea Coral Coast;
+Myanmar;Andaman Sea Coral Coast;
+Thailand;Andaman Sea Coral Coast;
+Angola;Angolan;
+Antarctica;Antarctic Peninsula;
+Bahrain;Arabian (Persian) Gulf;
+Iran;Arabian (Persian) Gulf;
+Iraq;Arabian (Persian) Gulf;
+Kuwait;Arabian (Persian) Gulf;
+Oman;Arabian (Persian) Gulf;
+Qatar;Arabian (Persian) Gulf;
+Saudi Arabia;Arabian (Persian) Gulf;
+United Arab Emirates;Arabian (Persian) Gulf;
+Indonesia;Arafura Sea;
+Papua New Guinea;Arafura Sea;
+Argentina;Araucanian;remove
+Chile;Araucanian;
+Australia;Arnhem Coast to Gulf of Carpenteria;
+New Zealand;Auckland Island;
+Azores;Azores Canaries Madeira;
+Canary Islands;Azores Canaries Madeira;
+Madeira;Azores Canaries Madeira;
+Portugal;Azores Canaries Madeira;remove
+Canada;Baffin Bay - Davis Strait;
+Greenland;Baffin Bay - Davis Strait;
+Bahamas;Bahamian;
+Dominican Republic;Bahamian;
+Puerto Rico;Bahamian;
+Turks and Caicos;Bahamian;
+Aland Islands;Baltic Sea;
+Belarus;Baltic Sea;remove
+Denmark;Baltic Sea;
+Estonia;Baltic Sea;
+Finland;Baltic Sea;
+Germany;Baltic Sea;
+Latvia;Baltic Sea;
+Lithuania;Baltic Sea;
+Poland;Baltic Sea;
+Russia;Baltic Sea;
+Sweden;Baltic Sea;
+Indonesia;Banda Sea;
+Sulawesi;Banda Sea;
+Australia;Bassian;
+Tasmania;Bassian;
+Alaska;Beaufort Sea - continental coast and shelf;remove
+Canada;Beaufort Sea - continental coast and shelf;
+United States;Beaufort Sea - continental coast and shelf;remove
+Canada;Beaufort-Amundsen-Viscount Melville-Queen Maud;
+Bermuda;Bermuda;
+Malawi;Bight of Sofala/Swamp Coast;remove
+Mozambique;Bight of Sofala/Swamp Coast;
+Zimbabwe;Bight of Sofala/Swamp Coast;
+Papua New Guinea;Bismarck Sea;
+Armenia;Black Sea;remove
+Bulgaria;Black Sea;
+Georgia;Black Sea;
+Moldova;Black Sea;remove
+Romania;Black Sea;
+Russia;Black Sea;
+Turkey;Black Sea;
+Ukraine;Black Sea;
+Australia;Bonaparte Coast;
+New Zealand;Bounty and Antipodes Islands;
+Bouvet Island;Bouvet Island;
+New Zealand;Campbell Island;
+Australia;Cape Howe;
+Tasmania;Cape Howe;
+Cape Verde;Cape Verde;
+Scattered Islands;Cargados Carajos/Tromelin Island;
+United States;Carolinian;
+Channel Islands;Celtic Seas;
+France;Celtic Seas;
+Ireland;Celtic Seas;
+Isle of Man;Celtic Seas;
+Saint Martin;Celtic Seas;
+United Kingdom;Celtic Seas;
+Australia;Central and Southern Great Barrier Reef;
+Argentina;Central Chile;remove
+Chile;Central Chile;
+Izu Islands;Central Kuroshio Current;
+Japan;Central Kuroshio Current;
+New Zealand;Central New Zealand;
+Peru;Central Peru;
+Ethiopia;Central Somali Coast;remove
+Somalia;Central Somali Coast;
+Chagos Archipelago;Chagos;
+Argentina;Channels and Fjords of Southern Chile;
+Chile;Channels and Fjords of Southern Chile;
+New Zealand;Chatham Island;
+Costa Rica;Chiapas-Nicaragua;
+El Salvador;Chiapas-Nicaragua;
+Guatemala;Chiapas-Nicaragua;
+Honduras;Chiapas-Nicaragua;
+Mexico;Chiapas-Nicaragua;
+Nicaragua;Chiapas-Nicaragua;
+Argentina;Chiloense;remove
+Chile;Chiloense;
+Alaska;Chukchi Sea;add
+Russia;Chukchi Sea;
+United States;Chukchi Sea;remove
+Clipperton Island;Clipperton;
+Costa Rica;Cocos Islands;remove
+Christmas Island;Cocos-Keeling/Christmas Island;
+Cocos (Keeling) Islands;Cocos-Keeling/Christmas Island;
+Australia;Coral Sea;
+Mexico;Cortezian;
+Sea of Cortez Islands;Cortezian;
+United States;Cortezian;remove
+Crozet Islands Group;Crozet Islands;
+Mozambique;Delagoa;
+South Africa;Delagoa;
+Swaziland;Delagoa;remove
+Zimbabwe;Delagoa;
+Kenya;East African Coral Coast;
+Mozambique;East African Coral Coast;
+Tanzania;East African Coral Coast;
+Zanzibar Island;East African Coral Coast;
+Antarctica;East Antarctic Dronning Maud Land;
+Antarctica;East Antarctic Enderby Land;
+Antarctica;East Antarctic Wilkes Land;
+Micronesia, Federated States of;East Caroline Islands;
+China;East China Sea;
+Japan;East China Sea;
+South Korea;East China Sea;
+Taiwan;East China Sea;
+Greenland;East Greenland Shelf;
+Russia;East Siberian Sea;
+Easter Island;Easter Island;
+Alaska;Eastern Bering Sea;add
+Russia;Eastern Bering Sea;
+United States;Eastern Bering Sea;remove
+Brazil;Eastern Brazil;
+Anguilla;Eastern Caribbean;
+Antigua and Barbuda;Eastern Caribbean;
+Barbados;Eastern Caribbean;
+British Virgin Islands;Eastern Caribbean;
+Dominica;Eastern Caribbean;
+Grenada;Eastern Caribbean;
+Guadeloupe;Eastern Caribbean;
+Martinique;Eastern Caribbean;
+Montserrat;Eastern Caribbean;
+Saba;Eastern Caribbean;
+Saint Barthelemy;Eastern Caribbean;
+Saint Kitts and Nevis;Eastern Caribbean;
+Saint Lucia;Eastern Caribbean;
+Saint Vincent and the Grenadines;Eastern Caribbean;
+Sint Eustatius;Eastern Caribbean;
+Sint Maarten;Eastern Caribbean;
+Virgin Islands, US;Eastern Caribbean;
+Galapagos;Eastern Galapagos Islands;
+India;Eastern India;
+Philippines;Eastern Philippines;
+Australia;Exmouth to Broome;
+Faroe Islands;Faroe Plateau;
+Fernando De Noronha;Fernando de Naronha and Atoll das Rocas;
+Fiji;Fiji Islands;
+United States;Floridian;
+Kiribati;Gilbert/Ellis Islands;
+Nauru;Gilbert/Ellis Islands;
+Tuvalu;Gilbert/Ellis Islands;
+Australia;Great Australian Bight;
+Cayman Islands;Greater Antilles;
+Cuba;Greater Antilles;
+Dominican Republic;Greater Antilles;
+Haiti;Greater Antilles;
+Jamaica;Greater Antilles;
+Puerto Rico;Greater Antilles;
+US Minor Outlying Islands;Greater Antilles;
+Ecuador;Guayaquil;
+Peru;Guayaquil;
+Brazil;Guianan;
+French Guiana;Guianan;
+Guyana;Guianan;
+Suriname;Guianan;
+Trinidad and Tobago;Guianan;
+Venezuela;Guianan;
+Djibouti;Gulf of Aden;
+Eritrea;Gulf of Aden;
+Ethiopia;Gulf of Aden;remove
+Socotra Island;Gulf of Aden;
+Somalia;Gulf of Aden;
+Yemen;Gulf of Aden;
+Alaska;Gulf of Alaska;add
+Canada;Gulf of Alaska;remove
+United States;Gulf of Alaska;remove
+Benin;Gulf of Guinea Central;
+Cameroon;Gulf of Guinea Central;
+Equatorial Guinea;Gulf of Guinea Central;
+Gabon;Gulf of Guinea Central;
+Ghana;Gulf of Guinea Central;
+Nigeria;Gulf of Guinea Central;
+Togo;Gulf of Guinea Central;
+Sao Tome and Principe;Gulf of Guinea Islands;
+Angola;Gulf of Guinea South;
+Congo;Gulf of Guinea South;
+Congo, Democratic Republic of the;Gulf of Guinea South;
+Gabon;Gulf of Guinea South;
+Cote D'Ivoire;Gulf of Guinea Upwelling;
+Ghana;Gulf of Guinea Upwelling;
+Liberia;Gulf of Guinea Upwelling;
+Cote D'Ivoire;Gulf of Guinea West;remove
+Guinea;Gulf of Guinea West;
+Guinea-Bissau;Gulf of Guinea West;
+Liberia;Gulf of Guinea West;
+Mali;Gulf of Guinea West;remove
+Senegal;Gulf of Guinea West;
+Sierra Leone;Gulf of Guinea West;
+Canada;Gulf of Maine/Bay of Fundy;
+United States;Gulf of Maine/Bay of Fundy;
+Afghanistan;Gulf of Oman;remove
+Iran;Gulf of Oman;
+Oman;Gulf of Oman;
+Pakistan;Gulf of Oman;
+Saudi Arabia;Gulf of Oman;remove
+United Arab Emirates;Gulf of Oman;
+Papua New Guinea;Gulf of Papua;
+Anticosti Island;Gulf of St. Lawrence - Eastern Scotian Shelf;
+Canada;Gulf of St. Lawrence - Eastern Scotian Shelf;
+United States;Gulf of St. Lawrence - Eastern Scotian Shelf;remove
+Cambodia;Gulf of Thailand;
+Laos;Gulf of Thailand;remove
+Malaysia;Gulf of Thailand;
+Myanmar;Gulf of Thailand;remove
+Thailand;Gulf of Thailand;
+Vietnam;Gulf of Thailand;
+Cambodia;Gulf of Tonkin;remove
+China;Gulf of Tonkin;
+Laos;Gulf of Tonkin;remove
+Myanmar;Gulf of Tonkin;remove
+Thailand;Gulf of Tonkin;remove
+Vietnam;Gulf of Tonkin;
+Indonesia;Halmahera;
+Hawaiian Islands;Hawaii;
+US Minor Outlying Islands;Hawaii;remove
+Heard-McDonald Islands;Heard and Macdonald Islands;
+Canada;High Arctic Archipelago;
+Australia;Houtman;
+Canada;Hudson Complex;
+Argentina;Humboldtian;remove
+Bolivia;Humboldtian;remove
+Chile;Humboldtian;
+Peru;Humboldtian;
+Albania;Ionian Sea;
+Greece;Ionian Sea;
+Italy;Ionian Sea;
+Malta;Ionian Sea;
+Sicily;Ionian Sea;
+Russia;Kamchatka Shelf and Coast;
+Russia;Kara Sea;
+Kerguelen Islands;Kerguelen Islands;
+Kermadec Islands;Kermadec Island;
+Canada;Lancaster Sound;
+Russia;Laptev Sea;
+Australia;Leeuwin;
+Indonesia;Lesser Sunda;
+Timor Leste;Lesser Sunda;
+Cyprus;Levantine Sea;
+Egypt;Levantine Sea;
+Greece;Levantine Sea;
+Israel;Levantine Sea;
+Jordan;Levantine Sea;
+Lebanon;Levantine Sea;
+Libya;Levantine Sea;
+Palestinian Territory, Occupied;Levantine Sea;remove
+Syria;Levantine Sea;
+Turkey;Levantine Sea;
+Kiribati;Line Islands;
+US Minor Outlying Islands;Line Islands;
+Lord Howe Island;Lord Howe and Norfolk Islands;
+Norfolk Island;Lord Howe and Norfolk Islands;
+Tasmania;Macquarie Island;remove
+Mexico;Magdalena Transition;
+Indonesia;Malacca Strait;
+Malaysia;Malacca Strait;
+Singapore;Malacca Strait;
+Thailand;Malacca Strait;remove
+Maldives;Maldives;
+Falkland Islands;Malvinas/Falklands;
+Australia;Manning-Hawkesbury;
+Guam;Mariana Islands;
+Micronesia, Federated States of;Mariana Islands;add
+Northern Mariana Islands;Mariana Islands;
+French Polynesia;Marquesas;
+Marshall Islands;Marshall Islands;
+US Minor Outlying Islands;Marshall Islands;remove
+Mauritius;Mascarene Islands;
+Reunion;Mascarene Islands;
+Rodriguez Island;Mascarene Islands;
+Saint Paul (France);Mascarene Islands;
+Mexico;Mexican Tropical Pacific;
+Namibia;Namaqua;
+South Africa;Namaqua;
+Angola;Namib;
+Namibia;Namib;
+Lesotho;Natal;remove
+South Africa;Natal;
+New Caledonia;New Caledonia;
+Costa Rica;Nicoya;
+Panama;Nicoya;
+Australia;Ningaloo;
+Alaska;North American Pacific Fijordland;add
+Canada;North American Pacific Fijordland;
+United States;North American Pacific Fijordland;remove
+Vancouver Island;North American Pacific Fijordland;
+Norway;North and East Barents Sea;
+Russia;North and East Barents Sea;
+Svalbard and Jan Mayen;North and East Barents Sea;
+Iceland;North and East Iceland;
+Svalbard and Jan Mayen;North and East Iceland;
+Greenland;North Greenland;
+Argentina;North Patagonian Gulfs;
+Belgium;North Sea;
+Denmark;North Sea;
+France;North Sea;
+Germany;North Sea;
+Luxembourg;North Sea;remove
+Netherlands;North Sea;
+Norway;North Sea;
+Shetland Islands;North Sea;
+Sweden;North Sea;
+United Kingdom;North Sea;
+Indonesia;Northeast Sulawesi;
+Sulawesi;Northeast Sulawesi;
+Brazil;Northeastern Brazil;
+Izu Islands;Northeastern Honshu;
+Japan;Northeastern Honshu;
+New Zealand;Northeastern New Zealand;
+Egypt;Northern and Central Red Sea;
+Israel;Northern and Central Red Sea;
+Jordan;Northern and Central Red Sea;
+Saudi Arabia;Northern and Central Red Sea;
+Sudan;Northern and Central Red Sea;
+Bangladesh;Northern Bay of Bengal;
+China;Northern Bay of Bengal;remove
+India;Northern Bay of Bengal;
+Laos;Northern Bay of Bengal;remove
+Myanmar;Northern Bay of Bengal;
+Thailand;Northern Bay of Bengal;remove
+United States;Northern California;
+Galapagos;Northern Galapagos Islands;
+Canada;Northern Grand Banks - Southern Labrador;
+Mexico;Northern Gulf of Mexico;
+United States;Northern Gulf of Mexico;
+Canada;Northern Labrador;
+Kenya;Northern Monsoon Current Coast;
+Somalia;Northern Monsoon Current Coast;
+Finland;Northern Norway and Finnmark;remove
+Norway;Northern Norway and Finnmark;
+Russia;Northern Norway and Finnmark;
+Sweden;Northern Norway and Finnmark;remove
+Ogasawara Islands;Ogasawara Islands;
+Canada;Oregon, Washington, Vancouver Coast and Shelf;
+United States;Oregon, Washington, Vancouver Coast and Shelf;
+Vancouver Island;Oregon, Washington, Vancouver Coast and Shelf;
+Japan;Oyashio Current;
+Russia;Oyashio Current;
+Brunei Darussalam;Palawan/North Borneo;
+Indonesia;Palawan/North Borneo;
+Malaysia;Palawan/North Borneo;
+Philippines;Palawan/North Borneo;
+Colombia;Panama Bight;
+Ecuador;Panama Bight;
+Panama;Panama Bight;
+Biak;Papua;
+Indonesia;Papua;
+Papua New Guinea;Papua;
+Argentina;Patagonian Shelf;
+Chile;Patagonian Shelf;
+Antarctica;Peter the First Island;
+American Samoa;Phoenix/Tokelau/Northern Cook Islands;remove
+Cook Islands;Phoenix/Tokelau/Northern Cook Islands;
+Kiribati;Phoenix/Tokelau/Northern Cook Islands;
+Tokelau;Phoenix/Tokelau/Northern Cook Islands;
+US Minor Outlying Islands;Phoenix/Tokelau/Northern Cook Islands;
+Canada;Puget Trough/Georgia Basin;
+United States;Puget Trough/Georgia Basin;
+Vancouver Island;Puget Trough/Georgia Basin;
+Pitcairn Islands;Rapa-Pitcairn;
+Mexico;Revillagigedos;
+Argentina;Rio de la Plata;
+Brazil;Rio de la Plata;remove
+Uruguay;Rio de la Plata;
+Brazil;Rio Grande;
+Uruguay;Rio Grande;remove
+Antarctica;Ross Sea;
+Algeria;Saharan Upwelling;remove
+Mauritania;Saharan Upwelling;
+Morocco;Saharan Upwelling;
+Spain;Saharan Upwelling;remove
+Western Sahara;Saharan Upwelling;
+Gambia;Sahelian Upwelling;
+Mali;Sahelian Upwelling;remove
+Mauritania;Sahelian Upwelling;
+Senegal;Sahelian Upwelling;
+Western Sahara;Sahelian Upwelling;
+American Samoa;Samoa Islands;
+Samoa;Samoa Islands;
+Wallis and Futuna;Samoa Islands;
+Brazil;Sao Pedro and Sao Paulo Islands;
+Canada;Scotian Shelf;
+China;Sea of Japan/East Sea;remove
+Japan;Sea of Japan/East Sea;
+North Korea;Sea of Japan/East Sea;
+Russia;Sea of Japan/East Sea;
+South Korea;Sea of Japan/East Sea;
+Japan;Sea of Okhotsk;
+Russia;Sea of Okhotsk;
+Seychelles;Seychelles;
+Australia;Shark Bay;
+New Zealand;Snares Island;
+French Polynesia;Society Islands;
+Papua New Guinea;Solomon Archipelago;
+Solomon Islands;Solomon Archipelago;
+Papua New Guinea;Solomon Sea;
+Solomon Islands;Solomon Sea;
+Iceland;South and West Iceland;
+Australia;South Australian Gulfs;
+France;South European Atlantic Shelf;
+Portugal;South European Atlantic Shelf;
+Spain;South European Atlantic Shelf;
+South Georgia and the South Sandwich Islands;South Georgia;
+India;South India and Sri Lanka;
+Sri Lanka;South India and Sri Lanka;
+Japan;South Kuroshio;
+Philippines;South Kuroshio;
+Taiwan;South Kuroshio;
+New Zealand;South New Zealand;
+Antarctica;South Orkney Islands;
+South Georgia and the South Sandwich Islands;South Sandwich Islands;
+Antarctica;South Shetland Islands;
+Madagascar;Southeast Madagascar;
+Papua New Guinea;Southeast Papua New Guinea;
+Brazil;Southeastern Brazil;
+Mexico;Southern California Bight;
+United States;Southern California Bight;
+Aruba;Southern Caribbean;
+Bonaire;Southern Caribbean;
+Colombia;Southern Caribbean;
+Curacao;Southern Caribbean;
+Grenada;Southern Caribbean;
+Trinidad and Tobago;Southern Caribbean;
+Venezuela;Southern Caribbean;
+China;Southern China;
+Hong Kong;Southern China;
+Macao;Southern China;
+Taiwan;Southern China;
+Cook Islands;Southern Cook/Austral Islands;
+Canada;Southern Grand Banks - South Newfoundland;
+Saint Pierre and Miquelon;Southern Grand Banks - South Newfoundland;
+Guatemala;Southern Gulf of Mexico;remove
+Mexico;Southern Gulf of Mexico;
+Indonesia;Southern Java;
+Norway;Southern Norway;
+Sweden;Southern Norway;remove
+Eritrea;Southern Red Sea;
+Ethiopia;Southern Red Sea;remove
+Saudi Arabia;Southern Red Sea;
+Sudan;Southern Red Sea;
+Yemen;Southern Red Sea;
+Cambodia;Southern Vietnam;remove
+Vietnam;Southern Vietnam;
+Colombia;Southwestern Caribbean;
+Costa Rica;Southwestern Caribbean;
+Honduras;Southwestern Caribbean;
+Nicaragua;Southwestern Caribbean;
+Panama;Southwestern Caribbean;
+Venezuela;Southwestern Caribbean;
+Ascension;St. Helena and Ascension Islands;
+Saint Helena;St. Helena and Ascension Islands;
+Indonesia;Sulawesi Sea/Makassar Strait;
+Philippines;Sulawesi Sea/Makassar Strait;
+Sulawesi;Sulawesi Sea/Makassar Strait;
+Indonesia;Sunda Shelf/Java Sea;
+Malaysia;Sunda Shelf/Java Sea;
+Thailand;Sunda Shelf/Java Sea;remove
+New Zealand;Three Kings-North Cape;
+Niue;Tonga Islands;
+Tonga;Tonga Islands;
+Australia;Torres Strait Northern Great Barrier Reef;
+Brazil;Trindade and Martin Vaz Islands;
+Tristan da Cunha;Tristan Gough;
+French Polynesia;Tuamotus;
+Kiribati;Tuamotus;
+Algeria;Tunisian Plateau/Gulf of Sidra;remove
+Libya;Tunisian Plateau/Gulf of Sidra;
+Tunisia;Tunisian Plateau/Gulf of Sidra;
+Australia;Tweed-Moreton;
+Argentina;Uruguay-Buenos Aires Shelf;
+Brazil;Uruguay-Buenos Aires Shelf;remove
+Uruguay;Uruguay-Buenos Aires Shelf;
+Solomon Islands;Vanuatu;remove
+Vanuatu;Vanuatu;
+United States;Virginian;
+Antarctica;Weddell Sea;
+Micronesia, Federated States of;West Caroline Islands;
+Palau;West Caroline Islands;
+Greenland;West Greenland Shelf;
+Comoros;Western and Northern Madagascar;
+Madagascar;Western and Northern Madagascar;
+Mayotte;Western and Northern Madagascar;
+Scattered Islands;Western and Northern Madagascar;
+Oman;Western Arabian Sea;
+Saudi Arabia;Western Arabian Sea;remove
+Yemen;Western Arabian Sea;
+Australia;Western Bassian;
+Tasmania;Western Bassian;
+Belize;Western Caribbean;
+Guatemala;Western Caribbean;
+Honduras;Western Caribbean;
+Mexico;Western Caribbean;
+Galapagos;Western Galapagos Islands;
+India;Western India;
+Pakistan;Western India;
+Algeria;Western Mediterranean;
+Andorra;Western Mediterranean;remove
+Balearic Islands;Western Mediterranean;
+Corse;Western Mediterranean;
+France;Western Mediterranean;
+Italy;Western Mediterranean;
+Monaco;Western Mediterranean;
+Sardinia;Western Mediterranean;
+Sicily;Western Mediterranean;
+Spain;Western Mediterranean;
+Tunisia;Western Mediterranean;
+Vatican City State;Western Mediterranean;remove
+Indonesia;Western Sumatra;
+Finland;White Sea;remove
+Russia;White Sea;
+China;Yellow Sea;
+North Korea;Yellow Sea;
+South Korea;Yellow Sea;
