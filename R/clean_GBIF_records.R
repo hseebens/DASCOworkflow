@@ -60,7 +60,7 @@ clean_GBIF_records <- function(
     ind <- nchar(sub('[0-9]+\\.', '', dat_sub$decimalLongitude))<2
     dat_sub <- dat_sub[!ind,]
     
-    n_split <- 10^6 # number of records per individual chunks (roughly)
+    n_split <- 10^5 # number of records per individual chunks (roughly)
     
     if (nrow(dat_sub)>n_split){
       

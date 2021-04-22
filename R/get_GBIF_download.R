@@ -11,7 +11,7 @@
 ##################################################################################
 
 
-get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension){
+get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension,overwrite=FALSE){
   
   print("If the function is not working, please check if GBIF API finished processing.")
   
@@ -23,7 +23,7 @@ get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension){
   load(file=file.path("Data","Output",file_name)) 
   
   for (i in 1:length(file_downloads)){
-    occ_download_get(file_downloads[[i]],overwrite=F,path=path_to_GBIFdownloads)
+    occ_download_get(file_downloads[[i]],overwrite=overwrite,path=path_to_GBIFdownloads)
   }
   
   ## alternative if previous does not work, execute the following and copy-paste output to command line
