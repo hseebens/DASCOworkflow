@@ -27,7 +27,7 @@ clean_GBIF_records <- function(
   GBIF_records_files <- allfiles[grepl("\\.rds",allfiles)]
   
   dat_all <- list()
-  for (i in 1:length(GBIF_records_files)){ # 
+  for (i in 7:length(GBIF_records_files)){ # 
     
     cat(paste0("\n ",i,": ",GBIF_records_files[i],"\n"))
     
@@ -188,6 +188,6 @@ clean_GBIF_records <- function(
   # output
   dat_all_df <- rbindlist(dat_all)
   
-  fwrite(dat_all_df, file.path("Data","Output",paste0("GBIFrecords_Cleaned_All",file_name_extension,".gz")))
+  fwrite(dat_all_df, file.path("Data","Output",paste0("GBIFrecords_Cleaned_All_",file_name_extension,".gz")))
 }
 

@@ -14,23 +14,21 @@
 
 coords_to_regions_OBIS <- function(
   name_of_shapefile,
-  path_to_OBISdownloads,
-  realm_extension,
-  file_name_extension
-  ){
+  path_to_OBISdownloads=path_to_OBISdownloads,
+  realm_extension=TRUE,
+  file_name_extension=file_name_extension
+){
   
   ### load data ###############################################################
   
   ## get OBIS species keys
-  OBIS_specieskeys <- fread(file = file.path(path_to_OBISdownloads,paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
-  # OBIS_specieskeys$speciesid <- as.numeric(OBIS_specieskeys$speciesid)
-  
-  
+  OBIS_specieskeys <- fread(file.path(path_to_OBISdownloads,paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
+
   ## Taxon list
   SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
   
   if (realm_extension  # check if realms should be identified
-      & !file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))
+      & !file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
       & !all(c("Habitat_marine","Habitat_freshwater","Habitat_terrestrial")%in%colnames(SpecNames))){ # check if required columns exist, if not, download data from WoRMS
 
       cat("\n 'realm_extension==TRUE' requires information about habitats from WoRMS.")
@@ -38,12 +36,12 @@ coords_to_regions_OBIS <- function(
       
       SpecNames <- get_WoRMS_habitats(SpecNames) # get habitats for species in WoRMS
       
-      fwrite(SpecNames,file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))
+      fwrite(SpecNames,file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   ## load taxon list with habitats if existing
-  if (realm_extension & file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))){
-    SpecNames <- read.table(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)),stringsAsFactors = F)
+  if (realm_extension & file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))){
+    SpecNames <- fread(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   SpecNames <- merge(SpecNames,unique(OBIS_specieskeys[,c("scientificName","Taxon_origName")]),by.x="Taxon",by.y="scientificName")  
@@ -88,7 +86,7 @@ coords_to_regions_OBIS <- function(
     marine_terr_recs <- merge(neighbours,SpecRegionData,by="Location",allow.cartesian=T)
     marine_speckeys <- unique(marine_terr_recs[,c("MEOW","Taxon")])
     if (any(colnames(marine_terr_recs)%in%c("FirstRecord","eventDate"))){
-      colnames(marine_terr_recs)[colnames(marine_terr_recs)%in%c("FirstRecord")] <- "eventDate"
+      colnames(marine_terr_recs)[colnames(marine_terr_recs)%in%c("FirstRecord","First_Record")] <- "eventDate"
       meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","Taxon","eventDate")])#,"Source"
     } else {
       meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","Taxon")])#,"Source"
@@ -99,6 +97,8 @@ coords_to_regions_OBIS <- function(
   
     ## list species which are clearly non-marine, clearly marine and clearly freshwater ######
     if (all(c("class","phylum")%in%tolower(colnames(SpecNames)))){
+      colnames(SpecNames)[tolower(colnames(SpecNames))=="class"] <- "class"
+      colnames(SpecNames)[tolower(colnames(SpecNames))=="phylum"] <- "phylum"
       
       non_marine <- subset(SpecNames,
                            class=="Insecta" 
@@ -141,10 +141,10 @@ coords_to_regions_OBIS <- function(
   }
   
   nchunks <- length(available_files) # set total number of data files, which contain the GBIF records
-  nsteps <- 10
+  nsteps <- 20
   
   all_counter <- 0
-  chunk_out <- all_out <- list()
+  chunk_out <- chunk_out_coords <- all_out <- all_out_coords <- list()
   for (i in 1:nchunks){ # loop over all chunks of GBIF coordinate data
     
     # Import processed GBIF files
@@ -192,7 +192,7 @@ coords_to_regions_OBIS <- function(
       region_records <- subset(region_records,Freq>0 & Freq<3)
       remove_taxreg <- paste0(region_records$Var1,"_",region_records$Var2)
       output <- subset(output,!(paste0(output$Taxon,"_",output$Location)%in%remove_taxreg))
-      output <- unique(output[,c("Taxon","Location","Realm")])
+      # output <- unique(output[,c("Taxon","Location","Realm")])
       
       ## identify species with the majority of records in terrestrial realm and remove
       if (realm_extension){ #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
@@ -202,6 +202,14 @@ coords_to_regions_OBIS <- function(
         output <- subset(output,!(Taxon%in%marinespec & Realm=="terrestrial")) # remove terrestrial records of marine species
         non_marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] <= 75]
         output <- subset(output,!(Taxon%in%non_marinespec & Realm=="marine")) # remove marine records of non-marine species
+      }
+      
+      if (realm_extension){
+        output_noCoords <- unique(output[,c("Taxon","Location","Realm")])
+        output_coords <- unique(output[,c("Taxon","Location","Realm","Longitude","Latitude")])
+      } else {
+        output_noCoords <- unique(output[,c("Taxon","Location")])
+        output_coords <- unique(output[,c("Taxon","Location","Longitude","Latitude")])
       }
       
       # ## test 
@@ -217,11 +225,14 @@ coords_to_regions_OBIS <- function(
       ## output ###############
       # saveRDS(output,file.path("Data","Output","Intermediate",paste0("AlienRegions_",file_name_extension,"_",i,"_",j,".rds")))
       
-      chunk_out[[j]] <- output
+      chunk_out_coords[[j]] <- output_coords
+      chunk_out[[j]]        <- output_noCoords
     }
     chunk_records <- unique(do.call("rbind",chunk_out))
+    chunk_records_coords <- unique(do.call("rbind",chunk_out_coords))
     
     all_out[[i]] <- chunk_records
+    all_out_coords[[i]] <- chunk_records_coords
     
     # ## output ###############
     # saveRDS(chunk_records,file.path("Data","Output","Intermediate",paste0("AlienRegions_OBIS_",file_name_extension,"_",i,".rds")))
@@ -238,13 +249,15 @@ coords_to_regions_OBIS <- function(
   fwrite(all_records_spec,file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".csv")))
   # all_records_spec <- fread(file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".gz")))
   
-  # ## remove intermediate files if previous saving was successful
-  # if (file.exists(file.path("Data","Output","Intermediate",paste0("AlienRegions_OBIS_",file_name_extension,".rds")))){
-  #   for (i in 1:nchunks){ # loop over all chunks of coordinate data
-  #     for (j in 1:(length(steps)-1)){# 
-  #       file.remove(file.path("Data","Output","Intermediate",paste0("AlienRegions_OBIS_",file_name_extension,"_",i,"_",j,".rds")))
-  #     }
-  #   }
-  # }
-  # return(all_records_spec)
+
+  ## with coordinates ###################
+  
+  all_coords <- rbindlist(all_out_coords)
+  all_coords <- unique(all_coords)
+  
+  # all_coords_spec <- merge(all_coords,uni_spec,by="speciesKey",all.x=T)
+  all_coords$Realm[all_coords$Taxon%in%freshwater] <- "freshwater"
+  
+  fwrite(all_coords,file=file.path("Data","Output",paste0("AlienRegions_OBISCoords_",file_name_extension,".gz")))
+  
 }

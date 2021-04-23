@@ -25,7 +25,7 @@ library(robis)
 library(CoordinateCleaner) # for clean_GBIF_records
 library(httr)
 library(sf)   # for transform_coords_to_regions
-
+library(utils)
 
 
 ###################################################################################
@@ -39,7 +39,7 @@ source(file.path("R","load_functions.R")) # load all required functions
 
 ### Within this workflow, files will be downloaded and stored in these folders
 ### Note: All files in that folder will be considered as relevant files
-path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInAS_20Apr2021"
+path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/GBIF_210421"
 path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInAS_20Apr2021"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
@@ -102,7 +102,7 @@ extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
 ### get OBIS records ##############################################################
 
 get_OBIS_records(path_to_OBISdownloads,file_name_extension)
-
+## Intermediate download files are stored under Data/Output/Intermediate
 
 ###################################################################################
 ### Cleaning data #################################################################
@@ -129,14 +129,6 @@ clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
 
 ###################################################################################
 ### get alien regions based on coordintates #######################################
-
-## Create shapefile of terrestrial and marine polygons
-## loads and combines shapefiles and stores the final shapefile in Data/Input/Shapefiles
-terrestrial_polygons <- "RegionsShapefile_200121" # name of terrestrial shapefile
-marine_polygons <- "meow_ecos" # name of marine shapefile
-
-create_shapefile(terrestrial_polygons,marine_polygons)
-
 
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests

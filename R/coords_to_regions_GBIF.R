@@ -15,7 +15,7 @@
 coords_to_regions_GBIF <- function(
   name_of_shapefile,
   path_to_GBIFdownloads=path_to_GBIFdownloads,
-  realm_extension=T,
+  realm_extension=TRUE,
   file_name_extension=file_name_extension
   ){
   
@@ -28,7 +28,7 @@ coords_to_regions_GBIF <- function(
   SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
   
   if (realm_extension  # check if realms should be identified
-      & !file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))
+      & !file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
       & !all(c("Habitat_marine","Habitat_freshwater","Habitat_terrestrial")%in%colnames(SpecNames))){ # check if required columns exist, if not, download data from WoRMS
 
       cat("\n 'realm_extension==TRUE' requires information about habitats from WoRMS.")
@@ -36,12 +36,12 @@ coords_to_regions_GBIF <- function(
       
       SpecNames <- get_WoRMS_habitats(SpecNames) # get habitats for species in WoRMS
       
-      fwrite(SpecNames,file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))
+      fwrite(SpecNames,file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   ## load taxon list with habitats if existing
-  if (realm_extension & file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension)))){
-    SpecNames <- fread(file.path("Data","Output","Intermediate",paste0("Habitats_",name_of_specieslist)))
+  if (realm_extension & file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))){
+    SpecNames <- fread(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   SpecNames <- merge(SpecNames,GBIF_specieskeys[,c("scientificName","speciesKey")],by="scientificName")  
@@ -129,7 +129,7 @@ coords_to_regions_GBIF <- function(
   ## check available files in folder 'Intermediate' or 'Output' ##################
   folder <- file.path("Output","Intermediate")
   available_files <- list.files(file.path("Data","Output","Intermediate"))
-  available_files <- available_files[grep("GBIFrecords_Cleaned_",available_files)]
+  available_files <- available_files[grep("GBIFrecords_Cleaned_All_",available_files)]
   available_files <- available_files[grep(file_name_extension,available_files)]
   
   if (length(available_files)==0){
@@ -143,7 +143,7 @@ coords_to_regions_GBIF <- function(
   }
   
   nchunks <- length(available_files) # set total number of data files, which contain the GBIF records
-  nsteps <- 20
+  nsteps <- 50
   
   all_counter <- 0
   chunk_out <- chunk_out_coords <- all_out <- all_out_coords <- list()
@@ -189,14 +189,13 @@ coords_to_regions_GBIF <- function(
       }
       
       ## remove entries with a very low number of records per region (requires coordinates in the file 'outpout')
-      #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
       region_records <- as.data.frame(table(output$speciesKey,output$Location),stringsAsFactors = F)
       region_records <- subset(region_records,Freq>0 & Freq<3)
       remove_taxreg <- paste0(region_records$Var1,"_",region_records$Var2)
       output <- subset(output,!(paste0(output$speciesKey,"_",output$Location)%in%remove_taxreg))
       
       ## identify species with the majority of records in terrestrial realm and remove
-      if (realm_extension){ #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      if (realm_extension){ 
         realm_spec <- as.matrix(table(output$speciesKey,output$Realm))
         realm_spec_proc <- round(((realm_spec) / rowSums(realm_spec))*100) # percent records per realm
         marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] > 75]
@@ -204,9 +203,9 @@ coords_to_regions_GBIF <- function(
         non_marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] <= 75]
         output <- subset(output,!(speciesKey%in%non_marinespec & Realm=="marine")) # remove marine records of non-marine species
       }
-      if (nrow(output)>0){
-        if (output$Location=="Hawaiian Islands" & output$Realm=="marine") {print(paste(i,j)); stop()}
-      }
+      # if (nrow(output)>0){
+      #   if (output$Location=="Hawaiian Islands" & output$Realm=="marine") {print(paste(i,j)); stop()}
+      # }
       
       if (realm_extension){
         output_noCoords <- unique(output[,c("speciesKey","Location","Realm")])
