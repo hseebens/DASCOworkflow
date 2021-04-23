@@ -72,6 +72,14 @@ coords_to_regions_GBIF <- function(
     ## Terrestrial to marine ecoregion file
     neighbours <- read.table(file.path("Data","Input","RegionsMEOW_NeighbourList.csv"),sep=";",header=T)
     neighbours <- subset(neighbours,Action!="remove")
+    
+    ## standardise location names 
+    newLocNames <- standardise_location_names(neighbours$Region,file_name_extension,data_set="Neighbours")
+    if (nrow(newLocNames)!=nrow(neighbours)){
+      stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
+    } 
+    neighbours$Region <- newLocNames$Location
+    
     neighbours$MEOW <- paste(neighbours$MEOW,"MEOW",sep="_")
     colnames(neighbours) <- c("Location","MEOW","Action") ## ADJUST shapefile AND REMOVE!!!!!!!!!!!!!!!!!!!!
   }

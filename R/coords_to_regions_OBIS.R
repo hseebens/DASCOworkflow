@@ -59,6 +59,13 @@ coords_to_regions_OBIS <- function(
   # regions$Ecoregion[!is.na(regions$Ecoregion)] <- paste(regions$Ecoregion[!is.na(regions$Ecoregion)],"MEOW",sep="_")
   # regions <- regions[is.na(regions$featurecla),] # remove lakes !!!! (no alien distinction available yet)
   
+  ## standardise location names 
+  newLocNames <- standardise_location_names(regions$Location,file_name_extension,data_set="Shapefile")
+  if (nrow(newLocNames)!=nrow(regions)){
+    stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
+  } 
+  regions$Location <- newLocNames$Location
+  
   if (realm_extension){
     # regions$Realm <- NA
     # regions$Realm[!is.na(regions$Ecoregion)] <- "marine"
@@ -71,6 +78,14 @@ coords_to_regions_OBIS <- function(
     ## Terrestrial to marine ecoregion file
     neighbours <- fread(file.path("Data","Input","RegionsMEOW_NeighbourList.csv"))
     neighbours <- subset(neighbours,Action!="remove")
+    
+    ## standardise location names 
+    newLocNames <- standardise_location_names(neighbours$Region,file_name_extension,data_set="Neighbours")
+    if (nrow(newLocNames)!=nrow(neighbours)){
+      stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
+    } 
+    neighbours$Region <- newLocNames$Location
+    
     neighbours$MEOW <- paste(neighbours$MEOW,"MEOW",sep="_")
     colnames(neighbours) <- c("Location","MEOW","Action") ## ADJUST shapefile AND REMOVE!!!!!!!!!!!!!!!!!!!!
   }
