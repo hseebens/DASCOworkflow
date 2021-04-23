@@ -114,15 +114,12 @@ get_OBIS_records(path_to_OBISdownloads,file_name_extension)
 ## remaining record at this site, the original (not the rounded) record
 ## is kept. Thinning may result in imprecise results when the regions
 ## considered later in the workflow are small.
-# thin_records <- T
 
 ### clean GBIF records ############################################################
 
 clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
 
 ### clean OBIS records ############################################################
-
-# thin_records <- F
 
 clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
   

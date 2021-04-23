@@ -25,7 +25,7 @@ library(robis)
 library(CoordinateCleaner) # for clean_GBIF_records
 library(httr)
 library(sf)   # for transform_coords_to_regions
-
+library(utils)
 
 
 ###################################################################################
@@ -57,6 +57,7 @@ column_eventDate <- "FirstRecord" # column name of year of first record of occur
 ## name of shapefile providing polygons for the new delineation
 name_of_shapefile <- "RegionsTerrMarine"
 
+## term to be added to the names of the output files; can be blank
 file_name_extension <- "FirstRecords"
 
 
@@ -88,10 +89,10 @@ email <- "ekinhanno1@outlook.com"                 # your email which you will re
 ###################################################################################
 
 ## send requests to GBIF 
-send_GBIF_request(file_name_extension,n_accounts,user=user,pwd=pwd,email=email)
+send_GBIF_request(file_name_extension,path_to_GBIFdownloads,n_accounts,user=user,pwd=pwd,email=email)
 
 ## get downloads from GBIF (requires running 'send_GBIF_request' first)
-get_GBIF_download(path_to_GBIFdownloads)
+get_GBIF_download(path_to_GBIFdownloads,file_name_extension)
 
 ### extract relevant information from GBIF downloads ##############################
 extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
@@ -101,7 +102,7 @@ extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
 ### get OBIS records ##############################################################
 
 get_OBIS_records(path_to_OBISdownloads,file_name_extension)
-
+## Intermediate download files are stored under Data/Output/Intermediate
 
 ###################################################################################
 ### Cleaning data #################################################################
@@ -113,29 +114,18 @@ get_OBIS_records(path_to_OBISdownloads,file_name_extension)
 ## remaining record at this site, the original (not the rounded) record
 ## is kept. Thinning may result in imprecise results when the regions
 ## considered later in the workflow are small.
-thin_records <- T
 
 ### clean GBIF records ############################################################
 
-clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records)
+clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
 
 ### clean OBIS records ############################################################
 
-thin_records <- F
-
-clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records)
+clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
   
 
 ###################################################################################
 ### get alien regions based on coordintates #######################################
-
-## Create shapefile of terrestrial and marine polygons
-## loads and combines shapefiles and stores the final shapefile in Data/Input/Shapefiles
-terrestrial_polygons <- "RegionsShapefile_200121" # name of terrestrial shapefile
-marine_polygons <- "meow_ecos" # name of marine shapefile
-
-create_shapefile(terrestrial_polygons,marine_polygons)
-
 
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests
