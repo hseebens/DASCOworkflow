@@ -137,13 +137,13 @@ coords_to_regions_GBIF <- function(
   ## check available files in folder 'Intermediate' or 'Output' ##################
   folder <- file.path("Output","Intermediate")
   available_files <- list.files(file.path("Data","Output","Intermediate"))
-  available_files <- available_files[grep("GBIFrecords_Cleaned_All_",available_files)]
+  available_files <- available_files[grep("GBIFrecords_Cleaned_",available_files)]
   available_files <- available_files[grep(file_name_extension,available_files)]
   
   if (length(available_files)==0){
     folder <- "Output"
     available_files <- list.files(file.path("Data","Output"))
-    available_files <- available_files[grep("GBIFrecords_Cleaned_",available_files)]
+    available_files <- available_files[grep("GBIFrecords_Cleaned_All_",available_files)]
     available_files <- available_files[grep(file_name_extension,available_files)]
   }
   if (length(available_files)==0){

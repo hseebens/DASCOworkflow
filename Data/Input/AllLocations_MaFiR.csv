@@ -14,6 +14,7 @@
 13;"AUS";"AU";"Australia";"Western Australia; Victoria; South Australia; Queensland; Northern Territory; New South Wales; New South Wales";0;"Australia";;5;"Australasia";"Australia"
 14;"AUS";"AU";"Lord Howe Island";"Lord Howe I.";1;"Australia";"Lord Howe Island";5;"Australasia";"Australia"
 15;"AUS";"AU";"Tasmania";;1;"Australia";"Tasmania";5;"Australasia";"Australia"
+15;"AUS";"AU";"Heard-McDonald Islands";;1;"Australia";;5;"Australasia";"Australia"
 16;"ABW";"AW";"Aruba";;1;"Aruba";"Aruba";8;"Southern America";"Aruba"
 17;"ALA";"AX";"Åland Islands";"Aland Islands";1;"Åland";;1;"Europe";
 18;"AZE";"AZ";"Azerbaijan";;0;"Azerbaijan";;;"Asia-Temperate";
@@ -42,11 +43,11 @@
 38;"BLR";"BY";"Belarus";;0;"Belarus";"Belarus";1;"Europe";"Belarus"
 39;"BLZ";"BZ";"Belize";;0;"Belize";"Belize";8;"Southern America";"Belize"
 40;"CAN";"CA";"Vancouver Island";;1;"Canada";;7;"Northern America";"Canada"
-40;"CAN";"CA";"Canada";"Quebec; Ontario; Newfoundland; British Columbia";0;"Canada";;7;"Northern America";"Canada"
+40;"CAN";"CA";"Canada";"Quebec; Ontario; Newfoundland; British Columbia; Anticosti Island";0;"Canada";;7;"Northern America";"Canada"
 41;"CCK";"CC";"Cocos Islands";"Keeling; Cocos (Keeling) Islands";1;"Cocos Islands";;4;"Asia-Tropical";"Cocos (Keeling) Islands (the)"
 42;"COD";"CD";"Democratic Republic of the Congo";"Congo, Democratic Republic of; Congo (the Democratic Republic of the); Congo, Democratic Republic of the; DR Congo; Democratic Republic of Congo";0;"Democratic Republic of the Congo";"Democratic Republic of the Congo";2;"Africa";"Congo (the Democratic Republic of the)"
 43;"CAF";"CF";"Central African Republic";;0;"Central African Republic";"Central African Republic";2;"Africa";"Central African Republic (the)"
-44;"COG";"CG";"Congo";"Republic of Congo";0;"Republic of Congo";"Congo";2;"Africa";"Congo (the)"
+44;"COG";"CG";"Congo";"Republic of Congo; Congo, Republic of";0;"Republic of Congo";"Congo";2;"Africa";"Congo (the)"
 45;"CHE";"CH";"Switzerland";;0;"Switzerland";"Switzerland";1;"Europe";"Switzerland"
 46;"CIV";"CI";"Côte d'Ivoire";"Cote D'Ivoire; Cote d'Ivoire; Ivory Coast; Côte D'ivoire; C“te d'Ivoire";0;"Côte d'Ivoire";"Cote d'Ivoire";2;"Africa";"Côte d'Ivoire"
 47;"COK";"CK";"Cook Islands";;1;"Cook Islands";;6;"Pacific";"Cook Islands (the)"
@@ -112,7 +113,7 @@
 105;"HRV";"HR";"Croatia";;0;"Croatia";"Croatia";1;"Europe";"Croatia"
 106;"HTI";"HT";"Haiti";;1;"Haiti";;8;"Southern America";"Haiti"
 107;"HUN";"HU";"Hungary";;0;"Hungary";"Hungary";1;"Europe";"Hungary"
-108;"IDN";"ID";"Indonesia";"Sulawesi";1;"Indonesia";"Indonesia";4;"Asia-Tropical";"Indonesia"
+108;"IDN";"ID";"Indonesia";"Sulawesi; Bali; Biak";1;"Indonesia";"Indonesia";4;"Asia-Tropical";"Indonesia"
 109;"IRL";"IE";"Ireland";;1;"Ireland";"Ireland";1;"Europe";"Ireland"
 110;"ISR";"IL";"Israel";;0;"Israel";"Israel";3;"Asia-Temperate";"Israel"
 111;"IMN";"IM";"Isle of Man";;1;"Isle of Man";;;"Europe";
@@ -265,7 +266,7 @@
 246;"USA";"US";"United States of America";"United States; USA; Florida; California; Arizona; Texas; Georgia(US); Alabama; Washington; New Jersey; Nevada; Kansas; Oregon; Wyoming; Virginia; Utah; South Carolina; Rhode Island; Pennsylvania; Oklahoma; Ohio; North Carolina; New York; New Mexico; New Hampshire; Nebraska; Montana; Missouri; Mississippi; Michigan; Massachusetts; Maryland; Maine; Louisiana; Kentucky; Indiana; Illinois; Idaho; Delaware; Connecticut; Colorado; Arkansas; District of Columbia";0;"United States";;7;"Northern America";"United States of America (the)"
 247;"URY";"UY";"Uruguay";;0;"Uruguay";"Uruguay";8;"Southern America";"Uruguay"
 248;"UZB";"UZ";"Uzbekistan";;0;"Uzbekistan";;;"Asia-Temperate";
-249;"VAT";"VA";"Holy See";"Vatican; Vatican City";0;"Vatican City";;;"Europe";
+249;"VAT";"VA";"Holy See";"Vatican; Vatican City; Vatican City State";0;"Vatican City";;;"Europe";
 250;"VCT";"VC";"Saint Vincent and the Grenadines";"St Vincent and the Grenadines; St. Vincent and the Grenadines";1;"Saint Vincent and the Grenadines";;8;"Southern America";"Saint Vincent and the Grenadines"
 251;"VEN";"VE";"Venezuela, Bolivarian Republic of";"Venezuela";0;"Venezuela";"Venezuela";8;"Southern America";"Venezuela (Bolivarian Republic of)"
 252;"VGB";"VG";"Virgin Islands (British)";"British Virgin Islands";1;"British Virgin Islands";;8;"Southern America";

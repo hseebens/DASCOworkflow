@@ -129,21 +129,18 @@ clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
 
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests
-realm_extension <- TRUE 
-
-## assigning country checklists to marine polygons
-# checklist_to_marine <- TRUE
+## realm_extension <- TRUE 
 
 # Region shapefile requires a consistent structure for marine and terrestrial polygons !!!!!
 
 coords_to_regions_GBIF(name_of_shapefile,
                        path_to_GBIFdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
 
 coords_to_regions_OBIS(name_of_shapefile,
                        path_to_OBISdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
 
 
