@@ -1,14 +1,12 @@
 ##################################################################################
 # 
-# This script is part of the workflow MaFiR (MArine FIrst Records) to identify
-# marine species occurrences in the FirstRecord database.
+# This script is part of the workflow DASCO to Downscale Alien Species Checklists
+# using Occurrence records from GBIF and OBIS.
 #
-# In this script, a (usually very long) species list is prepared to download
-# occurrence records from GBIF. Depending on the number of records per taxon
-# downloads are split into n_chunks of species to obtain downloads of similar
-# sizes. This requires n_chunks/3 accounts at GBIF.
+# The DASCO workflow has been published as ..., which has to be cited when used.
 #
-# Ekin Kaplan, Hanno Seebens, 23.02.2021
+#
+# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
 ##################################################################################
 
 
@@ -44,7 +42,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
     if (all(colnames(specname)!="species")) next
     
     x <- x + 1
-    GBIF_speclist[[x]] <- c(specname$speciesKey,specname$scientificName,specname$matchType,SpecNames[i])
+    GBIF_speclist[[x]] <- c(specname$speciesKey,specname$scientificName,specname$canonicalName,specname$matchType,SpecNames[i])
     
     if (x%%1000==0) print(x)
   }

@@ -210,7 +210,7 @@ coords_to_regions_OBIS <- function(
       # output <- unique(output[,c("Taxon","Location","Realm")])
       
       ## identify species with the majority of records in terrestrial realm and remove
-      if (realm_extension){ #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      if (realm_extension){ 
         realm_spec <- as.matrix(table(output$Taxon,output$Realm))
         realm_spec_proc <- round(((realm_spec) / rowSums(realm_spec))*100) # percent records per realm
         marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] > 75]

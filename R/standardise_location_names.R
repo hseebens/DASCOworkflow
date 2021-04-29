@@ -6,7 +6,7 @@
 # The DASCO workflow has been published as ..., which has to be cited when used.
 #
 # Location names are standardised accoring to the information provided in 
-# AllLocations_MaFiR.csv, which has to be provided in Data/Input.
+# AllLocations_DASCO.csv, which has to be provided in Data/Input.
 #
 # Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
 ##################################################################################
@@ -20,7 +20,7 @@ standardise_location_names <- function(dat,file_name_extension,data_set=NULL){
   colnames(dat) <- c("Location","Location_orig","order")
 
   ## load location table #################################################
-  regions <- read.table(file.path("Data","Input","AllLocations_MaFiR.csv"),sep=";",stringsAsFactors = F,header=T)
+  regions <- read.table(file.path("Data","Input","AllLocations_DASCO.csv"),sep=";",stringsAsFactors = F,header=T)
   # regions$keywords <- gsub("\\(","\\\\(",regions$keywords)
   # regions$keywords <- gsub("\\)","\\\\)",regions$keywords)
   regions$keywords <- tolower(regions$keywords) # set all to lower case for matching
