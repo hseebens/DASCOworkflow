@@ -53,6 +53,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
 
   ## save intermediate output ######
   fwrite(GBIF_species, file.path(path_to_GBIFdownloads,paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
+  fwrite(GBIF_species, file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
   # GBIF_species <- fread(file.path(path_to_GBIFdownloads,"SpeciesGBIFkeys.csv"))
 
   
