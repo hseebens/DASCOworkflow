@@ -108,21 +108,58 @@ relevant for intermediate steps, are stored in the subfolder Output/Intermediate
 
 ## 3. Data sets
 
-Shapefile
-AllLocations
-Taxon_Region
-Neighbours
+Executing the data sets requires having four data sets, which have to be stored in the 
+folder Data/Input/:
+
+1. Taxon-by-region list: The user has to provide a data set, which contains the records
+of the occurrences of taxa in a region. At minimum, the data set should consist of two
+columns for the taxon names and the name of region, where it has been recorded. In 
+addition, the year of first record (called 'event date') of the alien population can be provided.
+Ideally, the identity of the taxa is be provided in two columns, one with the full scientific name including the authority and another one with the taxon name without the authority. The reason for this is that GBIF and OBIS require different input variables to match the respective taxonomies. If information about
+the authority is not available, taxon names can be provided without for both GBIF and OBIS
+although this decreases the chance to find a match of taxon names in GBIF.
+The geographic regions can be any combination of regions as long as these are represented 
+in a shapefile (see below).
+The file format of the taxon-by-region file should be csv.
+
+2. Shapefile: The workflow requires a spatial representation of the boundaries of all regions as a shapefile.
+The regions and the region names should match the selection of regions in the taxon-by-region file. 
+A default shapefile based on 517 marine and terrestrial regions worldwide is provided with 
+the workflow in the folder Data/Input/Shapefiles.
+
+3. AllLocations: This spreadsheet table contains a list of all regions considered in the workflow.
+In the file, provided together with the workflow, further details are provided for each region 
+such as the contintent or ISO codes, which are not required to run the workflow. Information in 
+the column 'keywords' provides a way to match alternative names of the regions. If a name was
+found in this column, it will be changed to the name provided in the column 'Location'.
+
+4. Neighbouring regions: This data set provides information about neighbouring terrestrial and
+marine regions. This information is required to assign marine species, which are listed in
+the regional checklist, to the respective marine ecoregion bordering this terrestrial region. 
+For example, if the checklist of Turkey contains marine species and occurrence records of these
+species were obtained from OBIS or GBIF in the marine ecoregions bordering Turkey, the populations 
+of these species were set as being alien in these marine ecoregions.
+If new regions are added to the workflow, this file should be updated accordingly.
+
 
 # Executing the DASCO workflow
 
 To run the workflow, the Rstudio project file "DASCOworkflow.Rproj" has to be opened, which 
-sets the folder, where it is located, as the working directory.
+sets the working directory to locate the subfolders.
 The workflow can be run and all settings can be modified by using the file "run_DASCO_workflow.R" 
 (see below).
 
 
-## Step 0. Preparation and modification of the default setting
+Before running the workflow all scripts need to be loaded:
 
+```{r eval=FALSE}
+source(file.path("R","load_functions.R")) # load all required functions
+```
+
+
+## Step 0: Configuring the workflow
+
+### Global variables
 The successful execution of the workflow requires some basic information, which needs to
 be provided in the file "run_DASCO_workflow.R". 
 In this script, default settings of the workflow are provided under 'Global variables':
@@ -132,7 +169,7 @@ In this script, default settings of the workflow are provided under 'Global vari
 path_to_GBIFdownloads <- "/path/to/storage/GBIF/"
 path_to_OBISdownloads <- "/path/to/storage/OBIS"
 
-filename_inputData <- "Trial.csv"
+filename_inputData <- "Taxon-by-region-file.csv"
 column_scientificName <- "scientificName" 
 column_taxonName <- "TaxonName" 
 column_location <- "Region"
@@ -144,105 +181,128 @@ file_name_extension <- "FirstRecords"
 
 ```
 
-The first two variables called "path_to_GBIFdownloads" and "path_to_OBISdownloads" define the 
-folder to store the downloaded records from OBIS and GBIF. 
+The first two variables called `path_to_GBIFdownloads` and `path_to_OBISdownloads` define the 
+folders to store the downloaded records from OBIS and GBIF. 
 Depending on the list of species the files might be several GB large. 
 Users should note that all files in these folders will be considered as being relevant 
 files for further processing.
 
-The following five variables are related to the data set, which contains the lists of 
-taxon names from regional checklists. This file has to be stored in the folder Data/Input/. 
-The preferred file format is csv with the following columns:
+The following five variables are related to the taxon-by-region data set, which contains the lists of 
+taxon names and regions:
 
-1. The name of the data set containing the taxon list has to be named in the variable "filename_inputData".
-2. The variable "column_scientificName" specifies the column of the input data set with 
+1. The name of the data set containing the taxon list has to be named in the variable `filename_inputData`.
+2. The variable `column_scientificName` specifies the column of the input data set with 
 the scientific names of taxa with or without authority. The addition of the authority 
 increases chances to obtain a match of taxon names at GBIF.
-3. The "column_taxonName" variable denotes the column of the input data set with the 
+3. The `column_taxonName` variable denotes the column of the input data set with the 
 binomial of the taxon without authority. This information is required to match taxon names at OBIS.
-4. The "column_location" variable describes the name of the region where the species has been recorded.
-5. The "column_eventDate" variable refers to the column containing the first record 
+4. The `column_location` variable describes the name of the region where the species has been recorded.
+5. The `column_eventDate` variable refers to the column containing the first record 
 (i.e., the year when a species has been first described in a region). This variable is 
 optional and missing values are allowed.
 
 The workflow assigns occurrences of alien populations to regions as provided by polyons
 in a shapefile within the folder Data/Input/Shapefiles. The name of the shapefile can 
-be specified in the variable "name_of_shapefile". As a default, a shapefile providing
+be specified in the variable `name_of_shapefile`. As a default, a shapefile providing
 spatial boundaries of 517 marine and terrestrial regions is provided. Note that a modification
-of the shapefile should also be reflected in the file "AllLocations.csv".
+of the shapefile should also be reflected in the other input files (see 'Data sets' above).
 
 The names of the files produced by the workflow can be extended by a term specified in 
 the variable file_name_extension. That is, the content of this variable is added to each
 file name exported by the workflow. In this way, the user can e.g. determine the version 
-of the workflow run, and ensures that previous output files are not overwritten.
+of the workflow run, and ensure that previous output files are not overwritten.
 
 
+### GBIF accounts
+
+Records from GBIF are obtained through the GBIF API, which requires having an account on GBIF (GBIF.org) and 
+providing the account details here.
+As requested GBIF data can quickly reaches millions of records and several GB of data, it is 
+possible to split the request into chunks of manageable sizes. A single GBIF account can handle
+three requests simultaneously, and thus having n accounts allows splitting the requests into 
+n * 3 chunks.
+The number of accounts can be specified in the variable `n_accounts` (default set to 1).
+The variables `user`, `pwd`, and `email` provides the information of the GBIF accounts. 
+If the user want to chunk their request and use multiple accounts, `user` and `email` variables should be created and specified in a structured manner, which means that the usernames and email accounts should have subsequent numbers at the end of the names, such as:
+`user <- "username1"`, `email <- "username1\@address.com"`. 
+The number will be automatically increased within the workflow. 
+For instance, creating seven accounts will allow sending 21 requests in parallel. This requires
+having seven accounts, which should be named username1, username2, ... and username1\@address.com,
+username2\@address.com. While the username has to be unique, the email address could be universal
+to all accounts, which, however, requires an adjustment in the file `send_GBIF_request.R` by replacing
+`email <- gsub("1",x,email_base)` with `email <- email_base`.
+The variable `pwd` specifies the GBIF account password, which must be the same for every account as
+a default.
+
+After providing the required information, the workflow can be executed.
 
 
+## Step 1: Check and create folder structure
 
-source(file.path("R","load_functions.R")) # load all required functions
+As a first step of the workflow, the function `create_folders` checks if the necessary 
+folder structure is provided and - if not - creates the correct folder structure. The input
+data sets have to provided in the respective subfolders in `Data/Input/` (see section `Data sets` above)
 
-
-
-
-Users should start with loading the required packages and scripts that are specified in the "run_DASCO_workflow.R" main script. This can easily be done by running the main script until the "create_folders" function line (If users cannot load the packages, they should refer to former section 1. The R Environment). 
-
-
-Running the "create_folders" function checks if the necessary folder structure is present and creates the folder structure if there are problems.
-
-The "prepare_dataset" function utilizes the former variables to run. This function standardizes the information that resides in the columns of the dataset, such as location and taxon names.
-
-The following four variables are related to GBIF API. In the "n_accounts" variable, users can specify how many GBIF.org accounts they want to use. Using multiple accounts serves the purpose of downloading the occurrence data from GBIF in multiple chunks to process them much easier. 
-"user", "pwd", and "email" variables require users to provide the information on their GBIF.org account. If users want to chunk their data and use multiple accounts, "user" and "email" variables should be created and specified in a structured manner, which means that the usernames and email accounts should have subsequent numbers at the end of the names, such as:
-user <- "hannoseebens1", email <- "hannoseebens1\@outlook.com". "pwd" variable, which is specified for GBIF.org password, must be the same for every account.
-
-After all these variables are defined and functions are executed, the preparation step is done and users are ready to download occurrence data from GBIF and OBIS APIs.
-
+The following function `prepare_dataset.R` loads the taxon-by-region data set, standardises 
+the variable names and exports a standardised taxon-by-region file together with a taxon names.
 
 
 ```{r eval=FALSE}
-create_folders() 
-
 prepare_dataset(filename_inputData,column_scientificName,
                 column_taxonName,column_location,column_eventDate,
                 file_name_extension)
-
-n_accounts <- 7
-
-user <- "ekinhanno1"                                  
-pwd <- "******"                           
-email <- "ekinhanno1@outlook.com"                 
-
 ```
 
-##Step 1. Obtaining Occurrence Data
 
-In this step, users can begin downloading the occurrence data for the desired species from GBIF and OBIS databases. Since the users provided the necessary information such as their dataset and account information, all they have to do is running the lines for executing "send_GBIF_request", "get_GBIF_download", "extract_GBIF_columns", and "get_OBIS_records" functions. 
+## Step 2: Obtaining occurrence data
 
-The "send_GBIF_request" function was created to prepare and send a JSON file with the records of species from the dataset to the GBIF API, which then lets the GBIF API prepare the files that contain occurrence data to be downloaded. 
-This function first standardizes all species names through the "name_backbone" function from the "rgbif" package so that all synonyms or misspellings can be determined and then eliminated. Furthermore, the number of occurrence records for every species is determined through the "occ_count" function from the "rgbif" package. After this, according to the information that the user provided, the species are chunked nearly equally according to the number of occurrence records and the desired number of chunks (which is specified by the user in the preparation step). In the last step of this function, a JSON file for every chunk is created and sent to the GBIF API.
-
-The "get_GBIF_download" function was created in order to download the files that contain occurrence data from GBIF.org automatically. Users must take into account three important subjects before running this function: 1) After running the "send_GBIF_request" function, users may need to wait between 15 minutes and 3 hours so that GBIF API can process the request and prepare the download files; 2) Users can check if the downloads are ready by logging to their GBIF.org account, and even download the occurrence data from the website. But, it must be noted that downloading the data manually from the website may cause inconveniences for the workflow; 3) If the directory for downloading GBIF occurrence data ("path_to_GBIFdownloads") is not empty, some problems may occur within the workflow. In this case, users may need to change the option in the function overwrite to "TRUE", allowing the function to overwrite the files in the directory. It should be noted that the files that are overwritten can not be retrieved later. This function utilizes the "occ_download_get" function from "rgbif" package to accomplish its task.
-
-"extract_GBIF_columns" decompresses the zip files that were downloaded through "get_GBIF_download", eliminates fossil occurrence records, removes wrong (out of bound coordinates) or empty coordinates, and compiles the output in chunks. By running this function, the users are done with downloading occurrence data from the GBIF database and can move on to the OBIS phase.
-
-The "get_OBIS_records" function is the only function that is required to download the necessary occurrence data from the OBIS database. This function utilizes the "occurrence" function from the "robis" package to download the occurrence data from the OBIS database. Furthermore, this function provides a couple of options to the users; these options include fields to download from the OBIS database ("fieldsobis"), removing fossil records (remove.fossils), and removing records with missing important data (omit.rows). 
-
-"get_OBIS_records" only downloads eight columns out of 114 ("scientificName","scientificNameID", "decimalLongitude","decimalLatitude", "basisOfRecord", "country", "speciesid", "marine") by default from OBIS API in order to decrease the clutter, but this can be arranged through changing "fieldobis" object according to the users needs. This function also removes fossil records by default; setting the "remove.fossils" object to "FALSE" prevents that from happening. "omit.rows" object can also be changed according to users' needs if they want to remove some records based on missing information.
+In this step, species occurrence data are obtained from GBIF and OBIS. As both repositories require
+different input variables and provide different access, the process of obtaining data differs as well.
 
 ```{r eval=FALSE}
 send_GBIF_request(file_name_extension,path_to_GBIFdownloads,
                   n_accounts,user=user,pwd=pwd,email=email)
+```
 
+This function first standardises all taxon names through the `name_backbone` function from the `rgbif` package so that synonyms and misspellings can be determined. 
+Only records for matched taxon names can be downloaded, which means that non-matching taxon names have to 
+be removed from further processing. 
+The taxon names provided by GBIF are further used within the workflow. 
+These names are stored together with the GBIF keys and the original names in the output file `GBIF_SpeciesKeys_...` in the folder `Data/Output/`.
+
+For each taxon, the number of occurrence records on GBIF.org is determined using the `occ_count`
+function from the `rgbif` package. This information allows splitting the data into n (n = n_accounts * 3) chunks of similar size as specified by the user. 
+Each of the n chunks of the taxon list is then sent as a separate request to the GBIF API.
+Processing the requested data by GBIF may take some time depending on the amount of requested data.
+The R package `rgbif` provides a number of functions to handle and check the process of requests.
+
+```{r eval=FALSE}
 get_GBIF_download(path_to_GBIFdownloads,file_name_extension)
+```
 
+The `get_GBIF_download` function was created to download the files that contain occurrence data from GBIF.org automatically but three things need to be considered: 
+1 After running the `send_GBIF_request` function, users may need to wait up to several hours until GBIF has processed the request and prepared the download files. 
+2 Users can check if the downloads are ready by logging to their GBIF.org account, and even download the occurrence data directly from the website, but then the data needs to be stored in the correct folder as determined in the variable `path_to_GBIFdownloads`. 
+3 To prevent overwriting already stored files, the default option is set to `overwrite=FALSE`, which need to be changed if files are downloaded multiple times.
+This function utilizes the "occ_download_get" function from "rgbif" package to accomplish its task.
+
+```{r eval=FALSE}
 extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
+```
 
+The function `extract_GBIF_columns` decompresses the zip files that were downloaded from GBIF and conducts an initial cleaning by removing fossil occurrence records, duplicated and missing records and records with coordinates not being longitudes or latitudes. 
+
+```{r eval=FALSE}
 get_OBIS_records(path_to_OBISdownloads,file_name_extension)
 ```
-##Step 2. Cleaning Occurrence Data
 
-As it is contemplated in our paper, the degree of quality of the data that is obtained from GBIF and OBIS may raise some concerns; in our workflow, these concerns are addressed in this step. "clean_GBIF_records" and "clean_OBIS_records" functions utilize the "CoordinateCleaner" package that is designed to clean wrong, imprecise, outlying and empty coordinates based on the information that is obtained from GBIF and OBIS databases. Both of these functions provide the option to thin the records. Since high numbers of records may cause memory issues, the number of records can be reduced by setting "thin_records" to TRUE (for both functions). Then, coordinates are rounded to the second digit, and duplicates are removed. For the single remaining record at this site, the original (not the rounded) record is kept. Thinning may result in imprecise results when the regions considered later in the workflow are small.
+The `get_OBIS_records` function is the only function that is required to download the necessary occurrence data from the OBIS website. This function uses the `occurrence` function from the `robis` package to perform the download. Three options are provided to specify the download. 
+As the default, the following variables are obtained from OBIS for each record as specified in `fieldsobis`: `scientificName`, `scientificNameID`, `decimalLongitude`, `decimalLatitude`, `basisOfRecord`, `country`, `speciesid`, `marine`.
+Fossil records and records with missing entries in any of the entries for `species`, `decimalLongitude`, `decimalLatitude`, `scientificName` are removed.
+
+
+## Step 3: Cleaning Occurrence Data
+
 
 ```{r eval=FALSE}
 clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
@@ -250,25 +310,56 @@ clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
 clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
 ```
 
-##Step 3. Determining Alien Occurrences
+Occurrence records obtained from GBIF and OBIS may require serious cleaning of records due to false or imprecise records. 
+After initial cleaning within step 2 of the workflow, here coordinates with low precision of having less than
+two digits after the comma are removed.
+In addition, a serious of tests as provided in the package `CoordinateCleaner` (Zizka et al. 2020) are performed. The selection of tests can be specified in the option `tests_for_cleaning` and include the following tests as a default: `capitals`, `centroids`, `equal`, `gbif`, `institutions`, `outliers`, `zeros`.
+These tests identify apparently wrong entries such as records found at the coordinates of the providing
+institute or country, or outlying records based on the geographic outlier test as described in Zizka et al. (2020).
 
-In the last step, DASCO workflow utilizes two functions, "coords_to_regions_GBIF" and "coords_to_regions_OBIS" to accomplish the task of determining alien occurrences and produce a definitive last output. In order to utilize the coordinates, the "sf" package was used. As stated before, users can utilize the default shapefile that is presented in the DASCO workflow. 
+Both of these functions for GBIF and OBIS provide the option to thin records by removing close coordinates. 
+Particularly for GBIF, the number of records may be very high, which may cause memory issues although the data
+are already processed in chunks of data as specified by the user. In addition, depending on the resolution of the regions provided in the shapefile, a high resolution is not required and thinning enables accelerating the process without loosing much information.
+Thinning is enabled for GBIF as a default (`thin_records=TRUE'). Then, coordinates are rounded to the second digit, and duplicates are removed. For the single remaining record at this site, the original (not the rounded) record is kept. 
 
-Both functions start with cross-checking if the habitat information for species on the WORMS database is matching with the coordinates from GBIF and OBIS databases. Then, utilizing the region information from the dataset that users provided, DASCO workflow identifies which downloaded coordinates match the regions from the dataset and keeps the occurrence records that are thought to be alien. After running both functions, users can execute the last function called "add_first_records" to compile the alien occurrences and produce the last output file named "AlienRegions_FinalDB_(file_name_extension)", into the "./Data/Output" directory, which contains all the alien occurrences from the dataset that is provided.
+## Step 4: Determining alien populations
 
 ```{r eval=FALSE}
-realm_extension <- TRUE 
-
 coords_to_regions_GBIF(name_of_shapefile,
                        path_to_GBIFdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
 
 coords_to_regions_OBIS(name_of_shapefile,
                        path_to_OBISdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
-
-
-dat <- add_first_records(file_name_extension,path_to_GBIFdownloads)
 ```
+
+In the fourth step of the workflow, the status of being native or alien is determined for each record obtained from GBIF or OBIS.
+This is done by identifying the region, where the respective coordinate is located, and extracting the status of the population from the original taxon-by-region file. 
+A population is considered as being present in a particular region only if at least three records fall into the respective polyon.
+For instance, if a species has been recorded as being alien for Turkey and at least three records are listed for Turkey, all records found within Turkey for that species are taken as records of alien populations. 
+These records can then be assigned to the regions as specified in shapefile `name_of_shapefile`. In this way, records can be assigned to e.g. sub-regions of Turkey or biogeographical areas extending beyond that country.
+Coordinates of population not identified as being alien populations are removed.
+
+The DASCO workflow allows assigning taxa from regional checklists to marine regions if `realm_extension=TRUE`. 
+As marine taxa are often not specified as such, information from the World Register of Marine Species (WoRMS) is used to identify marine species. This is done by using the function `get_WoRMS_habitats` from the package `worrms`, which provides information about the habitat (marine, freshwater and terrestrial) of species listed on WoRMS. 
+In addition, to avoid mis-classifications taxa of the following groups were considered as non-marine: classes of insecta, arachnida, aves, amphibia and mammalia, and pyla of tracheophyta, anthocerotophyta and bryophyta.
+In this way, also freshwater species were classified but as this classification depends on WoRMS, the list
+of freshwater species is certainly incomplete.
+
+For marine taxa, the marine ecoregions bordering a certain terrestrial region are obtained from the file `RegionsMEOW_NeighbourList.csv`. Taxa identified as marine species and with available records in the respective marine ecoregions are then classified as being alien in the respective marine ecoregion. 
+
+
+## Step 5: Final output
+
+```{r eval=FALSE}
+dat <- final_DASCO_output(file_name_extension,path_to_GBIFdownloads)
+```
+
+As a last step of the DASCO workflow, the function `final_DASCO_output` merges all files from GBIF and OBIS.
+If provided, first records were harmonised such that the earliest first record provided for a certain region is kept.
+This is done under the assumption that the first record of a taxon reported for a region also holds to the regions assigned by the workflow.
+
+Finally, the output files are prepared and stored as `AlienRegions_FinalDB_(file_name_extension)` in the `Data/Output/` directory.

@@ -12,7 +12,7 @@
 
 
 
-add_first_records <- function(
+final_DASCO_output <- function(
   file_name_extension,
   path_to_GBIFdownloads
   ){

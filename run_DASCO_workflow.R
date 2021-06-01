@@ -150,4 +150,4 @@ coords_to_regions_OBIS(name_of_shapefile,
 ########################################################################
 ## add first records per region (requires 'eventDate' column) ##########
 ## and produce final output file containing GBIF and OBIS records ######
-dat <- add_first_records(file_name_extension,path_to_GBIFdownloads)
+dat <- final_DASCO_output(file_name_extension,path_to_GBIFdownloads)

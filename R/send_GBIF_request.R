@@ -93,7 +93,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   GBIF_species$group <- 1
   x <- 1
   for (i in 2:nrow(GBIF_species)){ # loop over all species
-    if (GBIF_species$cumsum[i-1] > sum(GBIF_species$nRecords)/ n_chunks){ # if $cumsum is larger x, start a new cumulative sum
+    if (GBIF_species$cumsum[i-1] > sum(GBIF_species$nRecords)/ n_chunks){ # if $cumsum is larger than 1/n_chunks fraction of all records, start a new cumulative sum
       x <- x + 1 # counter for the number of groups of species belonging to one chunk
       GBIF_species$cumsum[i] <- GBIF_species$nRecords[i]
     } else { # if not, continue with the former cumulative sum

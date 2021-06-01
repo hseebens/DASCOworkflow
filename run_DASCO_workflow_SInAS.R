@@ -62,22 +62,7 @@ file_name_extension <- "SInAS_2.3.2"
 
 
 ###################################################################################
-### Check and create folder structure #############################################
-create_folders() # creates folders only if they are not existing yet
-
-prepare_dataset(filename_inputData,
-                column_scientificName,
-                column_taxonName,
-                column_location,
-                column_eventDate,
-                file_name_extension)
-  
-
-###################################################################################
-### Obtaining data ################################################################
-### send requests to GBIF #########################################################
-
-## GBIF account details ############
+## GBIF account details ###########################################################
 ## Note that multiple accounts are required for n_accounts>1.
 ## The accounts have to numbered x=1...n_accounts, while x is part of
 ## user name and email address. For example, user name and email should be:
@@ -91,7 +76,25 @@ user <- "ekinhanno1"                                  # your gbif.org username
 pwd <- "seebenskaplan1234"                                     # your gbif.org password (set the same password for all accounts for convenience)
 email <- "ekinhanno1@outlook.com"                 # your email which you will recieve the download link
 
+
+
 ###################################################################################
+### EXECUTION OF DASCO WORKFLOW ###################################################
+###################################################################################
+
+### 1. Check and create folder structure #############################################
+create_folders() # creates folders only if they are not existing yet
+
+prepare_dataset(filename_inputData,
+                column_scientificName,
+                column_taxonName,
+                column_location,
+                column_eventDate,
+                file_name_extension)
+  
+
+###################################################################################
+### 2. Obtaining data #############################################################
 
 ## send requests to GBIF 
 send_GBIF_request(file_name_extension,
@@ -110,15 +113,15 @@ extract_GBIF_columns(path_to_GBIFdownloads,
                      file_name_extension)
 
 
-###################################################################################
 ### get OBIS records ##############################################################
 
 get_OBIS_records(path_to_OBISdownloads,
                  file_name_extension)
 ## Intermediate download files are stored under Data/Output/Intermediate
 
+
 ###################################################################################
-### Cleaning data #################################################################
+### 3. Cleaning data ##############################################################
 
 ## Thinning of coordinates:
 ## High numbers of records may cause memory issues. The number of records
@@ -142,7 +145,7 @@ clean_OBIS_records(path_to_OBISdownloads,
   
 
 ###################################################################################
-### get alien regions based on coordintates #######################################
+### 4. get alien regions based on coordintates ####################################
 
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests
@@ -162,7 +165,7 @@ coords_to_regions_OBIS(name_of_shapefile,
 
 
 ########################################################################
+## 5. produce final output of the DASCO workflow #######################
 ## add first records per region (requires 'eventDate' column) ##########
-## and produce final output file containing GBIF and OBIS records ######
-dat <- add_first_records(file_name_extension,
+dat <- final_DASCO_output(file_name_extension,
                          path_to_GBIFdownloads)

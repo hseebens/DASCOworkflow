@@ -187,10 +187,10 @@ coords_to_regions_OBIS <- function(
       
       ## export
       coords_mat <- as.data.frame(st_coordinates(ptspoly_alien),stringsAsFactors = F)
-      if (realm_extension){ #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      if (realm_extension){ 
         output <- cbind.data.frame(ptspoly_alien$Taxon,ptspoly_alien$Location,ptspoly_alien$Realm,coords_mat,stringsAsFactors=F) #
         colnames(output) <- c("Taxon","Location","Realm","Longitude","Latitude")#
-      } else { #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      } else { 
         output <- cbind.data.frame(ptspoly_alien$Taxon,ptspoly_alien$Location,coords_mat,stringsAsFactors=F) #
         colnames(output) <- c("Taxon","Location","Longitude","Latitude")#
       }

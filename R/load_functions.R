@@ -42,4 +42,4 @@ source(file.path("R","coords_to_regions_GBIF.R")) # identify region for each coo
 source(file.path("R","coords_to_regions_OBIS.R")) # identify region for each coordinate
 
 ## add first records to final output file ###############################
-source(file.path("R","add_first_records.R")) # add first records per species and region (if available)
+source(file.path("R","final_DASCO_output.R")) # add first records per species and region (if available)
