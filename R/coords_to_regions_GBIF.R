@@ -63,7 +63,11 @@ coords_to_regions_GBIF <- function(
     stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
   } 
   regions$Location <- newLocNames$Location
-  
+
+  all_locations <- fread(file.path("Data","Input","AllLocations_DASCO.csv"))
+  all_locations <- all_locations[,c("locationID","Location")]
+  regions <- merge(regions,all_locations,by="Location",all.x=T)
+
   if (realm_extension){
     # regions$Realm <- NA
     # regions$Realm[!is.na(regions$Ecoregion)] <- "marine"
@@ -181,10 +185,10 @@ coords_to_regions_GBIF <- function(
       
       ## export
       coords_mat <- as.data.frame(st_coordinates(ptspoly_alien),stringsAsFactors = F)
-      if (realm_extension){ #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      if (realm_extension){ 
         output <- cbind.data.frame(ptspoly_alien$speciesKey,ptspoly_alien$Location,ptspoly_alien$Realm,coords_mat,stringsAsFactors=F) #
         colnames(output) <- c("speciesKey","Location","Realm","Longitude","Latitude")#
-      } else { #### ADJUST COLUMN NAMES AFTER MAKING THE SHAPEFILE CONSISTENT!!!!
+      } else {
         output <- cbind.data.frame(ptspoly_alien$speciesKey,ptspoly_alien$Location,coords_mat,stringsAsFactors=F) #
         colnames(output) <- c("speciesKey","Location","Longitude","Latitude")#
       }

@@ -1,0 +1,515 @@
+"locationID";"ISO3";"countryCode";"Location";"keywords";"island";"gadm_name";"tdwg4_name";"tdwg1";"tdwg1_name";"glonaf_country"
+1;"AND";"AD";"Andorra";;0;"Andorra";;;"Europe";
+2;"ARE";"AE";"United Arab Emirates";;0;"United Arab Emirates";"United Arab Emirates";3;"Asia-Temperate";"United Arab Emirates (the)"
+3;"AFG";"AF";"Afghanistan";;0;"Afghanistan";"Afghanistan";3;"Asia-Temperate";"Afghanistan"
+4;"ATG";"AG";"Antigua and Barbuda";"Antigua; Barbuda";1;"Antigua and Barbuda";;8;"Southern America";"Antigua and Barbuda"
+5;"AIA";"AI";"Anguilla";"Anguilla Island";1;"Anguilla";"Anguilla";8;"Southern America";"Anguilla"
+6;"ALB";"AL";"Albania";;0;"Albania";"Albania";1;"Europe";"Albania"
+7;"ARM";"AM";"Armenia";;0;"Armenia";"Armenia";3;"Asia-Temperate";"Armenia"
+8;"AGO";"AO";"Angola";;0;"Angola";"Angola";2;"Africa";"Angola"
+9;"ATA";"AQ";"Antarctica";;0;"Antarctica";"Antarctica";9;"Antarctic";"Antarctica"
+10;"ARG";"AR";"Argentina";"San Juan; Salta; Mendoza; Misiones; Argentina Distrito Federal; Córdoba; Chaco; Buenos Aires";0;"Argentina";;8;"Southern America";"Argentina"
+11;"ASM";"AS";"American Samoa";;1;"American Samoa";;6;"Pacific";"American Samoa"
+12;"AUT";"AT";"Austria";;0;"Austria";;1;"Europe";"Austria"
+13;"AUS";"AU";"Australia";"Western Australia; Victoria; South Australia; Queensland; Northern Territory; New South Wales; New South Wales";0;"Australia";;5;"Australasia";"Australia"
+14;"AUS";"AU";"Lord Howe Island";"Lord Howe I.";1;"Australia";"Lord Howe Island";5;"Australasia";"Australia"
+15;"AUS";"AU";"Tasmania";;1;"Australia";"Tasmania";5;"Australasia";"Australia"
+16;"AUS";"AU";"Heard-McDonald Islands";;1;"Australia";;5;"Australasia";"Australia"
+17;"ABW";"AW";"Aruba";;1;"Aruba";"Aruba";8;"Southern America";"Aruba"
+18;"ALA";"AX";"Åland Islands";"Aland Islands";1;"Åland";;1;"Europe";
+19;"AZE";"AZ";"Azerbaijan";;0;"Azerbaijan";;;"Asia-Temperate";
+20;"BIH";"BA";"Bosnia and Herzegovina";"Bosnia-Herzegovina";0;"Bosnia and Herzegovina";;;"Europe";
+21;"BRB";"BB";"Barbados";;1;"Barbados";"Barbados";8;"Southern America";"Barbados"
+22;"BGD";"BD";"Bangladesh";;0;"Bangladesh";"Bangladesh";4;"Asia-Tropical";"Bangladesh"
+23;"BEL";"BE";"Belgium";;0;"Belgium";"Belgium";1;"Europe";"Belgium"
+24;"BFA";"BF";"Burkina Faso";;0;"Burkina Faso";"Burkina Faso";2;"Africa";"Burkina Faso"
+25;"BGR";"BG";"Bulgaria";;0;"Bulgaria";"Bulgaria";1;"Europe";"Bulgaria"
+26;"BHR";"BH";"Bahrain";;0;"Bahrain";;3;"Asia-Temperate";
+27;"BDI";"BI";"Burundi";;0;"Burundi";"Burundi";2;"Africa";"Burundi"
+28;"BEN";"BJ";"Benin";;0;"Benin";"Benin";2;"Africa";"Benin"
+29;"BLM";"BL";"Saint Barthélemy";"St Barthélemy; St. Barthélemy; Saint-Barthélemy; Barthelemy; Saint Barthelemy";1;"Saint-Barthélemy";"St. Martin-St. Barthelemy";8;"Southern America";"Saint Barthelemy"
+30;"BMU";"BM";"Bermuda";;1;"Bermuda";"Bermuda";8;"Southern America";"Bermuda"
+31;"BRN";"BN";"Brunei Darussalam";"Brunei";0;"Brunei";;;"Asia-Tropical";
+32;"BOL";"BO";"Bolivia";"Bolivia (Plurinational State of)";0;"Bolivia";;8;"Southern America";"Bolivia (Plurinational State of)"
+33;"BES";"BQ";"Bonaire";;1;"Bonaire, Saint Eustatius and Saba";;;"Southern America";
+34;"BES";"BQ";"Sint Eustatius";;1;"Bonaire, Saint Eustatius and Saba";;;"Southern America";
+35;"BES";"BQ";"Saba";;1;"Bonaire, Saint Eustatius and Saba";;;"Southern America";
+36;"BRA";"BR";"Fernando De Noronha";"Fernando de Naronha and Atoll das Rocas";1;"Brazil";;8;"Southern America";"Brazil"
+37;"BRA";"BR";"Brazil";;0;"Brazil";;8;"Southern America";"Brazil"
+38;"BHS";"BS";"Bahamas";"Bahamas (the)";1;"Bahamas";"Bahamas";8;"Southern America";"Bahamas (the)"
+39;"BTN";"BT";"Bhutan";;0;"Bhutan";;;"Asia-Tropical";
+40;"BVT";"BV";"Bouvet Island";;1;"Bouvet Island";;;"Antarctic";
+41;"BWA";"BW";"Botswana";;0;"Botswana";"Botswana";2;"Africa";"Botswana"
+42;"BLR";"BY";"Belarus";;0;"Belarus";"Belarus";1;"Europe";"Belarus"
+43;"BLZ";"BZ";"Belize";;0;"Belize";"Belize";8;"Southern America";"Belize"
+44;"CAN";"CA";"Vancouver Island";;1;"Canada";;7;"Northern America";"Canada"
+45;"CAN";"CA";"Canada";"Quebec; Ontario; Newfoundland; British Columbia; Anticosti Island";0;"Canada";;7;"Northern America";"Canada"
+46;"CCK";"CC";"Cocos Islands";"Keeling; Cocos (Keeling) Islands";1;"Cocos Islands";;4;"Asia-Tropical";"Cocos (Keeling) Islands (the)"
+47;"COD";"CD";"Democratic Republic of the Congo";"Congo, Democratic Republic of; Congo (the Democratic Republic of the); Congo, Democratic Republic of the; DR Congo; Democratic Republic of Congo";0;"Democratic Republic of the Congo";"Democratic Republic of the Congo";2;"Africa";"Congo (the Democratic Republic of the)"
+48;"CAF";"CF";"Central African Republic";;0;"Central African Republic";"Central African Republic";2;"Africa";"Central African Republic (the)"
+49;"COG";"CG";"Congo";"Republic of Congo; Congo, Republic of";0;"Republic of Congo";"Congo";2;"Africa";"Congo (the)"
+50;"CHE";"CH";"Switzerland";;0;"Switzerland";"Switzerland";1;"Europe";"Switzerland"
+51;"CIV";"CI";"Côte d'Ivoire";"Cote D'Ivoire; Cote d'Ivoire; Ivory Coast; Côte D'ivoire; C“te d'Ivoire";0;"Côte d'Ivoire";"Cote d'Ivoire";2;"Africa";"Côte d'Ivoire"
+52;"COK";"CK";"Cook Islands";;1;"Cook Islands";;6;"Pacific";"Cook Islands (the)"
+53;"CHL";"CL";"Chile";"Desventurados Islands; Juan Fernandez Islands";0;"Chile";;8;"Southern America";"Chile"
+54;"CHL";"CL";"Easter Island";"Rapa Nui";1;"Chile";"Easter Island, Chile";6;"Pacific";"Chile"
+55;"CMR";"CM";"Cameroon";;0;"Cameroon";"Cameroon";2;"Africa";"Cameroon"
+56;"CHN";"CN";"China";;0;"China";;3;"Asia-Temperate";"China"
+57;"COL";"CO";"Colombia";;0;"Colombia";"Colombia";8;"Southern America";"Colombia"
+58;"CRI";"CR";"Costa Rica";;0;"Costa Rica";"Costa Rica";8;"Southern America";"Costa Rica"
+59;"CUB";"CU";"Cuba";;1;"Cuba";"Cuba";8;"Southern America";"Cuba"
+60;"CPV";"CV";"Cape Verde";"Cabo Verde; Cape Verde Islands";1;"Cape Verde";"Cape Verde";2;"Africa";"Cabo Verde"
+61;"ANT";"CW";"Curacao";"Curaçao; Curacao";1;"Curaçao";"Curacao";8;"Southern America";"Netherlands Antilles"
+62;"CXR";"CX";"Christmas Island";;1;"Christmas Island";"Christmas Island";4;"Asia-Tropical";"Christmas Island"
+63;"CYP";"CY";"Cyprus";;1;"Cyprus";"Cyprus";3;"Asia-Temperate";"Cyprus"
+64;"CZE";"CZ";"Czech Republic";"Czechia";0;"Czech Republic";"Czech Republic";1;"Europe";"Czech Republic (the)"
+65;"DEU";"DE";"Germany";;0;"Germany";;1;"Europe";"Germany"
+66;"DJI";"DJ";"Djibouti";;0;"Djibouti";"Djibouti";2;"Africa";"Djibouti"
+67;"DNK";"DK";"Denmark";;0;"Denmark";"Denmark";1;"Europe";"Denmark"
+68;"DMA";"DM";"Dominica";;1;"Dominica";"Dominica";8;"Southern America";"Dominica"
+69;"DOM";"DO";"Dominican Republic";;1;"Dominican Republic";"Dominican Republic";8;"Southern America";"Dominican Republic (the)"
+70;"DZA";"DZ";"Algeria";;0;"Algeria";"Algeria";2;"Africa";"Algeria"
+71;"ECU";"EC";"Ecuador";;0;"Ecuador";;8;"Southern America";"Ecuador"
+72;"ECU";"EC";"Galapagos";"Española; Fernandina; Floreana; Genovesa; Isabela; Pinta; Pinzón; San Cristóbal; Santa Cruz; Santa Fé; Santiago; Ecuador (Galapagos)";1;"Ecuador";;8;"Southern America";"Ecuador"
+73;"EST";"EE";"Estonia";;0;"Estonia";"Estonia";1;"Europe";"Estonia"
+74;"EGY";"EG";"Egypt";;0;"Egypt";"Egypt";2;"Africa";"Egypt"
+75;"ESH";"EH";"Western Sahara";;0;"Western Sahara";"Western Sahara";2;"Africa";"Western Sahara"
+76;"ERI";"ER";"Eritrea";;0;"Eritrea";"Eritrea";2;"Africa";"Eritrea"
+77;"ESP";"ES";"Balearic Islands";"Spain (Balearic islands)";1;"Spain";"Balearic Islands";1;"Europe";"Spain"
+78;"ESP";"ES";"Canary Islands";"El Hierro; Fuerteventura; Gran Canaria; La Gomera; La Palma; Lanzarote; Tenerife; Spain (Canary islands)";1;"Spain";"Canary Islands";2;"Africa";"Spain"
+79;"ESP";"ES";"Spain";"Spain (mainland)";0;"Spain";"Spain (mainland)";1;"Europe";"Spain"
+80;"ETH";"ET";"Ethiopia";;0;"Ethiopia";"Ethiopia";2;"Africa";"Ethiopia"
+81;"FIN";"FI";"Finland";;0;"Finland";"Finland";1;"Europe";"Finland"
+82;"FJI";"FJ";"Fiji";"Fiji Island";1;"Fiji";;6;"Pacific";"Fiji"
+83;"FLK";"FK";"Falkland Islands";"Malvinas";1;"Falkland Islands";;;"Antarctic";
+84;"FSM";"FM";"Micronesia, Federated States of";"Micronesia (Federated States of); Micronesia; Federated States of Micronesia; Chuuk; Pohnpei";1;"Micronesia";;6;"Pacific";
+85;"FRO";"FO";"Faroe Islands";"Faroe";1;"Faroe Islands";"Faroe Islands";1;"Europe";"Faroe Islands (the)"
+86;"FRA";"FR";"Corsica";"Corse; France (Corsica)";1;"France";"Corsica";1;"Europe";"France"
+87;"FRA";"FR";"France";;0;"France";"France (mainland)";1;"Europe";"France"
+88;"GAB";"GA";"Gabon";;0;"Gabon";"Gabon";2;"Africa";"Gabon"
+89;"GBR";"GB";"Shetland Islands";;1;"United Kingdom of Great Britain and Northern Ireland (the)";;1;"Europe";"United Kingdom of Great Britain and Northern Ireland (the)"
+90;"GBR";"GB";"United Kingdom of Great Britain and Northern Ireland";"United Kingdom; Great Britain";1;"United Kingdom of Great Britain and Northern Ireland (the)";;1;"Europe";"United Kingdom of Great Britain and Northern Ireland (the)"
+91;"GRD";"GD";"Grenada";;1;"Grenada";"Grenada";8;"Southern America";"Grenada"
+92;"GEO";"GE";"Georgia";;0;"Georgia";"Georgia";3;"Asia-Temperate";"Georgia"
+93;"GUF";"GF";"French Guiana";;0;"French Guiana";"French Guiana";8;"Southern America";"French Guiana"
+94;"GGY";"GG";"Guernsey";;1;"Guernsey";;;"Europe";
+95;"GHA";"GH";"Ghana";;0;"Ghana";"Ghana";2;"Africa";"Ghana"
+96;"GIB";"GI";"Gibraltar";;0;"Gibraltar";;;"Europe";
+97;"GRL";"GL";"Greenland";;1;"Greenland";"Greenland";7;"Northern America";"Greenland"
+98;"GMB";"GM";"Gambia";;0;"Gambia";"Gambia";2;"Africa";"Gambia (the)"
+99;"GIN";"GN";"Guinea";;0;"Guinea";"Guinea";2;"Africa";"Guinea"
+100;"GLP";"GP";"Guadeloupe";"Guadalupe Island";1;"Guadeloupe";;8;"Southern America";"Guadeloupe"
+101;"GNQ";"GQ";"Equatorial Guinea";;0;"Equatorial Guinea";"Equatorial Guinea";2;"Africa";"Equatorial Guinea"
+102;"GRC";"GR";"Crete";;1;"Greece";"Greece";1;"Europe";"Greece"
+103;"GRC";"GR";"Greece";;0;"Greece";"Greece";1;"Europe";"Greece"
+104;"SGS";"GS";"South Georgia and the South Sandwich Islands";;1;"South Georgia and the South Sandwich Islands";"South Georgia Island";9;"Antarctic";"South Georgia and the South Sandwich Islands"
+105;"GTM";"GT";"Guatemala";;0;"Guatemala";;;"Southern America";
+106;"GUM";"GU";"Guam";;1;"Guam";"Guam";6;"Pacific";"Guam"
+107;"GNB";"GW";"Guinea-Bissau";"Guinea Bissau";0;"Guinea-Bissau";;2;"Africa";"Guinea-Bissau"
+108;"GUY";"GY";"Guyana";;0;"Guyana";"Guyana";8;"Southern America";"Guyana"
+109;"HKG";"HK";"Hong Kong";"Hongkong";0;"Hong Kong";"Hongkong";3;"Asia-Temperate";"Hong Kong"
+110;"HMD";"HM";"Heard Island and McDonald Islands";;1;"Heard Island and McDonald Islands";;9;"Antarctic";"Heard Island and McDonald Islands"
+111;"HND";"HN";"Honduras";;0;"Honduras";;;"Southern America";
+112;"HRV";"HR";"Croatia";;0;"Croatia";"Croatia";1;"Europe";"Croatia"
+113;"HTI";"HT";"Haiti";;1;"Haiti";;8;"Southern America";"Haiti"
+114;"HUN";"HU";"Hungary";;0;"Hungary";"Hungary";1;"Europe";"Hungary"
+115;"IDN";"ID";"Indonesia";"Sulawesi; Bali; Biak";1;"Indonesia";"Indonesia";4;"Asia-Tropical";"Indonesia"
+116;"IRL";"IE";"Ireland";;1;"Ireland";"Ireland";1;"Europe";"Ireland"
+117;"ISR";"IL";"Israel";;0;"Israel";"Israel";3;"Asia-Temperate";"Israel"
+118;"IMN";"IM";"Isle of Man";;1;"Isle of Man";;;"Europe";
+119;"IND";"IN";"India";;0;"India";;4;"Asia-Tropical";"India"
+120;"IND";"IN";"Andaman and Nicobar Islands";"Andaman; Nicobar; Nicobar and Andaman; Nicobar and Andaman Islands";1;"India";;4;"Asia-Tropical";"India"
+121;"IOT";"IO";"Chagos Archipelago";"Chagos";1;"British Indian Ocean Territory";;4;"Asia-Tropical";
+122;"IRQ";"IQ";"Iraq";;0;"Iraq";;;"Asia-Temperate";
+123;"IRN";"IR";"Iran, Islamic Republic of";"Iran; Iran (Islamic Republic of)";0;"Iran";"Iran (Islamic Republic of)";3;"Asia-Temperate";"Iran (Islamic Republic of)"
+124;"ISL";"IS";"Iceland";;1;"Iceland";;1;"Europe";"Iceland"
+125;"ITA";"IT";"Italy";;0;"Italy";"Italy (mainland)";1;"Europe";"Italy"
+126;"ITA";"IT";"Sardinia";"Italy (Sardinia)";1;"Italy";"Sardinia";1;"Europe";"Italy"
+127;"ITA";"IT";"Sicily";"Italy (Sicily)";1;"Italy";"Sicily";1;"Europe";"Italy"
+128;"JEY";"JE";"Jersey";;1;"Jersey";;;"Europe";
+129;"JAM";"JM";"Jamaica";;1;"Jamaica";"Jamaica";8;"Southern America";"Jamaica"
+130;"JOR";"JO";"Jordan";;0;"Jordan";;;"Asia-Temperate";
+131;"JPN";"JP";"Izu Islands";;1;"Japan";"Japan";3;"Asia-Temperate";"Japan"
+132;"JPN";"JP";"Ogasawara Islands";;1;"Japan";"Japan";3;"Asia-Temperate";"Japan"
+133;"JPN";"JP";"Japan";"Ryukyu Islands";1;"Japan";"Japan";3;"Asia-Temperate";"Japan"
+134;"KEN";"KE";"Kenya";;0;"Kenya";"Kenya";2;"Africa";"Kenya"
+135;"KGZ";"KG";"Kyrgyzstan";;0;"Kyrgyzstan";"Kyrgyzstan";3;"Asia-Temperate";"Kyrgyzstan"
+136;"KHM";"KH";"Cambodia";;0;"Cambodia";;;"Asia-Tropical";
+137;"KIR";"KI";"Kiribati";;1;"Kiribati";;6;"Pacific";"Kiribati"
+138;"COM";"KM";"Comoros";"Mwali (Mohéli); Ndzuwani (Anjouan); Ngazidja (Grande Comore)";1;"Comoros";"Comoros";2;"Africa";"Comoros (the)"
+139;"KNA";"KN";"Saint Kitts and Nevis";"St. Kitts and Nevis; St Kitts and Nevis";1;"Saint Kitts and Nevis";;8;"Southern America";"Saint Kitts and Nevis"
+140;"PRK";"KP";"Korea, Democratic People's Republic of";"North Korea; Democratic Repubic of Korea; Korea (the Democratic People's Republic of); KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF";0;"North Korea";"Korea, Democratic People's Republic of";3;"Asia-Temperate";"Korea (the Democratic People's Republic of)"
+141;"KOR";"KR";"Korea, Republic of";"South Korea; Republic of Korea; Korea (the Republic of); Jeju Island; Korea (Republic of)";0;"South Korea";"Korea, Republic of";3;"Asia-Temperate";"Korea (the Republic of)"
+142;"KWT";"KW";"Kuwait";;0;"Kuwait";;;"Asia-Temperate";
+143;"CYM";"KY";"Cayman Islands";"Cayman Islands";1;"Cayman Islands";"Cayman Islands";8;"Southern America";"Cayman Islands (the)"
+144;"KAZ";"KZ";"Kazakhstan";;0;"Kazakhstan";;;"Asia-Temperate";
+145;"LAO";"LA";"Lao People's Democratic Republic";"Laos";0;"Laos";"Lao People's Democratic Republic";4;"Asia-Tropical";"Lao People's Democratic Republic (the)"
+146;"LBN";"LB";"Lebanon";;0;"Lebanon";;;"Asia-Temperate";
+147;"LCA";"LC";"Saint Lucia";"St Lucia; St. Lucia";1;"Saint Lucia";"Saint Lucia";8;"Southern America";"Saint Lucia"
+148;"LIE";"LI";"Liechtenstein";;0;"Liechtenstein";"Liechtenstein";1;"Europe";"Liechtenstein"
+149;"LKA";"LK";"Sri Lanka";;1;"Sri Lanka";"Sri Lanka";4;"Asia-Tropical";"Sri Lanka"
+150;"LBR";"LR";"Liberia";;0;"Liberia";"Liberia";2;"Africa";"Liberia"
+151;"LSO";"LS";"Lesotho";;0;"Lesotho";"Lesotho";2;"Africa";"Lesotho"
+152;"LTU";"LT";"Lithuania";;0;"Lithuania";"Lithuania";1;"Europe";"Lithuania"
+153;"LUX";"LU";"Luxembourg";;0;"Luxembourg";"Luxembourg";1;"Europe";"Luxembourg"
+154;"LVA";"LV";"Latvia";;0;"Latvia";"Latvia";1;"Europe";"Latvia"
+155;"LBY";"LY";"Libya";;0;"Libya";"Libyan Arab Jamahiriya";2;"Africa";"Libya"
+156;"MAR";"MA";"Morocco";;0;"Morocco";"Morocco";2;"Africa";"Morocco"
+157;"MCO";"MC";"Monaco";;0;"Monaco";;;"Europe";
+158;"MDA";"MD";"Moldova, Republic of";"Moldova; Republic of Moldova; Moldova (the Republic of)";0;"Moldova";"Republic of Moldova";1;"Europe";"Moldova (the Republic of)"
+159;"MNE";"ME";"Montenegro";;0;"Montenegro";;;"Europe";
+160;"MAF";"MF";"Saint Martin";"St Martin; St. Martin; Saint-Martin";1;"Saint-Martin";"St. Martin-St. Barthelemy";8;"Southern America";
+161;"MDG";"MG";"Madagascar";;1;"Madagascar";"Madagascar";2;"Africa";"Madagascar"
+162;"MHL";"MH";"Marshall Islands";;1;"Marshall Islands";;6;"Pacific";"Marshall Islands (the)"
+163;"MKD";"MK";"Macedonia";"Macedonia (the former Yugoslav Republic of); MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF";0;"Macedonia";"The former Yugoslav Republic of Macedonia";1;"Europe";"Macedonia (the former Yugoslav Republic of)"
+164;"MLI";"ML";"Mali";;0;"Mali";"Mali";2;"Africa";"Mali"
+165;"MMR";"MM";"Myanmar";"Burma; Birma";0;"Myanmar";;4;"Asia-Tropical";
+166;"MNG";"MN";"Mongolia";;0;"Mongolia";"Mongolia";3;"Asia-Temperate";"Mongolia"
+167;"MAC";"MO";"Macao";;0;"Macao";"Macau";3;"Asia-Temperate";"Macao"
+168;"MNP";"MP";"Northern Mariana Islands";;1;"Northern Mariana Islands";;6;"Pacific";"Northern Mariana Islands (the)"
+169;"MTQ";"MQ";"Martinique";;1;"Martinique";"Martinique";8;"Southern America";"Martinique"
+170;"MRT";"MR";"Mauritania";;0;"Mauritania";"Mauritania";2;"Africa";"Mauritania"
+171;"MSR";"MS";"Montserrat";;1;"Montserrat";"Montserrat";8;"Southern America";"Montserrat"
+172;"MLT";"MT";"Malta";;1;"Malta";"Malta";1;"Europe";"Malta"
+173;"MUS";"MU";"Rodriguez Island";;1;"Mauritius";;2;"Africa";"Mauritius"
+174;"MUS";"MU";"Mauritius";;1;"Mauritius";;2;"Africa";"Mauritius"
+175;"MDV";"MV";"Maldives";"Maldive Islands";1;"Maldives";"Maldives";4;"Asia-Tropical";"Maldives"
+176;"MWI";"MW";"Malawi";;0;"Malawi";"Malawi";2;"Africa";"Malawi"
+177;"MEX";"MX";"Sea of Cortez Islands";;1;"Mexico";;7;"Northern America";"Mexico"
+178;"MEX";"MX";"Mexico";"Rocas Alijos; Zacatecas; Yucatán; Veracruz; Tamaulipas; Tabasco; Sonora; Sinaloa; San Luis Potosí; Quintana Roo; Querétaro; Puebla; Nuevo León; Nayarit; Morelos; Michoacán; Jalisco; Hidalgo; Guerrero; Durango; Chihuahua; Chiapas; Campeche; Oaxaca; Colima; Coahuila";0;"Mexico";;7;"Northern America";"Mexico"
+179;"MYS";"MY";"Malaysia";;0;"Malaysia";;4;"Asia-Tropical";"Malaysia"
+180;"MOZ";"MZ";"Mozambique";;0;"Mozambique";;2;"Africa";"Mozambique"
+181;"NAM";"NA";"Namibia";;0;"Namibia";"Namibia";2;"Africa";"Namibia"
+182;"NCL";"NC";"New Caledonia";;1;"New Caledonia";"New Caledonia";6;"Pacific";"New Caledonia"
+183;"NER";"NE";"Niger";;0;"Niger";"Niger";2;"Africa";"Niger (the)"
+184;"NFK";"NF";"Norfolk Island";"Norfolk Islands; Norfolk I.";1;"Norfolk Island";"Norfolk Island";5;"Australasia";"Norfolk Island"
+185;"NGA";"NG";"Nigeria";;0;"Nigeria";"Nigeria";2;"Africa";"Nigeria"
+186;"NIC";"NI";"Nicaragua";;0;"Nicaragua";"Nicaragua";8;"Southern America";"Nicaragua"
+187;"NLD";"NL";"Netherlands";;0;"Netherlands";"Netherlands";1;"Europe";"Netherlands (the)"
+188;"NOR";"NO";"Norway";;0;"Norway";"Norway (mainland)";1;"Europe";"Norway"
+189;"NPL";"NP";"Nepal";;0;"Nepal";"Nepal";4;"Asia-Tropical";"Nepal"
+190;"NRU";"NR";"Nauru";;1;"Nauru";"Nauru";6;"Pacific";"Nauru"
+191;"NIU";"NU";"Niue";;1;"Niue";;6;"Pacific";
+192;"NZL";"NZ";"Kermadec Islands";"Kermadec";1;"New Zealand";"Kermadec Islands";5;"Australasia";"New Zealand"
+193;"NZL";"NZ";"New Zealand";;1;"New Zealand";"New Zealand";5;"Australasia";"New Zealand"
+194;"OMN";"OM";"Oman";;0;"Oman";"Oman";3;"Asia-Temperate";"Oman"
+195;"PAN";"PA";"Panama";;0;"Panama";"Panama";8;"Southern America";"Panama"
+196;"PER";"PE";"Peru";;0;"Peru";"Peru";8;"Southern America";"Peru"
+197;"PYF";"PF";"French Polynesia";"Clipperton Island; Society Islands";1;"French Polynesia";;6;"Pacific";"French Polynesia"
+198;"PNG";"PG";"Papua New Guinea";;1;"Papua New Guinea";"Papua New Guinea";4;"Asia-Tropical";"Papua New Guinea"
+199;"PHL";"PH";"Philippines";;1;"Philippines";"Philippines";4;"Asia-Tropical";"Philippines (the)"
+200;"PAK";"PK";"Pakistan";;0;"Pakistan";;;"Asia-Temperate";
+201;"POL";"PL";"Poland";;0;"Poland";"Poland";1;"Europe";"Poland"
+202;"SPM";"PM";"Saint Pierre and Miquelon";"St Pierre and Miquelon; St. Pierre and Miquelon";1;"Saint Pierre and Miquelon";"Saint Pierre and Miquelon";7;"Northern America";"Saint Pierre and Miquelon"
+203;"PCN";"PN";"Pitcairn";"Pitcairn Islands";1;"Pitcairn Islands";;6;"Pacific";"Pitcairn"
+204;"PRI";"PR";"Puerto Rico";;1;"Puerto Rico";"Puerto Rico";8;"Southern America";"Puerto Rico"
+205;"PSE";"PS";"Palestine, State of";"Palestinian Territory, Occupied; Palestine; Palestina";0;"Palestina";;3;"Asia-Temperate";
+206;"PRT";"PT";"Azores";"Portugal (Azores)";1;"Portugal";;2;"Africa";"Portugal"
+207;"PRT";"PT";"Madeira";"Portugal (Madeira)";1;"Portugal";"Madeira";2;"Africa";"Portugal"
+208;"PRT";"PT";"Portugal";"Portugal (mainland)";0;"Portugal";"Portugal (mainland)";1;"Europe";"Portugal"
+209;"PLW";"PW";"Palau";;1;"Palau";;;"Pacific";
+210;"PRY";"PY";"Paraguay";;0;"Paraguay";"Paraguay";8;"Southern America";"Paraguay"
+211;"QAT";"QA";"Qatar";;0;"Qatar";"Qatar";3;"Asia-Temperate";"Qatar"
+212;"REU";"RE";"Réunion";"Reunion; R‚union";1;"Reunion";"Reunion";2;"Africa";"Reunion"
+213;"ROU";"RO";"Romania";;0;"Romania";"Romania";1;"Europe";"Romania"
+214;"SRB";"RS";"Serbia";;0;"Senegal";;;"Europe";
+215;"RUS";"RU";"Russian Federation";"Russia";0;"Russia";;3;"Asia-Temperate";"Russian Federation (the)"
+216;"RWA";"RW";"Rwanda";;0;"Rwanda";"Rwanda";2;"Africa";"Rwanda"
+217;"SAU";"SA";"Saudi Arabia";;0;"Saudi Arabia";"Saudi Arabia";3;"Asia-Temperate";"Saudi Arabia"
+218;"SLB";"SB";"Solomon Islands";;1;"Solomon Islands";;;"Pacific";
+219;"SYC";"SC";"Seychelles";"Aldabra";1;"Seychelles";;2;"Africa";"Seychelles"
+220;"SDN";"SD";"Sudan";"South Sudan";0;"Sudan";"Sudan (incl. South Sudan)";2;"Africa";"Sudan (the)"
+221;"SWE";"SE";"Sweden";;0;"Sweden";"Sweden";1;"Europe";"Sweden"
+222;"SGP";"SG";"Singapore";;0;"Singapore";"Singapore";4;"Asia-Tropical";"Singapore"
+223;"SHN";"SH";"Saint Helena";"St. Helena; St Helena";1;"Saint Helena";;9;"Antarctic";"Saint Helena, Ascension and Tristan da Cunha"
+224;"SHN";"SH";"Ascension";;1;"Saint Helena";;9;"Antarctic";"Saint Helena, Ascension and Tristan da Cunha"
+225;"SHN";"SH";"Tristan da Cunha";;1;"Saint Helena";;9;"Antarctic";"Saint Helena, Ascension and Tristan da Cunha"
+226;"SVN";"SI";"Slovenia";;0;"Slovenia";"Slovenia";1;"Europe";"Slovenia"
+227;"SJM";"SJ";"Svalbard and Jan Mayen";"Svalbard; Jan Mayen";1;"Svalbard and Jan Mayen";;1;"Europe";"Svalbard and Jan Mayen"
+228;"SVK";"SK";"Slovakia";;0;"Slovakia";"Slovakia";1;"Europe";"Slovakia"
+229;"SLE";"SL";"Sierra Leone";;0;"Sierra Leone";"Sierra Leone";2;"Africa";"Sierra Leone"
+230;"SMR";"SM";"San Marino";;0;"San Marino";;;"Europe";
+231;"SEN";"SN";"Senegal";;0;"Senegal";"Senegal";2;"Africa";"Senegal"
+232;"SOM";"SO";"Somalia";;0;"Somalia";"Somalia";2;"Africa";"Somalia"
+233;"SUR";"SR";"Suriname";;0;"Suriname";"Suriname";8;"Southern America";"Suriname"
+234;"STP";"ST";"Sao Tome and Principe";"Sao Tome; Principe";1;"Sao Tome and Principe";"Sao Tome and Principe";2;"Africa";"Sao Tome and Principe"
+235;"SLV";"SV";"El Salvador";;0;"El Salvador";;;"Southern America";
+236;"ANT";"SX";"Sint Maarten";;1;"Sint Maarten";"Netherlands Leeward Is.";8;"Southern America";"Netherlands Antilles"
+237;"SYR";"SY";"Syrian Arab Republic";"Syria";0;"Syria";;3;"Asia-Temperate";
+238;"SWZ";"SZ";"Eswatini";"Swaziland";0;"Swaziland";"Swaziland";2;"Africa";"Swaziland"
+239;"TCA";"TC";"Turks and Caicos Islands";"Turks and Caicos";1;"Turks and Caicos Islands";;8;"Southern America";
+240;"TCD";"TD";"Chad";;0;"Chad";"Chad";2;"Africa";"Chad"
+241;"ATF";"TF";"Amsterdam Island";"Amsterdam";1;"French Southern Territories";;9;"Antarctic";"French Southern Territories (the)"
+242;"ATF";"TF";"Crozet Islands";"Crozet; Crozet Islands Group";1;"French Southern Territories";;9;"Antarctic";"French Southern Territories (the)"
+243;"ATF";"TF";"Saint Paul (France)";"St Paul; St. Paul";1;"French Southern Territories";;9;"Antarctic";"French Southern Territories (the)"
+244;"ATF";"TF";"Scattered Islands";"Scattered";1;"French Southern Territories";;9;"Antarctic";"French Southern Territories (the)"
+245;"ATF";"TF";"Kerguelen Islands";"Kerguelen";1;"French Southern Territories";;9;"Antarctic";"French Southern Territories (the)"
+246;"TGO";"TG";"Togo";;0;"Togo";"Togo";2;"Africa";"Togo"
+247;"THA";"TH";"Thailand";;0;"Thailand";"Thailand";4;"Asia-Tropical";"Thailand"
+248;"TJK";"TJ";"Tajikistan";"Tadjikistan";0;"Tajikistan";;3;"Asia-Temperate";"Tajikistan"
+249;"TKL";"TK";"Tokelau";;1;"Tokelau";;;"Pacific";
+250;"TTO";"TL";"Timor-Leste";"East Timor; Timor Leste";0;"East Timor";;;"Asia-Tropical";
+251;"TKM";"TM";"Turkmenistan";;0;"Turkmenistan";;;"Asia-Temperate";
+252;"TUN";"TN";"Tunisia";;0;"Tunisia";"Tunisia";2;"Africa";"Tunisia"
+253;"TON";"TO";"Tonga";;1;"Tonga";"Tonga";6;"Pacific";"Tonga"
+254;"TUR";"TR";"Turkey";;0;"Turkey";"Turkey";0;"mixed";"Turkey"
+255;"TTO";"TT";"Trinidad and Tobago";;1;"Trinidad and Tobago";;;"Southern America";
+256;"TUV";"TV";"Tuvalu";;1;"Tuvalu";;;"Pacific";
+257;"TWN";"TW";"Taiwan";"Taiwan (Province of China); TAIWAN, PROVINCE OF CHINA";1;"Taiwan";"Taiwan";3;"Asia-Temperate";"Taiwan (Province of China)"
+258;"TZA";"TZ";"Zanzibar Island";;0;"Tanzania";"United Republic of Tanzania";2;"Africa";"Tanzania, United Republic of"
+259;"TZA";"TZ";"Tanzania, United Republic of";"Tanzania";0;"Tanzania";"United Republic of Tanzania";2;"Africa";"Tanzania, United Republic of"
+260;"UKR";"UA";"Ukraine";;0;"Ukraine";"Ukraine";1;"Europe";"Ukraine"
+261;"UGA";"UG";"Uganda";;0;"Uganda";"Uganda";2;"Africa";"Uganda"
+262;"UMI";"UM";"United States Minor Outlying Islands";"US Minor Outlying Islands; Baker Island; Howland Island; Jarvis Island; Johnston Atoll; Kingman Reef; Midway Atoll; Palmyra Atoll; Wake Atoll";1;"United States Minor Outlying Islands";;6;"Pacific";"United States Minor Outlying Islands (the)"
+263;"USA";"US";"Alaska";;0;"United States";"Alaska";7;"Northern America";"United States of America (the)"
+264;"USA";"US";"Hawaiian Islands";"Hawaii";1;"United States";;6;"Pacific";"United States of America (the)"
+265;"USA";"US";"United States of America";"United States; USA; Florida; California; Arizona; Texas; Georgia(US); Alabama; Washington; New Jersey; Nevada; Kansas; Oregon; Wyoming; Virginia; Utah; South Carolina; Rhode Island; Pennsylvania; Oklahoma; Ohio; North Carolina; New York; New Mexico; New Hampshire; Nebraska; Montana; Missouri; Mississippi; Michigan; Massachusetts; Maryland; Maine; Louisiana; Kentucky; Indiana; Illinois; Idaho; Delaware; Connecticut; Colorado; Arkansas; District of Columbia";0;"United States";;7;"Northern America";"United States of America (the)"
+266;"URY";"UY";"Uruguay";;0;"Uruguay";"Uruguay";8;"Southern America";"Uruguay"
+267;"UZB";"UZ";"Uzbekistan";;0;"Uzbekistan";;;"Asia-Temperate";
+268;"VAT";"VA";"Holy See";"Vatican; Vatican City; Vatican City State";0;"Vatican City";;;"Europe";
+269;"VCT";"VC";"Saint Vincent and the Grenadines";"St Vincent and the Grenadines; St. Vincent and the Grenadines";1;"Saint Vincent and the Grenadines";;8;"Southern America";"Saint Vincent and the Grenadines"
+270;"VEN";"VE";"Venezuela, Bolivarian Republic of";"Venezuela";0;"Venezuela";"Venezuela";8;"Southern America";"Venezuela (Bolivarian Republic of)"
+271;"VGB";"VG";"Virgin Islands (British)";"British Virgin Islands";1;"British Virgin Islands";;8;"Southern America";
+272;"VIR";"VI";"Virgin Islands (U.S.)";"Virgin Islands, US; US Virgin Islands; VIRGIN ISLANDS, U.S";1;"Virgin Islands, U.S.";"United States Virgin Islands";8;"Southern America";"Virgin Islands (U.S.)"
+273;"VNM";"VN";"Viet Nam";"Vietnam";0;"Vietnam";;;"Asia-Tropical";
+274;"VUT";"VU";"Vanuatu";;1;"Vanuatu";;;"Pacific";
+275;"WLF";"WF";"Wallis and Futuna";;1;"Wallis and Futuna";;;"Pacific";
+276;"WSM";"WS";"Samoa";;1;"Samoa";;6;"Pacific";"Samoa"
+277;"YEM";"YE";"Socotra Island";"Soqotra; Yemen- Soqotra; Socotra Island; Socotra";1;"Yemen";"Yemen";3;"Asia-Temperate";"Yemen"
+278;"YEM";"YE";"Yemen";;0;"Yemen";"Yemen";3;"Asia-Temperate";"Yemen"
+279;"MYT";"YT";"Mayotte";;1;"Mayotte";"Mayotte";2;"Africa";"Mayotte"
+280;"ZAF";"ZA";"South Africa";"Western Cape province; KwaZulu-Natal";0;"South Africa";;2;"Africa";"South Africa"
+281;"ZMB";"ZM";"Zambia";;0;"Zambia";;2;"Africa";"Zambia"
+282;"ZWE";"ZW";"Zimbabwe";;0;"Zimbabwe";;2;"Africa";"Zimbabwe"
+283;;;"Adriatic Sea_MEOW";;;;;;;
+284;;;"Aegean Sea_MEOW";;;;;;;
+285;;;"Agulhas Bank_MEOW";;;;;;;
+286;;;"Alboran Sea_MEOW";;;;;;;
+287;;;"Aleutian Islands_MEOW";;;;;;;
+288;;;"Amazonia_MEOW";;;;;;;
+289;;;"Amsterdam-St Paul_MEOW";;;;;;;
+290;;;"Amundsen/Bellingshausen Sea_MEOW";;;;;;;
+291;;;"Andaman and Nicobar Islands_MEOW";;;;;;;
+292;;;"Andaman Sea Coral Coast_MEOW";;;;;;;
+293;;;"Angolan_MEOW";;;;;;;
+294;;;"Antarctic Peninsula_MEOW";;;;;;;
+295;;;"Arabian (Persian) Gulf_MEOW";;;;;;;
+296;;;"Arafura Sea_MEOW";;;;;;;
+297;;;"Araucanian_MEOW";;;;;;;
+298;;;"Arnhem Coast to Gulf of Carpenteria_MEOW";;;;;;;
+299;;;"Auckland Island_MEOW";;;;;;;
+300;;;"Azores Canaries Madeira_MEOW";;;;;;;
+301;;;"Baffin Bay - Davis Strait_MEOW";;;;;;;
+302;;;"Bahamian_MEOW";;;;;;;
+303;;;"Baltic Sea_MEOW";;;;;;;
+304;;;"Banda Sea_MEOW";;;;;;;
+305;;;"Bassian_MEOW";;;;;;;
+306;;;"Beaufort Sea - continental coast and shelf_MEOW";;;;;;;
+307;;;"Beaufort-Amundsen-Viscount Melville-Queen Maud_MEOW";;;;;;;
+308;;;"Bermuda_MEOW";;;;;;;
+309;;;"Bight of Sofala/Swamp Coast_MEOW";;;;;;;
+310;;;"Bismarck Sea_MEOW";;;;;;;
+311;;;"Black Sea_MEOW";;;;;;;
+312;;;"Bonaparte Coast_MEOW";;;;;;;
+313;;;"Bounty and Antipodes Islands_MEOW";;;;;;;
+314;;;"Bouvet Island_MEOW";;;;;;;
+315;;;"Campbell Island_MEOW";;;;;;;
+316;;;"Cape Howe_MEOW";;;;;;;
+317;;;"Cape Verde_MEOW";;;;;;;
+318;;;"Cargados Carajos/Tromelin Island_MEOW";;;;;;;
+319;;;"Carolinian_MEOW";;;;;;;
+320;;;"Celtic Seas_MEOW";;;;;;;
+321;;;"Central and Southern Great Barrier Reef_MEOW";;;;;;;
+322;;;"Central Chile_MEOW";;;;;;;
+323;;;"Central Kuroshio Current_MEOW";;;;;;;
+324;;;"Central New Zealand_MEOW";;;;;;;
+325;;;"Central Peru_MEOW";;;;;;;
+326;;;"Central Somali Coast_MEOW";;;;;;;
+327;;;"Chagos_MEOW";;;;;;;
+328;;;"Channels and Fjords of Southern Chile_MEOW";;;;;;;
+329;;;"Chatham Island_MEOW";;;;;;;
+330;;;"Chiapas-Nicaragua_MEOW";;;;;;;
+331;;;"Chiloense_MEOW";;;;;;;
+332;;;"Chukchi Sea_MEOW";;;;;;;
+333;;;"Clipperton_MEOW";;;;;;;
+334;;;"Cocos Islands_MEOW";;;;;;;
+335;;;"Cocos-Keeling/Christmas Island_MEOW";;;;;;;
+336;;;"Coral Sea_MEOW";;;;;;;
+337;;;"Cortezian_MEOW";;;;;;;
+338;;;"Crozet Islands_MEOW";;;;;;;
+339;;;"Delagoa_MEOW";;;;;;;
+340;;;"East African Coral Coast_MEOW";;;;;;;
+341;;;"East Antarctic Dronning Maud Land_MEOW";;;;;;;
+342;;;"East Antarctic Enderby Land_MEOW";;;;;;;
+343;;;"East Antarctic Wilkes Land_MEOW";;;;;;;
+344;;;"East Caroline Islands_MEOW";;;;;;;
+345;;;"East China Sea_MEOW";;;;;;;
+346;;;"East Greenland Shelf_MEOW";;;;;;;
+347;;;"East Siberian Sea_MEOW";;;;;;;
+348;;;"Easter Island_MEOW";;;;;;;
+349;;;"Eastern Bering Sea_MEOW";;;;;;;
+350;;;"Eastern Brazil_MEOW";;;;;;;
+351;;;"Eastern Caribbean_MEOW";;;;;;;
+352;;;"Eastern Galapagos Islands_MEOW";;;;;;;
+353;;;"Eastern India_MEOW";;;;;;;
+354;;;"Eastern Philippines_MEOW";;;;;;;
+355;;;"Exmouth to Broome_MEOW";;;;;;;
+356;;;"Faroe Plateau_MEOW";;;;;;;
+357;;;"Fernando de Naronha and Atoll das Rocas_MEOW";;;;;;;
+358;;;"Fiji Islands_MEOW";;;;;;;
+359;;;"Floridian_MEOW";;;;;;;
+360;;;"Gilbert/Ellis Islands_MEOW";;;;;;;
+361;;;"Great Australian Bight_MEOW";;;;;;;
+362;;;"Greater Antilles_MEOW";;;;;;;
+363;;;"Guayaquil_MEOW";;;;;;;
+364;;;"Guianan_MEOW";;;;;;;
+365;;;"Gulf of Aden_MEOW";;;;;;;
+366;;;"Gulf of Alaska_MEOW";;;;;;;
+367;;;"Gulf of Guinea Central_MEOW";;;;;;;
+368;;;"Gulf of Guinea Islands_MEOW";;;;;;;
+369;;;"Gulf of Guinea South_MEOW";;;;;;;
+370;;;"Gulf of Guinea Upwelling_MEOW";;;;;;;
+371;;;"Gulf of Guinea West_MEOW";;;;;;;
+372;;;"Gulf of Maine/Bay of Fundy_MEOW";;;;;;;
+373;;;"Gulf of Oman_MEOW";;;;;;;
+374;;;"Gulf of Papua_MEOW";;;;;;;
+375;;;"Gulf of St. Lawrence - Eastern Scotian Shelf_MEOW";;;;;;;
+376;;;"Gulf of Thailand_MEOW";;;;;;;
+377;;;"Gulf of Tonkin_MEOW";;;;;;;
+378;;;"Halmahera_MEOW";;;;;;;
+379;;;"Hawaii_MEOW";;;;;;;
+380;;;"Heard and Macdonald Islands_MEOW";;;;;;;
+381;;;"High Arctic Archipelago_MEOW";;;;;;;
+382;;;"Houtman_MEOW";;;;;;;
+383;;;"Hudson Complex_MEOW";;;;;;;
+384;;;"Humboldtian_MEOW";;;;;;;
+385;;;"Ionian Sea_MEOW";;;;;;;
+386;;;"Juan Fernandez and Desventuradas_MEOW";;;;;;;
+387;;;"Kamchatka Shelf and Coast_MEOW";;;;;;;
+388;;;"Kara Sea_MEOW";;;;;;;
+389;;;"Kerguelen Islands_MEOW";;;;;;;
+390;;;"Kermadec Island_MEOW";;;;;;;
+391;;;"Lancaster Sound_MEOW";;;;;;;
+392;;;"Laptev Sea_MEOW";;;;;;;
+393;;;"Leeuwin_MEOW";;;;;;;
+394;;;"Lesser Sunda_MEOW";;;;;;;
+395;;;"Levantine Sea_MEOW";;;;;;;
+396;;;"Line Islands_MEOW";;;;;;;
+397;;;"Lord Howe and Norfolk Islands_MEOW";;;;;;;
+398;;;"Macquarie Island_MEOW";;;;;;;
+399;;;"Magdalena Transition_MEOW";;;;;;;
+400;;;"Malacca Strait_MEOW";;;;;;;
+401;;;"Maldives_MEOW";;;;;;;
+402;;;"Malvinas/Falklands_MEOW";;;;;;;
+403;;;"Manning-Hawkesbury_MEOW";;;;;;;
+404;;;"Mariana Islands_MEOW";;;;;;;
+405;;;"Marquesas_MEOW";;;;;;;
+406;;;"Marshall Islands_MEOW";;;;;;;
+407;;;"Mascarene Islands_MEOW";;;;;;;
+408;;;"Mexican Tropical Pacific_MEOW";;;;;;;
+409;;;"Namaqua_MEOW";;;;;;;
+410;;;"Namib_MEOW";;;;;;;
+411;;;"Natal_MEOW";;;;;;;
+412;;;"New Caledonia_MEOW";;;;;;;
+413;;;"Nicoya_MEOW";;;;;;;
+414;;;"Ningaloo_MEOW";;;;;;;
+415;;;"North American Pacific Fijordland_MEOW";;;;;;;
+416;;;"North and East Barents Sea_MEOW";;;;;;;
+417;;;"North and East Iceland_MEOW";;;;;;;
+418;;;"North Greenland_MEOW";;;;;;;
+419;;;"North Patagonian Gulfs_MEOW";;;;;;;
+420;;;"North Sea_MEOW";;;;;;;
+421;;;"Northeast Sulawesi_MEOW";;;;;;;
+422;;;"Northeastern Brazil_MEOW";;;;;;;
+423;;;"Northeastern Honshu_MEOW";;;;;;;
+424;;;"Northeastern New Zealand_MEOW";;;;;;;
+425;;;"Northern and Central Red Sea_MEOW";;;;;;;
+426;;;"Northern Bay of Bengal_MEOW";;;;;;;
+427;;;"Northern California_MEOW";;;;;;;
+428;;;"Northern Galapagos Islands_MEOW";;;;;;;
+429;;;"Northern Grand Banks - Southern Labrador_MEOW";;;;;;;
+430;;;"Northern Gulf of Mexico_MEOW";;;;;;;
+431;;;"Northern Labrador_MEOW";;;;;;;
+432;;;"Northern Monsoon Current Coast_MEOW";;;;;;;
+433;;;"Northern Norway and Finnmark_MEOW";;;;;;;
+434;;;"Ogasawara Islands_MEOW";;;;;;;
+435;;;"Oregon, Washington, Vancouver Coast and Shelf_MEOW";;;;;;;
+436;;;"Oyashio Current_MEOW";;;;;;;
+437;;;"Palawan/North Borneo_MEOW";;;;;;;
+438;;;"Panama Bight_MEOW";;;;;;;
+439;;;"Papua_MEOW";;;;;;;
+440;;;"Patagonian Shelf_MEOW";;;;;;;
+441;;;"Peter the First Island_MEOW";;;;;;;
+442;;;"Phoenix/Tokelau/Northern Cook Islands_MEOW";;;;;;;
+443;;;"Prince Edward Islands_MEOW";;;;;;;
+444;;;"Puget Trough/Georgia Basin_MEOW";;;;;;;
+445;;;"Rapa-Pitcairn_MEOW";;;;;;;
+446;;;"Revillagigedos_MEOW";;;;;;;
+447;;;"Rio de la Plata_MEOW";;;;;;;
+448;;;"Rio Grande_MEOW";;;;;;;
+449;;;"Ross Sea_MEOW";;;;;;;
+450;;;"Saharan Upwelling_MEOW";;;;;;;
+451;;;"Sahelian Upwelling_MEOW";;;;;;;
+452;;;"Samoa Islands_MEOW";;;;;;;
+453;;;"Sao Pedro and Sao Paulo Islands_MEOW";;;;;;;
+454;;;"Scotian Shelf_MEOW";;;;;;;
+455;;;"Sea of Japan/East Sea_MEOW";;;;;;;
+456;;;"Sea of Okhotsk_MEOW";;;;;;;
+457;;;"Seychelles_MEOW";;;;;;;
+458;;;"Shark Bay_MEOW";;;;;;;
+459;;;"Snares Island_MEOW";;;;;;;
+460;;;"Society Islands_MEOW";;;;;;;
+461;;;"Solomon Archipelago_MEOW";;;;;;;
+462;;;"Solomon Sea_MEOW";;;;;;;
+463;;;"South and West Iceland_MEOW";;;;;;;
+464;;;"South Australian Gulfs_MEOW";;;;;;;
+465;;;"South China Sea Oceanic Islands_MEOW";;;;;;;
+466;;;"South European Atlantic Shelf_MEOW";;;;;;;
+467;;;"South Georgia_MEOW";;;;;;;
+468;;;"South India and Sri Lanka_MEOW";;;;;;;
+469;;;"South Kuroshio_MEOW";;;;;;;
+470;;;"South New Zealand_MEOW";;;;;;;
+471;;;"South Orkney Islands_MEOW";;;;;;;
+472;;;"South Sandwich Islands_MEOW";;;;;;;
+473;;;"South Shetland Islands_MEOW";;;;;;;
+474;;;"Southeast Madagascar_MEOW";;;;;;;
+475;;;"Southeast Papua New Guinea_MEOW";;;;;;;
+476;;;"Southeastern Brazil_MEOW";;;;;;;
+477;;;"Southern California Bight_MEOW";;;;;;;
+478;;;"Southern Caribbean_MEOW";;;;;;;
+479;;;"Southern China_MEOW";;;;;;;
+480;;;"Southern Cook/Austral Islands_MEOW";;;;;;;
+481;;;"Southern Grand Banks - South Newfoundland_MEOW";;;;;;;
+482;;;"Southern Gulf of Mexico_MEOW";;;;;;;
+483;;;"Southern Java_MEOW";;;;;;;
+484;;;"Southern Norway_MEOW";;;;;;;
+485;;;"Southern Red Sea_MEOW";;;;;;;
+486;;;"Southern Vietnam_MEOW";;;;;;;
+487;;;"Southwestern Caribbean_MEOW";;;;;;;
+488;;;"St. Helena and Ascension Islands_MEOW";;;;;;;
+489;;;"Sulawesi Sea/Makassar Strait_MEOW";;;;;;;
+490;;;"Sunda Shelf/Java Sea_MEOW";;;;;;;
+491;;;"Three Kings-North Cape_MEOW";;;;;;;
+492;;;"Tonga Islands_MEOW";;;;;;;
+493;;;"Torres Strait Northern Great Barrier Reef_MEOW";;;;;;;
+494;;;"Trindade and Martin Vaz Islands_MEOW";;;;;;;
+495;;;"Tristan Gough_MEOW";;;;;;;
+496;;;"Tuamotus_MEOW";;;;;;;
+497;;;"Tunisian Plateau/Gulf of Sidra_MEOW";;;;;;;
+498;;;"Tweed-Moreton_MEOW";;;;;;;
+499;;;"Uruguay-Buenos Aires Shelf_MEOW";;;;;;;
+500;;;"Vanuatu_MEOW";;;;;;;
+501;;;"Virginian_MEOW";;;;;;;
+502;;;"Weddell Sea_MEOW";;;;;;;
+503;;;"West Caroline Islands_MEOW";;;;;;;
+504;;;"West Greenland Shelf_MEOW";;;;;;;
+505;;;"Western and Northern Madagascar_MEOW";;;;;;;
+506;;;"Western Arabian Sea_MEOW";;;;;;;
+507;;;"Western Bassian_MEOW";;;;;;;
+508;;;"Western Caribbean_MEOW";;;;;;;
+509;;;"Western Galapagos Islands_MEOW";;;;;;;
+510;;;"Western India_MEOW";;;;;;;
+511;;;"Western Mediterranean_MEOW";;;;;;;
+512;;;"Western Sumatra_MEOW";;;;;;;
+513;;;"White Sea_MEOW";;;;;;;
+514;;;"Yellow Sea_MEOW";;;;;;;

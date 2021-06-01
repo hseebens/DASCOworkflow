@@ -65,7 +65,12 @@ file_name_extension <- "SInAS_2.3.2"
 ### Check and create folder structure #############################################
 create_folders() # creates folders only if they are not existing yet
 
-prepare_dataset(filename_inputData,column_scientificName,column_taxonName,column_location,column_eventDate,file_name_extension)
+prepare_dataset(filename_inputData,
+                column_scientificName,
+                column_taxonName,
+                column_location,
+                column_eventDate,
+                file_name_extension)
   
 
 ###################################################################################
@@ -89,19 +94,27 @@ email <- "ekinhanno1@outlook.com"                 # your email which you will re
 ###################################################################################
 
 ## send requests to GBIF 
-send_GBIF_request(file_name_extension,path_to_GBIFdownloads,n_accounts,user=user,pwd=pwd,email=email)
+send_GBIF_request(file_name_extension,
+                  path_to_GBIFdownloads,
+                  n_accounts,
+                  user=user,
+                  pwd=pwd,
+                  email=email)
 
 ## get downloads from GBIF (requires running 'send_GBIF_request' first)
-get_GBIF_download(path_to_GBIFdownloads,file_name_extension)
+get_GBIF_download(path_to_GBIFdownloads,
+                  file_name_extension)
 
 ### extract relevant information from GBIF downloads ##############################
-extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
+extract_GBIF_columns(path_to_GBIFdownloads,
+                     file_name_extension)
 
 
 ###################################################################################
 ### get OBIS records ##############################################################
 
-get_OBIS_records(path_to_OBISdownloads,file_name_extension)
+get_OBIS_records(path_to_OBISdownloads,
+                 file_name_extension)
 ## Intermediate download files are stored under Data/Output/Intermediate
 
 ###################################################################################
@@ -117,11 +130,15 @@ get_OBIS_records(path_to_OBISdownloads,file_name_extension)
 
 ### clean GBIF records ############################################################
 
-clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
+clean_GBIF_records(path_to_GBIFdownloads,
+                   file_name_extension,
+                   thin_records=TRUE)
 
 ### clean OBIS records ############################################################
 
-clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
+clean_OBIS_records(path_to_OBISdownloads,
+                   file_name_extension,
+                   thin_records=FALSE)
   
 
 ###################################################################################
@@ -147,4 +164,5 @@ coords_to_regions_OBIS(name_of_shapefile,
 ########################################################################
 ## add first records per region (requires 'eventDate' column) ##########
 ## and produce final output file containing GBIF and OBIS records ######
-dat <- add_first_records(file_name_extension,path_to_GBIFdownloads)
+dat <- add_first_records(file_name_extension,
+                         path_to_GBIFdownloads)
