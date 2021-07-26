@@ -22,13 +22,13 @@ coords_to_regions_OBIS <- function(
   ### load data ###############################################################
   
   ## get OBIS species keys
-  OBIS_specieskeys <- fread(file.path(path_to_OBISdownloads,paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
+  OBIS_specieskeys <- fread(file.path("Data","Output",paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
 
   ## Taxon list
   SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
   
   if (realm_extension  # check if realms should be identified
-      & !file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
+      & !file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
       & !all(c("Habitat_marine","Habitat_freshwater","Habitat_terrestrial")%in%colnames(SpecNames))){ # check if required columns exist, if not, download data from WoRMS
 
       cat("\n 'realm_extension==TRUE' requires information about habitats from WoRMS.")
@@ -36,12 +36,12 @@ coords_to_regions_OBIS <- function(
       
       SpecNames <- get_WoRMS_habitats(SpecNames) # get habitats for species in WoRMS
       
-      fwrite(SpecNames,file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
+      fwrite(SpecNames,file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   ## load taxon list with habitats if existing
-  if (realm_extension & file.exists(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))){
-    SpecNames <- fread(file.path("Data","Output","Intermediate",paste0("Habitats_",file_name_extension,".csv")))
+  if (realm_extension & file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))){
+    SpecNames <- fread(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
   }
 
   SpecNames <- merge(SpecNames,unique(OBIS_specieskeys[,c("scientificName","Taxon_origName")]),by.x="Taxon",by.y="scientificName")  

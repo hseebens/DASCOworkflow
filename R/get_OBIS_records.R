@@ -85,7 +85,7 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
   colnames(OBIS_Codes_Species) <- c("scientificName","Taxon_origName")
   
   ### Store the species codes
-  fwrite(OBIS_Codes_Species, file = file.path(path_to_OBISdownloads,paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
+  fwrite(OBIS_Codes_Species, file = file.path("Data","Output",paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))
   
   ### Delete intermediate files
   filelist <- list.files(path=file.path("Data","Output","Intermediate"),pattern = "OBIS_Data_*")
