@@ -15,7 +15,7 @@
 
 get_WoRMS_habitats <- function(dat){
   
-  uni_species <- unique(dat$Taxon)
+  uni_species <- unique(dat$taxon)
   dat$Habitat_marine <- NA
   dat$Habitat_freshwater <- NA
   dat$Habitat_terrestrial <- NA
@@ -42,7 +42,7 @@ get_WoRMS_habitats <- function(dat){
       # if (class(entry)[1]=="try-error") next  # if database did not provide info, jump to next species
       if (all(is.na(entry$scientificname))) next # empty entries....
       
-      ind_spec <- dat$Taxon==taxon
+      ind_spec <- dat$taxon==taxon
       
       if ("isMarine"%in%colnames(entry)) dat$Habitat_marine[ind_spec] <- entry$isMarine[1]
       if ("isFreshwater"%in%colnames(entry)) dat$Habitat_freshwater[ind_spec] <- entry$isFreshwater[1]

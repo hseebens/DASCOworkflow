@@ -70,9 +70,15 @@ final_DASCO_output <- function(
   ## combine terrestrial and marine first records #################################
   colnames(marine_regspec_fr_GBIF)[colnames(marine_regspec_fr_GBIF)=="MEOW"] <- "location"
   all_regspec_fr_GBIF <- rbind(marine_regspec_fr_GBIF,terr_regspec_fr_GBIF)
-  all_regspec_fr_GBIF <- all_regspec_fr_GBIF[,c("location","scientificName","Realm","eventDate")]
+  all_regspec_fr_GBIF <- unique(all_regspec_fr_GBIF[,c("location","scientificName","Realm","eventDate")])
   
+  ## add canonical names to GBIF ###################################################
+  col_names <- c("scientificName","taxon")
+  taxlist <- unique(taxlist[,..col_names])
+  all_regspec_fr_GBIF <- merge(all_regspec_fr_GBIF,taxlist,by="scientificName",all.x=T)
+  all_regspec_fr_GBIF <- all_regspec_fr_GBIF[,c("location","scientificName","taxon","Realm","eventDate")]
 
+  
   
   ### OBIS records ##############################################################
   
@@ -121,13 +127,13 @@ final_DASCO_output <- function(
   col_names <- c("scientificName","taxon")
   taxlist <- unique(taxlist[,..col_names])
   all_regspec_fr_OBIS <- merge(all_regspec_fr_OBIS,taxlist,by="taxon",all.x=T)
-  all_regspec_fr_OBIS <- all_regspec_fr_OBIS[,-which(colnames(all_regspec_fr_OBIS)=="taxon")]
-  all_regspec_fr_OBIS <- all_regspec_fr_OBIS[,c("location","scientificName","Realm","eventDate")]
+  # all_regspec_fr_OBIS <- all_regspec_fr_OBIS[,-which(colnames(all_regspec_fr_OBIS)=="taxon")]
+  all_regspec_fr_OBIS <- all_regspec_fr_OBIS[,c("location","scientificName","taxon","Realm","eventDate")]
 
   
   ## combine GBIF and OBIS ########################################################
   all_regspec_fr <- rbind(all_regspec_fr_GBIF,all_regspec_fr_OBIS)
-  all_regspec_fr <- all_regspec_fr[,c("location","scientificName","eventDate")]
+  all_regspec_fr <- unique(all_regspec_fr[,c("location","scientificName","taxon","eventDate")])
     
   ## output ###################################################
   fwrite(all_regspec_fr,file.path("Data","Output",paste0("AlienRegions_FinalDB_",file_name_extension,".csv")),sep=";",row.names=F)
