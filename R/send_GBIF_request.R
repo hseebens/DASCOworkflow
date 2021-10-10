@@ -47,7 +47,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
     if (x%%1000==0) print(x)
   }
   GBIF_species <- as.data.frame(do.call("rbind",GBIF_speclist),stringsAsFactors = F)
-  colnames(GBIF_species) <- c("speciesKey","scientificName","matchType","Orig_name")
+  colnames(GBIF_species) <- c("speciesKey","scientificName","canonicalName","matchType","Orig_name")
 
   ## save intermediate output ######
   fwrite(GBIF_species, file.path(path_to_GBIFdownloads,paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))

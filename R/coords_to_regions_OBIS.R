@@ -27,24 +27,30 @@ coords_to_regions_OBIS <- function(
   ## Taxon list
   SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
   
-  if (realm_extension  # check if realms should be identified
-      & !file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
-      & !all(c("Habitat_marine","Habitat_freshwater","Habitat_terrestrial")%in%colnames(SpecNames))){ # check if required columns exist, if not, download data from WoRMS
-
-      cat("\n 'realm_extension==TRUE' requires information about habitats from WoRMS.")
-      cat("\n If not provided in the taxon file, it will be obtained now. \n")
-      
-      SpecNames <- get_WoRMS_habitats(SpecNames) # get habitats for species in WoRMS
-      
-      fwrite(SpecNames,file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
-  }
+  SpecNames <- merge(SpecNames,OBIS_specieskeys,by="taxon")
+  
+  # if (realm_extension  # check if realms should be identified
+  #     & !file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
+  #     & !all(c("habitat_marine","habitat_freshwater","habitat_terrestrial")%in%colnames(SpecNames))){ # check if required columns exist, if not, download data from WoRMS
+  # 
+  #     cat("\n 'realm_extension==TRUE' requires information about habitats from WoRMS.")
+  #     cat("\n If not provided in the taxon file, it will be obtained now. \n")
+  #     
+  #     SpecNames <- get_WoRMS_habitats(SpecNames) # get habitats for species in WoRMS
+  #     
+  #     fwrite(SpecNames,file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
+  # }
 
   ## load taxon list with habitats if existing
-  if (realm_extension & file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))){
-    SpecNames <- fread(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
+  if (realm_extension){
+    habitats <- fread(file.path("Data","Output",paste0("DASCO_TaxonHabitats_",file_name_extension,".csv")))
+    SpecNames <- merge(SpecNames,habitats,by="taxon",all.x=T)  
   }
+  # if (realm_extension & file.exists(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))){
+  #   SpecNames <- fread(file.path("Data","Output",paste0("Habitats_",file_name_extension,".csv")))
+  # }
 
-  SpecNames <- merge(SpecNames,unique(OBIS_specieskeys[,c("scientificName","Taxon_origName")]),by.x="Taxon",by.y="scientificName")  
+  # SpecNames <- merge(SpecNames,unique(OBIS_specieskeys[,c("scientificName","Taxon_origName")]),by.x="Taxon",by.y="scientificName")  
   
   ## Taxon x region database 
   SpecRegionData <-  fread(file.path("Data","Output",paste0("FullDataSet_Standardised_",file_name_extension,".gz")))
@@ -55,24 +61,25 @@ coords_to_regions_OBIS <- function(
   ## Polygon file of marine and terrestrial regions
   # regions2 <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
   regions <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
+  colnames(regions)[colnames(regions)=="Location"] <- "location"
   # colnames(regions)[2] <- "Ecoregion"
   # regions$Ecoregion[!is.na(regions$Ecoregion)] <- paste(regions$Ecoregion[!is.na(regions$Ecoregion)],"MEOW",sep="_")
   # regions <- regions[is.na(regions$featurecla),] # remove lakes !!!! (no alien distinction available yet)
   
   ## standardise location names 
-  newLocNames <- standardise_location_names(regions$Location,file_name_extension,data_set="Shapefile")
+  newLocNames <- standardise_location_names(regions$location,file_name_extension,data_set="Shapefile")
   if (nrow(newLocNames)!=nrow(regions)){
     stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
   } 
-  regions$Location <- newLocNames$Location
+  regions$location <- newLocNames$location
   
   if (realm_extension){
     # regions$Realm <- NA
     # regions$Realm[!is.na(regions$Ecoregion)] <- "marine"
     # regions$Realm[!is.na(regions$Region)] <- "terrestrial"
     
-    # regions$Location <- regions$Region
-    # regions$Location[!is.na(regions$Ecoregion)] <- regions$Ecoregion[!is.na(regions$Ecoregion)]
+    # regions$location <- regions$Region
+    # regions$location[!is.na(regions$Ecoregion)] <- regions$Ecoregion[!is.na(regions$Ecoregion)]
     # regions$Region[!is.na(regions$featurecla)] <- regions$name[!is.na(regions$featurecla)]
     
     ## Terrestrial to marine ecoregion file
@@ -84,31 +91,31 @@ coords_to_regions_OBIS <- function(
     if (nrow(newLocNames)!=nrow(neighbours)){
       stop("\n Standardisation of location names went wrong. Check standardise_location_names.R in coords_to_regions.R \n")
     } 
-    neighbours$Region <- newLocNames$Location
+    neighbours$Region <- newLocNames$location
     
     neighbours$MEOW <- paste(neighbours$MEOW,"MEOW",sep="_")
-    colnames(neighbours) <- c("Location","MEOW","Action") ## ADJUST shapefile AND REMOVE!!!!!!!!!!!!!!!!!!!!
+    colnames(neighbours) <- c("location","MEOW","Action") ## ADJUST shapefile AND REMOVE!!!!!!!!!!!!!!!!!!!!
   }
 
   ## Identify region of occurrence for each coordinate entry ######################################
   
   ## All taxon-region pairs for the identification of alien populations
-  TaxonRegionPairs <- paste(SpecRegionData$Taxon,SpecRegionData$Location,sep="_")
+  TaxonRegionPairs <- paste(SpecRegionData$taxon,SpecRegionData$location,sep="_")
   
   if (realm_extension){
     
     ## add marine ecoregions to taxon-region pairs 
-    marine_terr_recs <- merge(neighbours,SpecRegionData,by="Location",allow.cartesian=T)
-    marine_speckeys <- unique(marine_terr_recs[,c("MEOW","Taxon")])
+    marine_terr_recs <- merge(neighbours,SpecRegionData,by="location",allow.cartesian=T)
+    marine_speckeys <- unique(marine_terr_recs[,c("MEOW","taxon")])
     if (any(colnames(marine_terr_recs)%in%c("FirstRecord","eventDate"))){
       colnames(marine_terr_recs)[colnames(marine_terr_recs)%in%c("FirstRecord","First_Record")] <- "eventDate"
-      meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","Taxon","eventDate")])#,"Source"
+      meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","taxon","eventDate")])#,"Source"
     } else {
-      meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","Taxon")])#,"Source"
+      meow_records <- unique(marine_terr_recs[,c("MEOW","scientificName","taxon")])#,"Source"
     }
     fwrite(meow_records,file.path("Data","Output","Intermediate","MarineRecords_OBIS.gz"))
     
-    TaxonRegionPairs <- c(TaxonRegionPairs,paste(marine_speckeys$Taxon,marine_speckeys$MEOW,sep="_"))
+    TaxonRegionPairs <- c(TaxonRegionPairs,paste(marine_speckeys$taxon,marine_speckeys$MEOW,sep="_"))
   
     ## list species which are clearly non-marine, clearly marine and clearly freshwater ######
     if (all(c("class","phylum")%in%tolower(colnames(SpecNames)))){
@@ -124,16 +131,16 @@ coords_to_regions_OBIS <- function(
                            | class=="Aves"
                            | class=="Amphibia"
                            | class=="Mammalia" # not fully correct, but no marine alien mammal known
-                           | Habitat_marine=="0")$Taxon
+                           | habitat_marine=="0")$taxon
     } else {
       cat("\n No information of class and phylum is provided. Skip identification of non-marine species based on taxonomic information. \n")
       
-      non_marine <- subset(SpecNames,Habitat_marine=="0")$Taxon
+      non_marine <- subset(SpecNames,habitat_marine=="0")$taxon
     }
     
-    marine <- subset(SpecNames,Habitat_marine=="1")$Taxon
+    marine <- subset(SpecNames,habitat_marine=="1")$taxon
     
-    freshwater <- unique(subset(SpecNames,Habitat_freshwater=="1" & Habitat_marine=="0" & Habitat_terrestrial=="0")$Taxon)
+    freshwater <- unique(subset(SpecNames,habitat_freshwater=="1" & habitat_marine=="0" & habitat_terrestrial=="0")$taxon)
   }
   
   
@@ -164,7 +171,7 @@ coords_to_regions_OBIS <- function(
     
     # Import processed GBIF files
     all_coords <- fread(file.path("Data",folder,available_files[i]))
-    colnames(all_coords)[colnames(all_coords)=="scientificName"] <- "Taxon"
+    colnames(all_coords)[colnames(all_coords)=="scientificName"] <- "taxon"
 
     # Transform to sf object
     coords_sf <- st_as_sf(all_coords,coords=c("decimalLongitude","decimalLatitude"),crs=st_crs(regions))
@@ -182,59 +189,59 @@ coords_to_regions_OBIS <- function(
       ptspoly <- st_join(coords_sf[steps[j]:steps[j+1],],regions)
       
       ## identify and keep only alien records
-      ptspoly$SpeciesRegion <- paste(ptspoly$Taxon,ptspoly$Location,sep="_")
+      ptspoly$SpeciesRegion <- paste(ptspoly$taxon,ptspoly$location,sep="_")
       ptspoly_alien <- ptspoly[ptspoly$SpeciesRegion%in%TaxonRegionPairs,]
       
       ## export
       coords_mat <- as.data.frame(st_coordinates(ptspoly_alien),stringsAsFactors = F)
       if (realm_extension){ 
-        output <- cbind.data.frame(ptspoly_alien$Taxon,ptspoly_alien$Location,ptspoly_alien$Realm,coords_mat,stringsAsFactors=F) #
-        colnames(output) <- c("Taxon","Location","Realm","Longitude","Latitude")#
+        output <- cbind.data.frame(ptspoly_alien$taxon,ptspoly_alien$location,ptspoly_alien$Realm,coords_mat,stringsAsFactors=F) #
+        colnames(output) <- c("taxon","location","Realm","Longitude","Latitude")#
       } else { 
-        output <- cbind.data.frame(ptspoly_alien$Taxon,ptspoly_alien$Location,coords_mat,stringsAsFactors=F) #
-        colnames(output) <- c("Taxon","Location","Longitude","Latitude")#
+        output <- cbind.data.frame(ptspoly_alien$taxon,ptspoly_alien$location,coords_mat,stringsAsFactors=F) #
+        colnames(output) <- c("taxon","location","Longitude","Latitude")#
       }
       output <- unique(output)
       
       ## remove non-marine species in marine ecoregions and marine species in terrestrial regions
       if (realm_extension){
-        output <- subset(output,!(output$Taxon%in%non_marine & output$Realm=="marine"))
-        output <- subset(output,!(output$Taxon%in%marine & output$Realm=="terrestrial"))
+        output <- subset(output,!(output$taxon%in%non_marine & output$Realm=="marine"))
+        output <- subset(output,!(output$taxon%in%marine & output$Realm=="terrestrial"))
       }
       
       ## remove entries with a very low number of records per region (requires coordinates in the file 'outpout')
-      region_records <- as.data.frame(table(output$Taxon,output$Location),stringsAsFactors = F)
+      region_records <- as.data.frame(table(output$taxon,output$location),stringsAsFactors = F)
       region_records <- subset(region_records,Freq>0 & Freq<3)
       remove_taxreg <- paste0(region_records$Var1,"_",region_records$Var2)
-      output <- subset(output,!(paste0(output$Taxon,"_",output$Location)%in%remove_taxreg))
-      # output <- unique(output[,c("Taxon","Location","Realm")])
+      output <- subset(output,!(paste0(output$taxon,"_",output$location)%in%remove_taxreg))
+      # output <- unique(output[,c("Taxon","location","Realm")])
       
       ## identify species with the majority of records in terrestrial realm and remove
       if (realm_extension){ 
-        realm_spec <- as.matrix(table(output$Taxon,output$Realm))
+        realm_spec <- as.matrix(table(output$taxon,output$Realm))
         realm_spec_proc <- round(((realm_spec) / rowSums(realm_spec))*100) # percent records per realm
         marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] > 75]
-        output <- subset(output,!(Taxon%in%marinespec & Realm=="terrestrial")) # remove terrestrial records of marine species
+        output <- subset(output,!(taxon%in%marinespec & Realm=="terrestrial")) # remove terrestrial records of marine species
         non_marinespec <- rownames(realm_spec_proc)[realm_spec_proc[,which(colnames(realm_spec_proc)=="marine")] <= 75]
-        output <- subset(output,!(Taxon%in%non_marinespec & Realm=="marine")) # remove marine records of non-marine species
+        output <- subset(output,!(taxon%in%non_marinespec & Realm=="marine")) # remove marine records of non-marine species
       }
       
       if (realm_extension){
-        output_noCoords <- unique(output[,c("Taxon","Location","Realm")])
-        output_coords <- unique(output[,c("Taxon","Location","Realm","Longitude","Latitude")])
+        output_noCoords <- unique(output[,c("taxon","location","Realm")])
+        output_coords <- unique(output[,c("taxon","location","Realm","Longitude","Latitude")])
       } else {
-        output_noCoords <- unique(output[,c("Taxon","Location")])
-        output_coords <- unique(output[,c("Taxon","Location","Longitude","Latitude")])
+        output_noCoords <- unique(output[,c("taxon","location")])
+        output_coords <- unique(output[,c("taxon","location","Longitude","Latitude")])
       }
       
       # ## test 
-      # test_dat <- unique(merge(unique(output[,c("Taxon","Location","Realm")]),firstrecords_GBIF[,c("Taxon","Species","Class","Order")],by="Taxon"))
+      # test_dat <- unique(merge(unique(output[,c("taxon","location","Realm")]),firstrecords_GBIF[,c("taxon","Species","Class","Order")],by="taxon"))
       # graphics.off()
       # x11(width=12,height=12)
       # plot(st_geometry(regions),xlim=c(0,10),ylim=c(50,60))
-      # points(output[which(output$Taxon==3189846 & output$Location=="North Sea"),c("Longitude","Latitude")],col="black",pch=16)
+      # points(output[which(output$taxon==3189846 & output$location=="North Sea"),c("Longitude","Latitude")],col="black",pch=16)
       # 
-      # subset(firstrecords_GBIF,Taxon==9809222) #>75, no vascular plants, no birds, no insects
+      # subset(firstrecords_GBIF,taxon==9809222) #>75, no vascular plants, no birds, no insects
       # tab_realm[which(rownames(tab_realm)=="5277297"),]
       
       ## output ###############
@@ -255,15 +262,14 @@ coords_to_regions_OBIS <- function(
   all_records_spec <- do.call("rbind",all_out)
   all_records_spec <- unique(all_records_spec)
   
-  # all_records_spec <- merge(all_records,uni_spec,by="Taxon",all.x=T)
+  # all_records_spec <- merge(all_records,uni_spec,by="taxon",all.x=T)
 
   ## set realm of freshwater species to freshwater ######################
-  all_records_spec$Realm[all_records_spec$Taxon%in%freshwater] <- "freshwater"
+  all_records_spec$Realm[all_records_spec$taxon%in%freshwater] <- "freshwater"
   
   # ## output ###############
   fwrite(all_records_spec,file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".csv")))
   # all_records_spec <- fread(file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".gz")))
-  
 
   ## with coordinates ###################
   
@@ -271,8 +277,7 @@ coords_to_regions_OBIS <- function(
   all_coords <- unique(all_coords)
   
   # all_coords_spec <- merge(all_coords,uni_spec,by="speciesKey",all.x=T)
-  all_coords$Realm[all_coords$Taxon%in%freshwater] <- "freshwater"
+  all_coords$Realm[all_coords$taxon%in%freshwater] <- "freshwater"
   
   fwrite(all_coords,file=file.path("Data","Output",paste0("AlienRegions_OBISCoords_",file_name_extension,".gz")))
-  
 }

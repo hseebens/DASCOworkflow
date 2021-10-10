@@ -36,6 +36,8 @@ source(file.path("R","clean_OBIS_records.R")) # create shapefile of marine and t
 
 ## assign coordinates to regions and identify alien populations #########
 source(file.path("R","get_WoRMS_habitats.R")) # get habitat information from WoRMS
+source(file.path("R","get_habitats.R")) # get habitat information from WoRMS, Fishbase and Sealifebase
+source(file.path("R","get_habitats_DASCO.R")) # get habitat information from WoRMS, Fishbase and Sealifebase
 source(file.path("R","standardise_location_names.R")) # standardise location names (for matching with shapefile)
 
 source(file.path("R","coords_to_regions_GBIF.R")) # identify region for each coordinate

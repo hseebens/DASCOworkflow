@@ -25,18 +25,18 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
   ### Load the Data
   FullTaxaList <- fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
 
-  SpecList <- sort(unique(FullTaxaList$Taxon))
+  SpecList <- sort(unique(FullTaxaList$taxon))
 
   z <- 0
   out_files <- list()
   for (k in (1:length(SpecList)) ) {#[sample(1:length(SpecList),200)]
     
     if (k%%100==0){
-      cat(paste0("\n ",round(k/length(SpecList)*100,2),"% of species processed \n"))
+      cat(paste0("\n ",round(k/length(SpecList)*100,2),"% of species (",k,"/",lengthSpecList,") processed \n"))
     }
     
     ## download OBIS records
-    my_occ <- try(occurrence(scientificname = SpecList[k], fields = fieldsobis,verbose=F),silent=T)#
+    my_occ <- try(robis::occurrence(scientificname = SpecList[k], fields = fieldsobis,verbose=F),silent=T)#
     
     ## check if downloaded did not work
     if(any(class(my_occ) == "try-error")){
@@ -48,7 +48,7 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
     if (nrow(my_occ)>0){ # 
       
       z = z + 1
-      my_occ$Taxon <- SpecList[k]
+      my_occ$taxon <- SpecList[k]
       out_files[[z]] <- my_occ
       
       ## generate intermediate output
@@ -81,8 +81,9 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
   fwrite(OBIS_Download, file = file.path(path_to_OBISdownloads,paste0("OBIS_CompleteDownload_",file_name_extension,".gz")))
   # OBIS_Download <- fread(file = file.path(path_to_OBISdownloads,paste0("OBIS_CompleteDownload_",file_name_extension,".gz")))
   
-  OBIS_Codes_Species <- unique(as.data.frame(cbind(OBIS_Download$scientificName, OBIS_Download$Taxon)))
-  colnames(OBIS_Codes_Species) <- c("scientificName","Taxon_origName")
+  OBIS_Codes_Species <- unique(as.data.frame(cbind(OBIS_Download$scientificName, OBIS_Download$taxon, OBIS_Download$speciesid))) # Hanno: Check if correct column names!!!
+  # colnames(OBIS_Codes_Species) <- c("scientificName","Taxon_origName")
+  colnames(OBIS_Codes_Species) <- c("taxon","taxon_origName","OBIS_speciesKey")
   
   ### Store the species codes
   fwrite(OBIS_Codes_Species, file = file.path("Data","Output",paste0("OBIS_SpeciesKeys_",file_name_extension,".csv")))

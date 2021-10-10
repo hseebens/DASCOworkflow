@@ -26,7 +26,7 @@ library(CoordinateCleaner) # for clean_GBIF_records
 library(httr)
 library(sf)   # for transform_coords_to_regions
 library(utils)
-
+library(rfishbase)
 
 ###################################################################################
 ## load functions #################################################################
@@ -50,16 +50,23 @@ column_scientificName <- "scientificName" # taxon name with or without authority
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
 column_location <- "Location" # column name of location records
 column_eventDate <- "eventDate" # column name of year of first record of occurrence
+column_habitat <- "habitat" # column name of year of first record of occurrence
 
 ## Name of file with the information of alien species and regions
 # name_of_TaxonLoc <- "IntroDat_22Mar2021.csv"
 
 ## name of shapefile providing polygons for the new delineation
-name_of_shapefile <- "RegionsTerrMarine"
+name_of_shapefile <- "RegionsTerrMarine_160621"
 
 ## term to be added to the names of the output files; can be blank
 file_name_extension <- "SInAS_2.3.2"
 
+
+## check if folders and files exist
+if (!dir.exists(path_to_GBIFdownloads)) stop(paste0("Folder '",path_to_GBIFdownloads,"’ does not exist!"))
+if (!dir.exists(path_to_OBISdownloads)) stop(paste0("Folder '",path_to_OBISdownloads,"’ does not exist!"))
+if (!file.exists(file.path("Data","Input",filename_inputData))) stop(paste0("File '",filename_inputData,"’ could not be found in 'Input' folder!"))
+ 
 
 ###################################################################################
 ## GBIF account details ###########################################################
@@ -90,6 +97,7 @@ prepare_dataset(filename_inputData,
                 column_taxonName,
                 column_location,
                 column_eventDate,
+                column_habitat,
                 file_name_extension)
   
 
@@ -147,6 +155,9 @@ clean_OBIS_records(path_to_OBISdownloads,
 ###################################################################################
 ### 4. get alien regions based on coordintates ####################################
 
+## get habitat information for taxa (terrestrial, freshwater, marine, brackish)
+get_habitats_DASCO(file_name_extension,path_to_GBIFdownloads,path_to_OBISdownloads)
+
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests
 ## realm_extension <- TRUE 
@@ -169,3 +180,4 @@ coords_to_regions_OBIS(name_of_shapefile,
 ## add first records per region (requires 'eventDate' column) ##########
 dat <- final_DASCO_output(file_name_extension,
                          path_to_GBIFdownloads)
+
