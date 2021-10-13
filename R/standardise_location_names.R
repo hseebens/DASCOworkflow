@@ -80,8 +80,8 @@ standardise_location_names <- function(dat,file_name_extension,data_set=NULL){
     
     cat(paste0("\n ",length(missing)," location names did not match. Check file 'Missing_locations_*' \n"))
     
-    # write.table(missing,file.path("Data","Output",paste0("Missing_locations_",file_name_extension,".csv")),row.names = F,col.names=F)
-    write.table(missing,file.path("Data","Output",paste0("Missing_locations_",file_name_extension,"_",data_set,".csv")),row.names = F,col.names=F)
+    write.table(missing,file.path("Data","Output",paste0("Missing_locations_",file_name_extension,".csv")),row.names = F,col.names=F)
+    # write.table(missing,file.path("Data","Output",paste0("Missing_locations_",file_name_extension,"_",data_set,".csv")),row.names = F,col.names=F)
   }
   
   # write.table(reg_names,file.path("Output","Translated_locationNames.csv"),row.names=F)

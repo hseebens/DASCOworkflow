@@ -32,7 +32,7 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
   for (k in (1:length(SpecList)) ) {#[sample(1:length(SpecList),200)]
     
     if (k%%100==0){
-      cat(paste0("\n ",round(k/length(SpecList)*100,2),"% of species (",k,"/",lengthSpecList,") processed \n"))
+      cat(paste0("\n ",round(k/length(SpecList)*100,2),"% of species (",k,"/",length(SpecList),") processed \n"))
     }
     
     ## download OBIS records

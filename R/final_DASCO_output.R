@@ -13,8 +13,7 @@
 
 
 final_DASCO_output <- function(
-  file_name_extension,
-  path_to_GBIFdownloads
+  file_name_extension
   ){
 
   SpecRegionData <-  fread(file.path("Data","Output",paste0("FullDataSet_Standardised_",file_name_extension,".gz")),stringsAsFactors = F,header=T)

@@ -22,10 +22,16 @@ time_bin <- 5
 start_year <- 1700
 
 ## marine species
-marine_aliens <- subset(alien_habitats,habitat_marine=="1" | habitat_brackish=="1")
+marine_aliens <- subset(alien_habitats,habitat_marine=="1")
 marine_aliens$eventDate <- round(marine_aliens$eventDate/time_bin)*time_bin
 marine_ts <- as.data.frame(table(marine_aliens$eventDate),stringsAsFactors = F)
 colnames(marine_ts) <- c("Year","nSpec")
+
+## brackish species
+brackish_aliens <- subset(alien_habitats,habitat_marine=="0" & habitat_brackish=="1")
+brackish_aliens$eventDate <- round(brackish_aliens$eventDate/time_bin)*time_bin
+brackish_ts <- as.data.frame(table(brackish_aliens$eventDate),stringsAsFactors = F)
+colnames(brackish_ts) <- c("Year","nSpec")
 
 
 ## terrestrial species
@@ -49,6 +55,7 @@ op <- par(pch=16)
 plot(terr_ts,xlim=c(start_year,2020),type="b")
 points(marine_ts$Year,marine_ts$nSpec,xlim=c(start_year,2020),col="blue",type="b")
 points(fresh_ts$Year,fresh_ts$nSpec,xlim=c(start_year,2020),col=3,type="b")
+points(brackish_ts$Year,brackish_ts$nSpec,xlim=c(start_year,2020),col=5,type="b")
 abline(v=2005,col="gray")
 par(op)
 

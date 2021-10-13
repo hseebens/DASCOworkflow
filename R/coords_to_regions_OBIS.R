@@ -14,7 +14,6 @@
 
 coords_to_regions_OBIS <- function(
   name_of_shapefile,
-  path_to_OBISdownloads=path_to_OBISdownloads,
   realm_extension=TRUE,
   file_name_extension=file_name_extension
 ){

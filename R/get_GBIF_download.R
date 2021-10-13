@@ -20,7 +20,7 @@ get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension,overwrit
   # the loaded file is called 'file_downloads'
   file_name <- list.files(file.path("Data","Output"))
   file_name <- file_name[file_name==paste0("GBIF_download_requests_",file_name_extension,".RData")]
-  load(file=file.path("Data","Output",file_name)) 
+  load(file=file.path("Data","Output",file_name)) # loads file named 'file_downloads'
   
   for (i in 1:length(file_downloads)){
     occ_download_get(file_downloads[[i]],overwrite=overwrite,path=path_to_GBIFdownloads)

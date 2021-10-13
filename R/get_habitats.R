@@ -74,7 +74,7 @@ get_habitats= function(taxon_names){ # data.frame of taxon names and optionally 
   
   
   #If there is pre-existing habitat information (works best with SINAS workflow)
-  if("habitat" %in% colnames(taxon_names) == T){
+  if("habitat" %in% colnames(taxon_names)){
     # dat2= data.frame(dat$taxon,dat$habitat)
     # colnames(dat2) = c("taxon", "habitat")
     # all_DBs= merge(all_DBs,dat2, by='taxon', all.x = T)

@@ -43,32 +43,41 @@ get_habitats_DASCO <- function(file_name_extension,path_to_GBIFdownloads,path_to
 
   ## get habitat information from WoRMS, Fishbase and Sealifebase
   habitats <- get_habitats(taxon_names)
-  # fwrite(habitats,file.path("Data","Output","Intermediate","Habitats_rawdata.csv"))
-  
+  fwrite(habitats,file.path("Data","Output","Intermediate","Habitats_rawdata.csv"))
+  # habitats <- fread(file.path("Data","Output","Intermediate","Habitats_rawdata.csv"))
+
+    
   ## check results (correct obvious errors; combine duplicated entries)
+  ## correct habitat information    
+  SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
+  taxa_dupl <- habitats$taxon[duplicated(habitats$taxon)]
+  # set birds and mammals to terrestrial only
+  if (any(taxa_dupl %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon)) { # No marine alien mammal is known 
+    birds <- taxa_dupl[taxa_dupl %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] # set birds to terrestrial
+    habitats$habitat_freshwater[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
+    habitats$habitat_brackish[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
+    habitats$habitat_marine[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
+    habitats$habitat_terrestrial[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 1
+    habitats <- unique(habitats)
+  }
+  # set Insecta to non-marine
+  if (any(taxa_dupl %in% subset(SpecNames,class%in%c("Insecta","Amphibia"))$taxon)) {
+    habitats$habitat_marine[habitats$taxon %in% subset(SpecNames,class%in%c("Magnoliopsida","Insecta","Amphibia"))$taxon] <- 0
+    habitats <- unique(habitats)
+  }
+  # set land plants to non-marine
+  if (any(taxa_dupl %in% subset(SpecNames,phylum%in%c("Tracheophyta","Anthocerotophyta","Bryophyta"))$taxon)) {
+    habitats$habitat_marine[habitats$taxon %in% subset(SpecNames,class%in%c("Magnoliopsida","Insecta","Amphibia"))$taxon] <- 0
+    habitats <- unique(habitats)
+  }
+  
+  ## combine habitat information for duplicated taxa
   habitats <- unique(habitats)
   if (any(duplicated(habitats$taxon))){
     print("Warning: Duplicated taxa in habitat list! Check file Duplicated_Entries_Habitats.csv. Habitat information has been combined.")
     
     write.csv2(habitats$taxon[duplicated(habitats$taxon)],file=file.path("Data","Output","Intermediate","Duplicated_Entries_Habitats.csv"))
 
-    ## correct and combine habitat information    
-    SpecNames <-  fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
-    taxa_dupl <- habitats$taxon[duplicated(habitats$taxon)]
-    # set birds and mammals to terrestrial only
-    if (any(taxa_dupl %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon)) {
-      birds <- taxa_dupl[taxa_dupl %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] # set birds to terrestrial
-      habitats$habitat_freshwater[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
-      habitats$habitat_brackish[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
-      habitats$habitat_marine[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 0
-      habitats$habitat_terrestrial[habitats$taxon %in% subset(SpecNames,class%in%c("Aves","Mammalia","Arachnida"))$taxon] <- 1
-      habitats <- unique(habitats)
-    }
-    # set Magnoliopsida and Insecta to non-marine
-    if (any(taxa_dupl %in% subset(SpecNames,class%in%c("Magnoliopsida","Insecta","Amphibia"))$taxon)) {
-      habitats$habitat_marine[habitats$taxon %in% subset(SpecNames,class%in%c("Magnoliopsida","Insecta","Amphibia"))$taxon] <- 0
-      habitats <- unique(habitats)
-    }
     ## combine habitat information
     habitats_agg_terr <- aggregate(habitat_terrestrial ~ taxon,data=habitats,FUN=max,na.rm=T)
     habitats_agg_fresh <- aggregate(habitat_freshwater ~ taxon,data=habitats,FUN=max,na.rm=T)

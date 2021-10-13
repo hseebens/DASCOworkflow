@@ -14,7 +14,6 @@
 
 coords_to_regions_GBIF <- function(
   name_of_shapefile,
-  path_to_GBIFdownloads=path_to_GBIFdownloads,
   realm_extension=TRUE,
   file_name_extension=file_name_extension
   ){
