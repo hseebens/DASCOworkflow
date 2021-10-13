@@ -22,11 +22,11 @@ library(data.table) # for clean_GBIF_records, request_GBIF_download
 library(httr)
 library(sf)   # for transform_coords_to_regions
 library(utils)
-# library(rgbif) # for clean_GBIF_records, request_GBIF_download
-# library(worrms)
-# library(robis)
-# library(CoordinateCleaner) # for clean_GBIF_records
-# library(rfishbase)
+library(rgbif) # for clean_GBIF_records, request_GBIF_download
+library(worrms)
+library(robis)
+library(CoordinateCleaner) # for clean_GBIF_records
+library(rfishbase)
 
 ###################################################################################
 ## load functions #################################################################
