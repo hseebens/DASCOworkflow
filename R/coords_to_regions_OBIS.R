@@ -14,7 +14,6 @@
 
 coords_to_regions_OBIS <- function(
   name_of_shapefile,
-  path_to_OBISdownloads=path_to_OBISdownloads,
   realm_extension=TRUE,
   file_name_extension=file_name_extension
 ){
@@ -257,7 +256,7 @@ coords_to_regions_OBIS <- function(
     all_out_coords[[i]] <- chunk_records_coords
     
     # ## output ###############
-    # saveRDS(chunk_records,file.path("Data","Output","Intermediate",paste0("AlienRegions_OBIS_",file_name_extension,"_",i,".rds")))
+    # saveRDS(chunk_records,file.path("Data","Output","Intermediate",paste0("DASCO_OBISregions_",file_name_extension,"_",i,".rds")))
   }
   all_records_spec <- do.call("rbind",all_out)
   all_records_spec <- unique(all_records_spec)
@@ -268,8 +267,8 @@ coords_to_regions_OBIS <- function(
   all_records_spec$Realm[all_records_spec$taxon%in%freshwater] <- "freshwater"
   
   # ## output ###############
-  fwrite(all_records_spec,file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".csv")))
-  # all_records_spec <- fread(file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".gz")))
+  fwrite(all_records_spec,file.path("Data","Output",paste0("DASCO_OBISregions_",file_name_extension,".csv")))
+  # all_records_spec <- fread(file.path("Data","Output",paste0("DASCO_OBISregions_",file_name_extension,".gz")))
 
   ## with coordinates ###################
   
@@ -279,5 +278,5 @@ coords_to_regions_OBIS <- function(
   # all_coords_spec <- merge(all_coords,uni_spec,by="speciesKey",all.x=T)
   all_coords$Realm[all_coords$taxon%in%freshwater] <- "freshwater"
   
-  fwrite(all_coords,file=file.path("Data","Output",paste0("AlienRegions_OBISCoords_",file_name_extension,".gz")))
+  fwrite(all_coords,file=file.path("Data","Output",paste0("DASCO_OBISCoords_",file_name_extension,".gz")))
 }

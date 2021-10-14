@@ -14,7 +14,6 @@
 
 coords_to_regions_GBIF <- function(
   name_of_shapefile,
-  path_to_GBIFdownloads=path_to_GBIFdownloads,
   realm_extension=TRUE,
   file_name_extension=file_name_extension
   ){
@@ -243,7 +242,7 @@ coords_to_regions_GBIF <- function(
       # tab_realm[which(rownames(tab_realm)=="5277297"),]
       
       ## output ###############
-      # saveRDS(output,file.path("Data","Output","Intermediate",paste0("AlienRegions_",file_name_extension,"_",i,"_",j,".rds")))
+      # saveRDS(output,file.path("Data","Output","Intermediate",paste0("DASCO_",file_name_extension,"_",i,"_",j,".rds")))
       
       chunk_out_coords[[j]] <- output_coords
       chunk_out[[j]]        <- output_noCoords
@@ -255,9 +254,9 @@ coords_to_regions_GBIF <- function(
     all_out_coords[[i]] <- chunk_records_coords
     
     ## output ###############
-    fwrite(chunk_records,file=file.path("Data","Output","Intermediate",paste0("AlienRegions_GBIF_",file_name_extension,"_",i,".csv")))
+    fwrite(chunk_records,file=file.path("Data","Output","Intermediate",paste0("DASCO_GBIFregions_",file_name_extension,"_",i,".csv")))
     
-    fwrite(chunk_records_coords,file=file.path("Data","Output","Intermediate",paste0("AlienRegions_GBIFCoords_",file_name_extension,"_",i,".gz")))
+    fwrite(chunk_records_coords,file=file.path("Data","Output","Intermediate",paste0("DASCO_GBIFCoords_",file_name_extension,"_",i,".gz")))
   }
   all_records <- rbindlist(all_out)
   all_records <- unique(all_records)
@@ -268,14 +267,14 @@ coords_to_regions_GBIF <- function(
   all_records_spec$Realm[all_records_spec$speciesKey%in%freshwater] <- "freshwater"
   
   # ## output ###############
-  fwrite(all_records_spec,file=file.path("Data","Output",paste0("AlienRegions_GBIF_",file_name_extension,".csv")))
-  # all_records_spec <- readRDS(file.path("Data","Output",paste0("AlienRegions_GBIF_",file_name_extension,".rds")))
+  fwrite(all_records_spec,file=file.path("Data","Output",paste0("DASCO_GBIFregions_",file_name_extension,".csv")))
+  # all_records_spec <- readRDS(file.path("Data","Output",paste0("DASCO_GBIFregions_",file_name_extension,".rds")))
   
   ## remove intermediate files if previous saving was successful
-  if (file.exists(file.path("Data","Output",paste0("AlienRegions_GBIF_",file_name_extension,".csv")))){
+  if (file.exists(file.path("Data","Output",paste0("DASCO_GBIFregions_",file_name_extension,".csv")))){
     for (i in 1:nchunks){ # loop over all chunks of coordinate data
       for (j in 1:(length(steps)-1)){# 
-        file.remove(file.path("Data","Output","Intermediate",paste0("AlienRegions_GBIF_",file_name_extension,"_",i,".csv")))
+        file.remove(file.path("Data","Output","Intermediate",paste0("DASCO_GBIFregions_",file_name_extension,"_",i,".csv")))
       }
     }
   }
@@ -284,7 +283,7 @@ coords_to_regions_GBIF <- function(
   
   # all_out_coords <- list()
   # for (i in 1:nchunks){ # loop over all chunks of coordinate data
-  #   all_out_coords[[i]] <- readRDS(file.path("Data","Output","Intermediate",paste0("AlienRegions_GBIFCoords_",file_name_extension,"_",i,".rds")))
+  #   all_out_coords[[i]] <- readRDS(file.path("Data","Output","Intermediate",paste0("DASCO_GBIFCoords_",file_name_extension,"_",i,".rds")))
   # }
   
   all_coords <- rbindlist(all_out_coords)
@@ -293,13 +292,13 @@ coords_to_regions_GBIF <- function(
   # all_coords_spec <- merge(all_coords,uni_spec,by="speciesKey",all.x=T)
   all_coords$Realm[all_coords$speciesKey%in%freshwater] <- "freshwater"
 
-  fwrite(all_coords,file=file.path("Data","Output",paste0("AlienRegions_GBIFCoords_",file_name_extension,".gz")))
+  fwrite(all_coords,file=file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))
   
   ## remove intermediate files if previous saving was successful
-  if (file.exists(file.path("Data","Output",paste0("AlienRegions_GBIFCoords_",file_name_extension,".gz")))){
+  if (file.exists(file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))){
     for (i in 1:nchunks){ # loop over all chunks of coordinate data
       # for (j in 1:(length(steps)-1)){# 
-        file.remove(file.path("Data","Output","Intermediate",paste0("AlienRegions_GBIFCoords_",file_name_extension,"_",i,".gz")))
+        file.remove(file.path("Data","Output","Intermediate",paste0("DASCO_GBIFCoords_",file_name_extension,"_",i,".gz")))
       # }
     }
   }

@@ -13,8 +13,7 @@
 
 
 final_DASCO_output <- function(
-  file_name_extension,
-  path_to_GBIFdownloads
+  file_name_extension
   ){
 
   SpecRegionData <-  fread(file.path("Data","Output",paste0("FullDataSet_Standardised_",file_name_extension,".gz")),stringsAsFactors = F,header=T)
@@ -30,7 +29,7 @@ final_DASCO_output <- function(
     cat("\n Column 'eventDate' is missing. Cannot add first records. \n")
   }
 
-  all_records_spec <- fread(file.path("Data","Output",paste0("AlienRegions_GBIF_",file_name_extension,".csv")))
+  all_records_spec <- fread(file.path("Data","Output",paste0("DASCO_GBIFregions_",file_name_extension,".csv")))
 
   GBIF_keys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
   GBIF_keys <- unique(GBIF_keys[,c("speciesKey","scientificName")])
@@ -86,7 +85,7 @@ final_DASCO_output <- function(
   
   meow_records <- fread(file.path("Data","Output","Intermediate","MarineRecords_OBIS.gz"))
 
-  all_records_spec <- fread(file.path("Data","Output",paste0("AlienRegions_OBIS_",file_name_extension,".csv")))
+  all_records_spec <- fread(file.path("Data","Output",paste0("DASCO_OBISregions_",file_name_extension,".csv")))
 
   ## create empty dummy variables to ensure proper merging; if records exists, these files are overwritten further down
   all_regspec_fr_OBIS <- data.frame(location=character(),scientificName=character(),Realm=character(),eventDate=integer())
@@ -136,8 +135,8 @@ final_DASCO_output <- function(
   all_regspec_fr <- unique(all_regspec_fr[,c("location","scientificName","taxon","eventDate")])
     
   ## output ###################################################
-  fwrite(all_regspec_fr,file.path("Data","Output",paste0("AlienRegions_FinalDB_",file_name_extension,".csv")),sep=";",row.names=F)
-  # dat_new <- fread(file.path("Data","Output",paste0("AlienRegions_FinalDB_",file_name_extension,".csv")))
+  fwrite(all_regspec_fr,file.path("Data","Output",paste0("DASCO_AlienRegions_",file_name_extension,".csv")),sep=";",row.names=F)
+  # dat_new <- fread(file.path("Data","Output",paste0("DASCO_AlienRegions_",file_name_extension,".csv")))
   # all_regspec_fr <- readRDS(file.path("Data","FirstRecords_TerrMarRegions_min3.rds"))
 
   return(all_regspec_fr)
