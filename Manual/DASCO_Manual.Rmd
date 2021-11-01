@@ -1,17 +1,10 @@
 ---
 title: "DASCO Manual"
 author: "Ekin Kaplan, Hanno Seebens"
-date: "17 Mayıs 2021"
+date: " 1 November 2021"
 output: pdf_document
 ---
 
----
-title: "DASCO Workflow Manual"
-author: "Ekin Kaplan"", Hanno Seebens"
-date: "8 May 2021"
-output: pdf_document
-fontsize: 12 pt
----
 
 # Introduction 
 
@@ -69,7 +62,6 @@ remaining package "robis" can be obtained from GitHub.
 To download these packages, the following code can be executed in the terminal.
 
 ```{r eval=FALSE}
-
 install.packages("data.table") 
 install.packages("rgbif")
 install.packages("worrms")
@@ -79,7 +71,6 @@ install.packages("sf")
 install.packages("R.utils")
 install.packages("rfishbase")
 install_github("iobis/robis")
-
 ```
 
 
@@ -166,20 +157,15 @@ be provided in the file "run_DASCO_workflow.R".
 In this script, default settings of the workflow are provided under 'Global variables':
 
 ```{r eval=FALSE}
-
 path_to_GBIFdownloads <- "/path/to/storage/GBIF/"
 path_to_OBISdownloads <- "/path/to/storage/OBIS"
-
 filename_inputData <- "Taxon-by-region-file.csv"
 column_scientificName <- "scientificName" 
 column_taxonName <- "TaxonName" 
 column_location <- "Region"
 column_eventDate <- "FirstRecord" 
-
 name_of_shapefile <- "RegionsTerrMarine"
-
 file_name_extension <- "FirstRecords"
-
 ```
 
 The first two variables called `path_to_GBIFdownloads` and `path_to_OBISdownloads` define the 
@@ -301,8 +287,13 @@ The `get_OBIS_records` function is the only function that is required to downloa
 As the default, the following variables are obtained from OBIS for each record as specified in `fieldsobis`: `scientificName`, `scientificNameID`, `decimalLongitude`, `decimalLatitude`, `basisOfRecord`, `country`, `speciesid`, `marine`.
 Fossil records and records with missing entries in any of the entries for `species`, `decimalLongitude`, `decimalLatitude`, `scientificName` are removed.
 
-The `get_habitats` function allows users to obtain the habitat information of list of species from 
-WoRMS, Sealifebase and Fishbase databases. This function utilizes the species keys that are obtained 
+```{r eval=FALSE}
+get_habitats_DASCO (file_name_extension,path_to_GBIFdownloads,
+                    path_to_OBISdownloads,update_sealifebase= F)
+
+```
+The `get_habitats_DASCO` function allows users to obtain the habitat information of list of species from 
+WoRMS, Sealifebase and Fishbase databases. This function utilizes the standardized taxon names that are obtained 
 from GBIF and OBIS to prevent false species names and synonyms to be processed. After the parsing, 
 the function downloads the habitat information from WoRMS and Fishbase databases. Sealifebase database
  is already in the '/Data' section, but if one decides to use the latest version sealifebase, they can 
@@ -315,7 +306,6 @@ information, the function processes this information into four columns, namely "
 
 ```{r eval=FALSE}
 clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
-
 clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
 ```
 
@@ -330,15 +320,12 @@ Both of these functions for GBIF and OBIS provide the option to thin records by 
 Particularly for GBIF, the number of records may be very high, which may cause memory issues although the data
 are already processed in chunks of data as specified by the user. In addition, depending on the resolution of the regions provided in the shapefile, a high resolution is not required and thinning enables accelerating the process without loosing much information.
 Thinning is enabled for GBIF as a default (`thin_records=TRUE'). Then, coordinates are rounded to the second digit, and duplicates are removed. For the single remaining record at this site, the original (not the rounded) record is kept. 
-
 ## Step 4: Determining alien populations
-
 ```{r eval=FALSE}
 coords_to_regions_GBIF(name_of_shapefile,
                        path_to_GBIFdownloads,
                        realm_extension=TRUE,
                        file_name_extension)
-
 coords_to_regions_OBIS(name_of_shapefile,
                        path_to_OBISdownloads,
                        realm_extension=TRUE,
