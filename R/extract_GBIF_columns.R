@@ -47,6 +47,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     ### process data files #############################################
     
     ## single file...
+    # test_dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),nrows = 1)
     # dat <- fread(file=paste0("FirstRecordsSpec/",unzipped),select=c("speciesKey","decimalLatitude","decimalLongitude","basisOfRecord","eventDate","year","dateIdentified"),quote="")
     dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),select=c("speciesKey","basisOfRecord","decimalLatitude","decimalLongitude"),quote="")
     
