@@ -52,7 +52,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   ## save intermediate output ######
   fwrite(GBIF_species, file.path(path_to_GBIFdownloads,paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
   fwrite(GBIF_species, file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
-  # GBIF_species <- fread(file.path(path_to_GBIFdownloads,"SpeciesGBIFkeys.csv"))
+  # GBIF_species <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
 
   
   #######################################################################################
@@ -133,7 +133,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
     
     sub_keys <- subset(GBIF_species,group==j)$speciesKey
     
-    ## prepare requests for GBIF download (no execution!)
+    ## prepare requests for GBIF download
     file_downloads[[j]] <- occ_download(
       pred_in("taxonKey", sub_keys),
       pred("hasCoordinate", TRUE),
@@ -144,9 +144,9 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   }
   
   save(file_downloads,file=file.path("Data","Output",paste0("GBIF_download_requests_",file_name_extension,".RData")))
-  # load(file=file.path("Data","Output","GBIF_download_requests.RData"))
+  # load(file=file.path("Data","Output",paste0("GBIF_download_requests_",file_name_extension,".RData")))
   
-  # ### using one GBIF account and different queries #######################################################
+  ### using one GBIF account and different queries #######################################################
   # ### the rgbif functions are beta versions and may not work as expected! ################################
   # 
   # ## GBIF account details ##############################################################################

@@ -135,6 +135,7 @@ coords_to_regions_GBIF <- function(
     }
     
     marine <- subset(SpecNames,habitat_marine=="1")$speciesKey
+    non_marine <- non_marine[!non_marine%in%marine] # avoid overlaps
     
     freshwater <- unique(subset(SpecNames,habitat_freshwater=="1" & habitat_marine=="0" & habitat_terrestrial=="0")$speciesKey)
   }
