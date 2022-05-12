@@ -86,6 +86,7 @@ install.packages("CoordinateCleaner")
 install.packages("httr")
 install.packages("sf")
 install.packages("R.utils")
+install.packages("rfishbase")
 install_github("iobis/robis")
 
 ```
@@ -272,6 +273,14 @@ get_OBIS_records(path_to_OBISdownloads,
 The `get_OBIS_records` function is the only function that is required to download occurrence data from the OBIS. This function uses the `occurrence` function from the `robis` package to perform the download. Three options are provided to specify the download: As the default, the following variables are obtained from OBIS for each record as specified in `fieldsobis`: `scientificName`, `scientificNameID`, `decimalLongitude`, `decimalLatitude`, `basisOfRecord`, `country`, `speciesid`, `marine`.
 Fossil records and records with missing entries in any of the entries for `species`, `decimalLongitude`, `decimalLatitude`, `scientificName` are removed.
 
+The `get_habitats` function allows users to obtain the habitat information of list of species from 
+WoRMS, Sealifebase and Fishbase databases. This function utilizes the species keys that are obtained 
+from GBIF and OBIS to prevent false species names and synonyms to be processed. After the parsing, 
+the function downloads the habitat information from WoRMS and Fishbase databases. Sealifebase database
+ is already in the '/Data' section, but if one decides to use the latest version sealifebase, they can 
+change the 'update_sealifebase' object to 'True', thus updating the database. After acquiring the habitat 
+information, the function processes this information into four columns, namely "terrestrial", "marine", 
+"freshwater", "brackish"; then this file is saved into the "Data/Output" folder for further use.
 
 ## Step 3: Cleaning Occurrence Data
 
