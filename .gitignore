@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+*.gz
+/Data/Output/
+RegionsTerrMarine_160621_Germany*
