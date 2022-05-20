@@ -86,9 +86,10 @@ get_habitats_DASCO <- function(file_name_extension,path_to_GBIFdownloads,path_to
     habitats_agg <- merge(habitats_agg_terr,habitats_agg_fresh,by="taxon",all=T)
     habitats_agg <- merge(habitats_agg,habitats_agg_brack,by="taxon",all=T)
     habitats_agg <- merge(habitats_agg,habitats_agg_marine,by="taxon",all=T)
+    habitats <- habitats_agg
   } 
   
-  write.csv2(habitats_agg,file = file.path("Data","Output",paste0("DASCO_TaxonHabitats_",file_name_extension,".csv")) ,row.names = F)
+  write.csv2(habitats,file = file.path("Data","Output",paste0("DASCO_TaxonHabitats_",file_name_extension,".csv")) ,row.names = F)
 
 }
 
