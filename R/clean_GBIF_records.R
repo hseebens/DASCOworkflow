@@ -18,7 +18,7 @@ clean_GBIF_records <- function(
   path_to_GBIFdownloads,
   file_name_extension,
   thin_records,
-  tests_for_cleaning = c("capitals","centroids", "equal","gbif","institutions","outliers","zeros")  # remove 'seas' test from default
+  tests_for_cleaning = c("centroids", "equal","gbif","institutions","outliers","zeros")  # remove 'seas' and 'capitals' test from default
   ){
 
   ## identify files to import (i.e., all files within all sub-directories ending with .rds and with 'GBIFrecords_NUMBER_NUMBER' in name)
