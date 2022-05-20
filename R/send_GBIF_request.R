@@ -107,6 +107,28 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   ### Two approaches are provided below using either several GBIF accounts or a single
   ### account. The first is less convenient but stable, while the latter is a beta version
   
+  ### identify extent of area of interest for downloading records #######################
+  regions <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
+  # regions <- regions[regions$Location=="Germany",]
+  
+  ## get spatial extent
+  bounding_box <- st_bbox(regions)
+  
+  ## enlarge bounding box to also cover buffer zones
+  bounding_box[1] <- bounding_box[1] -1
+  bounding_box[2] <- bounding_box[2] -1
+  bounding_box[3] <- bounding_box[3] +1
+  bounding_box[4] <- bounding_box[4] +1
+
+  ## define WKT string to define area for GBIF request
+  WKT_string <- paste('POLYGON((',
+                  bounding_box[1],bounding_box[2],",",
+                  bounding_box[3],bounding_box[2],",",
+                  bounding_box[3],bounding_box[4],",",
+                  bounding_box[1],bounding_box[4],",",
+                  bounding_box[1],bounding_box[2],
+                  "))",sep=" ")
+
   ### using various GBIF accounts #######################################################
   user_base <- user
   email_base <- email
@@ -138,6 +160,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
       pred_in("taxonKey", sub_keys),
       pred("hasCoordinate", TRUE),
       pred("hasGeospatialIssue", FALSE),
+      pred_within(WKT_string),
       format = "SIMPLE_CSV",
       user=user,pwd=pwd,email=email
     )
