@@ -19,14 +19,14 @@ rm(list=ls())
 
 
 library(data.table) # for clean_GBIF_records, request_GBIF_download
+library(httr)
+library(sf)   # for transform_coords_to_regions
+library(utils)
 library(rgbif) # for clean_GBIF_records, request_GBIF_download
 library(worrms)
 library(robis)
 library(CoordinateCleaner) # for clean_GBIF_records
-library(httr)
-library(sf)   # for transform_coords_to_regions
-library(utils)
-
+library(rfishbase)
 
 ###################################################################################
 ## load functions #################################################################
@@ -39,40 +39,39 @@ source(file.path("R","load_functions.R")) # load all required functions
 
 ### Within this workflow, files will be downloaded and stored in these folders
 ### Note: All files in that folder will be considered as relevant files
-path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/FirstRecords_Mar2021"
-path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS"
+path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
+path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
 # name_of_specieslist <- "SInAS_AlienSpeciesDB_2.3.1_FullTaxaList.csv"
-filename_inputData <- "IntroDat_22Mar2021.csv"
+# filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Full+Taxonomy.csv"
+filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Germany.csv"
+
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
-column_taxonName <- "TaxonName" # taxon name without authority; required for OBIS
-column_location <- "Region" # column name of location records
-column_eventDate <- "FirstRecord" # column name of year of first record of occurrence
+column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
+column_location <- "Location" # column name of location records
+column_eventDate <- "eventDate" # column name of year of first record of occurrence
+column_habitat <- "habitat" # column name of year of first record of occurrence
 
 ## Name of file with the information of alien species and regions
 # name_of_TaxonLoc <- "IntroDat_22Mar2021.csv"
 
 ## name of shapefile providing polygons for the new delineation
-name_of_shapefile <- "RegionsTerrMarine"
+name_of_shapefile <- "RegionsTerrMarine_160621_Germany"
 
 ## term to be added to the names of the output files; can be blank
-file_name_extension <- "FirstRecords"
+file_name_extension <- "SInAS_2.4.1_Germany"
 
+
+## check if folders and files exist
+if (!dir.exists(path_to_GBIFdownloads)) stop(paste0("Folder '",path_to_GBIFdownloads,"’ does not exist!"))
+if (!dir.exists(path_to_OBISdownloads)) stop(paste0("Folder '",path_to_OBISdownloads,"’ does not exist!"))
+if (!file.exists(file.path("Data","Input",filename_inputData))) stop(paste0("File '",filename_inputData,"’ could not be found in 'Input' folder!"))
+ 
 
 ###################################################################################
-### Check and create folder structure #############################################
-create_folders() # creates folders only if they are not existing yet
-
-prepare_dataset(filename_inputData,column_scientificName,column_taxonName,column_location,column_eventDate,file_name_extension)
-  
-
-###################################################################################
-### Obtaining data ################################################################
-### send requests to GBIF #########################################################
-
-## GBIF account details ############
+## GBIF account details ###########################################################
 ## Note that multiple accounts are required for n_accounts>1.
 ## The accounts have to numbered x=1...n_accounts, while x is part of
 ## user name and email address. For example, user name and email should be:
@@ -86,26 +85,53 @@ user <- "ekinhanno1"                                  # your gbif.org username
 pwd <- "seebenskaplan1234"                                     # your gbif.org password (set the same password for all accounts for convenience)
 email <- "ekinhanno1@outlook.com"                 # your email which you will recieve the download link
 
+
+
+###################################################################################
+### EXECUTION OF DASCO WORKFLOW ###################################################
 ###################################################################################
 
-## send requests to GBIF 
-send_GBIF_request(file_name_extension,path_to_GBIFdownloads,n_accounts,user=user,pwd=pwd,email=email)
+### 1. Check and create folder structure #############################################
+create_folders() # creates folders only if they are not existing yet
+
+prepare_dataset(filename_inputData,
+                column_scientificName,
+                column_taxonName,
+                column_location,
+                column_eventDate,
+                column_habitat,
+                file_name_extension)
+
+
+###################################################################################
+### 2. Obtaining data #############################################################
+
+## send requests to GBIF
+send_GBIF_request(file_name_extension,
+                  path_to_GBIFdownloads,
+                  n_accounts,
+                  user=user,
+                  pwd=pwd,
+                  email=email)
 
 ## get downloads from GBIF (requires running 'send_GBIF_request' first)
-get_GBIF_download(path_to_GBIFdownloads,file_name_extension)
+get_GBIF_download(path_to_GBIFdownloads,
+                  file_name_extension)
 
 ### extract relevant information from GBIF downloads ##############################
-extract_GBIF_columns(path_to_GBIFdownloads,file_name_extension)
+extract_GBIF_columns(path_to_GBIFdownloads,
+                     file_name_extension)
 
 
-###################################################################################
 ### get OBIS records ##############################################################
 
-get_OBIS_records(path_to_OBISdownloads,file_name_extension)
+get_OBIS_records(path_to_OBISdownloads,
+                 file_name_extension)
 ## Intermediate download files are stored under Data/Output/Intermediate
 
+
 ###################################################################################
-### Cleaning data #################################################################
+### 3. Cleaning data ##############################################################
 
 ## Thinning of coordinates:
 ## High numbers of records may cause memory issues. The number of records
@@ -117,37 +143,40 @@ get_OBIS_records(path_to_OBISdownloads,file_name_extension)
 
 ### clean GBIF records ############################################################
 
-clean_GBIF_records(path_to_GBIFdownloads,file_name_extension,thin_records=TRUE)
+clean_GBIF_records(path_to_GBIFdownloads,
+                   file_name_extension,
+                   thin_records=TRUE)
 
 ### clean OBIS records ############################################################
 
-clean_OBIS_records(path_to_OBISdownloads,file_name_extension,thin_records=FALSE)
-  
+clean_OBIS_records(path_to_OBISdownloads,
+                   file_name_extension,
+                   thin_records=FALSE)
+
 
 ###################################################################################
-### get alien regions based on coordintates #######################################
+### 4. get alien regions based on coordintates ####################################
+
+## get habitat information for taxa (terrestrial, freshwater, marine, brackish)
+get_habitats_DASCO(file_name_extension,path_to_GBIFdownloads,path_to_OBISdownloads)
 
 ## Assign coordinates to different realms (terrestrial, freshwater, marine)
 ## depending on geographic location and additional tests
-realm_extension <- TRUE 
-
-## assigning country checklists to marine polygons
-# checklist_to_marine <- TRUE
+## realm_extension <- TRUE
 
 # Region shapefile requires a consistent structure for marine and terrestrial polygons !!!!!
 
 coords_to_regions_GBIF(name_of_shapefile,
-                       path_to_GBIFdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
 
 coords_to_regions_OBIS(name_of_shapefile,
-                       path_to_OBISdownloads,
-                       realm_extension,
+                       realm_extension=TRUE,
                        file_name_extension)
 
 
 ########################################################################
+## 5. produce final output of the DASCO workflow #######################
 ## add first records per region (requires 'eventDate' column) ##########
-## and produce final output file containing GBIF and OBIS records ######
-dat <- final_DASCO_output(file_name_extension,path_to_GBIFdownloads)
+dat <- final_DASCO_output(file_name_extension)
+
