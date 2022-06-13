@@ -10,7 +10,7 @@
 # checklist to be used, the paths for storing data and different options for 
 # the application of the workflow.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens, Ekin Kaplan, 13.06.2021
 ##################################################################################
 
 
@@ -38,15 +38,15 @@ source(file.path("R","load_functions.R")) # load all required functions
 ### Global variables ##############################################################
 
 ### Within this workflow, files will be downloaded and stored in these folders
-### Note: All files in that folder will be considered as relevant files
-path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
-path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
+### Note: All files in that folder will be considered as relevant files; old files should be removed
+path_to_GBIFdownloads <- file.path("path","to","GBIF","folder")
+path_to_OBISdownloads <- file.path("path","to","OBIS","folder")
+# path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
+# path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-# name_of_specieslist <- "SInAS_AlienSpeciesDB_2.3.1_FullTaxaList.csv"
-# filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Full+Taxonomy.csv"
-filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Germany.csv"
+filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Full+Taxonomy.csv"
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
@@ -58,10 +58,10 @@ column_habitat <- "habitat" # column name of year of first record of occurrence
 # name_of_TaxonLoc <- "IntroDat_22Mar2021.csv"
 
 ## name of shapefile providing polygons for the new delineation
-name_of_shapefile <- "RegionsTerrMarine_160621_Germany"
+name_of_shapefile <- "RegionsTerrMarine_160621"
 
 ## term to be added to the names of the output files; can be blank
-file_name_extension <- "SInAS_2.4.1_Germany"
+file_name_extension <- "SInAS_2.4.1"
 
 
 ## check if folders and files exist
@@ -77,13 +77,13 @@ if (!file.exists(file.path("Data","Input",filename_inputData))) stop(paste0("Fil
 ## user name and email address. For example, user name and email should be:
 ## (ekinhanno1, ekinhanno1@gmail.com), (ekinhanno2, ekinhanno2@gmail.com) and so on.
 
-n_accounts <- 7
+n_accounts <- 1
 
 ## login details for first account (x=1) (the '1' in user name and email
-## address will be replaced be account number)
-user <- "ekinhanno1"                                  # your gbif.org username
-pwd <- "seebenskaplan1234"                                     # your gbif.org password (set the same password for all accounts for convenience)
-email <- "ekinhanno1@outlook.com"                 # your email which you will recieve the download link
+## address will be replaced be account number (i.e., 1:n_accounts)
+user <- ""                                  # your gbif.org username
+pwd <- ""                                     # your gbif.org password (set the same password for all accounts for convenience)
+email <- ""                 # your email which you will recieve the download link
 
 
 
@@ -145,7 +145,7 @@ get_OBIS_records(path_to_OBISdownloads,
 
 clean_GBIF_records(path_to_GBIFdownloads,
                    file_name_extension,
-                   thin_records=TRUE)
+                   thin_records=FALSE)
 
 ### clean OBIS records ############################################################
 
