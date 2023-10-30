@@ -23,7 +23,7 @@ get_habitats= function(taxon_names){ # data.frame of taxon names and optionally 
   # Get Fishbase habitats ###################################################
   cat(paste0("\n  Get habitat records from FishBase \n"))
   
-  fb.habitats= species(species_list = taxon_names$taxon)
+  fb.habitats= species(server = "fishbase",species_list = taxon_names$taxon)
   fb.habitats= data.frame(fb.habitats$Species, fb.habitats$Fresh,
                           fb.habitats$Brack,fb.habitats$Saltwater)
   colnames(fb.habitats)= c("taxon", "fbFresh", "fbBrack", "fbSalt")
@@ -31,7 +31,7 @@ get_habitats= function(taxon_names){ # data.frame of taxon names and optionally 
   # Get Sealifebase dataset ###################################################
   cat(paste0("\n  Get habitat records from SeaLifeBase \n"))
   
-  sl.habitats= species(server = "sealifebase")
+  sl.habitats= species(server = "sealifebase",species_list = taxon_names$taxon)
   
   sl.habitats.final= data.frame(sl.habitats$Fresh,
                                 sl.habitats$Brack,

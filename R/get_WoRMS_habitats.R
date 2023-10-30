@@ -11,7 +11,9 @@
 # Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
 ##################################################################################
 
-
+uni_species <- (c("Alitta virens", "Biddulphia sinensis", "Crepidula fornicata", "Desmarestia viridis", "Ensis leei", "Gracilaria gracilis", "Teredo navalis"))
+dat <- as.data.frame(uni_species)
+colnames(dat) <- "taxon"
 
 get_WoRMS_habitats <- function(dat){
   

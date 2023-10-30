@@ -61,6 +61,8 @@ coords_to_regions_OBIS <- function(
   # regions2 <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
   regions <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
   colnames(regions)[colnames(regions)=="Location"] <- "location"
+  regions <- st_make_valid(regions)
+  sf_use_s2(FALSE) # to avoid errors with st_join (edge crossing)
   # colnames(regions)[2] <- "Ecoregion"
   # regions$Ecoregion[!is.na(regions$Ecoregion)] <- paste(regions$Ecoregion[!is.na(regions$Ecoregion)],"MEOW",sep="_")
   # regions <- regions[is.na(regions$featurecla),] # remove lakes !!!! (no alien distinction available yet)
@@ -156,10 +158,10 @@ coords_to_regions_OBIS <- function(
     folder <- "Output"
     available_files <- list.files(file.path("Data","Output"))
     available_files <- available_files[grep("OBISrecords_Cleaned_All_",available_files)]
-    available_files <- available_files[grep(file_name_extension,available_files)]
+    available_files <- available_files[grep(file_name_extension,available_files,fixed=T)]
   }
   if (length(available_files)==0){
-    cat("\n No available files with coordinates found! \n")
+    warning("\n No files with cleaned coordinates starting with 'OBISrecords_Cleaned_' found! \n")
   }
   
   nchunks <- length(available_files) # set total number of data files, which contain the GBIF records

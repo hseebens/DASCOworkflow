@@ -14,13 +14,13 @@
 
 
 prepare_dataset <- function(
-  filename_inputData,
-  column_scientificName,
-  column_taxonName,
-  column_location,
-  column_eventDate,
-  column_habitat,
-  file_name_extension){
+    filename_inputData,
+    column_scientificName,
+    column_taxonName,
+    column_location,
+    column_eventDate,
+    column_habitat,
+    file_name_extension){
 
   FullTaxaList <- fread(file.path("Data","Input",filename_inputData))
   

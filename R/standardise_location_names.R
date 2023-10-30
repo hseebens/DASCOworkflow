@@ -14,7 +14,11 @@
 
 standardise_location_names <- function(dat,file_name_extension,data_set=NULL){
 
-  # dat <- FullTaxaList$location
+  # dat <- regions$location #FullTaxaList$location
+  # 
+  # if (any(duplicated(dat))){
+  #   stop("Duplicated entries of locations! Please correct.")
+  # }
   
   dat <- cbind.data.frame(dat,dat,1:length(dat),stringsAsFactors=F)  
   colnames(dat) <- c("location","location_orig","order")
@@ -27,6 +31,10 @@ standardise_location_names <- function(dat,file_name_extension,data_set=NULL){
   regions$keywords <- tolower(regions$keywords) # set all to lower case for matching
   regions$keywords[regions$keywords==""] <- NA
   regions$location_lower <- tolower(regions$location) # set all to lower case for matching
+
+  if (any(duplicated(regions$location))){
+    stop("Duplicated entries of locations! Please correct.")
+  }
   
   ## prepare data set ############################################
 

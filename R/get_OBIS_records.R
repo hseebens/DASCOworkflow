@@ -39,7 +39,7 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
     my_occ <- try(robis::occurrence(scientificname = SpecList[k], fields = fieldsobis,verbose=F),silent=T)#
     
     ## check if downloaded did not work
-    if(any(class(my_occ) == "try-error")){
+    if(any(class(my_occ) == "try-error") | is.null(my_occ)){
       cat(paste0("  \n OBIS API could not download the species ",SpecList[k],"\n  "))
       next
     }

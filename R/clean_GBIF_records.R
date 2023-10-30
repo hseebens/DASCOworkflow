@@ -123,7 +123,7 @@ clean_GBIF_records <- function(
             
             dat_manyrecords <- subset(dat_sub_sub,speciesKey%in%spec_manyrecords[l])
             pieces <- c(seq(1,nrow(dat_manyrecords),by=max_records),nrow(dat_manyrecords)) # split data into smaller pieces
-            for (m in 2:length(pieces)){
+            for (m in 2:length(pieces)){ # m starts with '2'!
               
               cat(paste0("\n Data split into further pieces for species ",spec_manyrecords[l],": ",m-1,"/",length(pieces)-1,"\n"))
               
@@ -184,6 +184,10 @@ clean_GBIF_records <- function(
     
     dat_all[[i]] <- dat_cleaned
   }
+
+  # for (i in 1:length(GBIF_records_files)){
+  #   dat_all[[i]] <- fread(file.path("Data","Output","Intermediate",paste0("GBIFrecords_Cleaned_",file_name_extension,"_",i,".gz")))
+  # }
   
   # output
   dat_all_df <- rbindlist(dat_all)

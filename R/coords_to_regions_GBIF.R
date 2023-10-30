@@ -57,6 +57,8 @@ coords_to_regions_GBIF <- function(
   ## Polygon file of marine and terrestrial regions
   regions <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
   colnames(regions)[colnames(regions)=="Location"] <- "location"
+  regions <- st_make_valid(regions)
+  sf_use_s2(FALSE) # to avoid errors with st_join (edge crossing)
   # regions$Ecoregion[!is.na(regions$Ecoregion)] <- paste(regions$Ecoregion[!is.na(regions$Ecoregion)],"MEOW",sep="_")
   # regions <- regions[is.na(regions$featurecla),] # remove lakes !!!! (no alien distinction available yet)
   
@@ -147,16 +149,16 @@ coords_to_regions_GBIF <- function(
   folder <- file.path("Output","Intermediate")
   available_files <- list.files(file.path("Data","Output","Intermediate"))
   available_files <- available_files[grep("GBIFrecords_Cleaned_",available_files)]
-  available_files <- available_files[grep(file_name_extension,available_files)]
+  available_files <- available_files[grep(file_name_extension,available_files,fixed=T)]
   
   if (length(available_files)==0){
     folder <- "Output"
     available_files <- list.files(file.path("Data","Output"))
     available_files <- available_files[grep("GBIFrecords_Cleaned_All_",available_files)]
-    available_files <- available_files[grep(file_name_extension,available_files)]
+    available_files <- available_files[grep(file_name_extension,available_files,fixed=T)]
   }
   if (length(available_files)==0){
-    cat("\n No available files with coordinates found! \n")
+    warning("\n No files with cleaned coordinates starting with 'GBIFrecords_Cleaned_' found! \n")
   }
   
   nchunks <- length(available_files) # set total number of data files, which contain the GBIF records
@@ -294,6 +296,7 @@ coords_to_regions_GBIF <- function(
   all_coords$Realm[all_coords$speciesKey%in%freshwater] <- "freshwater"
 
   fwrite(all_coords,file=file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))
+  # all_coords <- fread(file=file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))
   
   ## remove intermediate files if previous saving was successful
   if (file.exists(file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))){

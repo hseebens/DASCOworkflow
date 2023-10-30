@@ -130,14 +130,66 @@ final_DASCO_output <- function(
   all_regspec_fr_OBIS <- all_regspec_fr_OBIS[,c("location","scientificName","taxon","Realm","eventDate")]
 
   
-  ## combine GBIF and OBIS ########################################################
+  ## combine GBIF and OBIS regional data ########################################################
   all_regspec_fr <- rbind(all_regspec_fr_GBIF,all_regspec_fr_OBIS)
   all_regspec_fr <- unique(all_regspec_fr[,c("location","scientificName","taxon","eventDate")])
-    
+
+  
+  ## combine GBIF and OBIS coordinate data ########################################################
+  ## get specieskey (need to replaced by taxon names to obtain a match with OBIS)
+  GBIF_coords <- fread(file=file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))
+  GBIF_keys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
+
+  ## GBIF keys without duplications
+  GBIF_keys_dupl <- duplicated(GBIF_keys$speciesKey)
+  dupl_spec <- GBIF_keys$speciesKey[GBIF_keys_dupl]
+  GBIF_keys_noDupl <- GBIF_keys[!GBIF_keys$speciesKey%in%dupl_spec,c("speciesKey","canonicalName")]
+  
+  ## merge GBIF_coords with keys ignoring duplicated keys for now
+  GBIF_coords_names <- merge(GBIF_coords,GBIF_keys_noDupl,by="speciesKey",all.x=T)
+  
+  ## speciesKeys without a taxon name yet (due to duplicated entries because of e.g. sub-species)
+  GBIF_keys_left <- unique(GBIF_coords_names$speciesKey[is.na(GBIF_coords_names$canonicalName)])
+
+  ## get taxon names for duplicated speciesKeys from GBIF
+  GBIF_keys_left <- as.data.frame(GBIF_keys_left)
+  colnames(GBIF_keys_left) <- "speciesKey"
+  GBIF_keys_left$taxon <- NA
+  for (i in 1:nrow(GBIF_keys_left)){
+    specname <- occ_search(speciesKey=GBIF_keys_left[i,1],limit=1)$data$species
+    GBIF_keys_left$taxon[GBIF_keys_left$speciesKey==GBIF_keys_left[i,1]] <- specname
+    if (i%%100==0) cat(paste(round(i/nrow(GBIF_keys_left),2)*100,"%\n"))
+  }
+  GBIF_coords_names <- merge(GBIF_coords_names,GBIF_keys_left,by="speciesKey",all.x=T)
+  
+  ## fill column taxon with all names (needed to match OBIS)
+  GBIF_coords_names$taxon[is.na(GBIF_coords_names$taxon)] <- GBIF_coords_names$canonicalName[is.na(GBIF_coords_names$taxon)]
+  
+  # setkey(GBIF_coords_names,taxon)
+  # GBIF_coords_names[is.na(canonicalName),]
+
+  ## prepare file for matching with OBIS
+  GBIF_coords_names[,canonicalName:=NULL]
+  GBIF_coords_names[,speciesKey:=NULL]
+  GBIF_coords_names[,Database:="GBIF"]
+  
+  ## OBIS coordinates
+  OBIS_coords <- fread(file=file.path("Data","Output",paste0("DASCO_OBISCoords_",file_name_extension,".gz")))
+  OBIS_coords[,Database:="OBIS"]
+  
+  ## merge coordinates from OBIS and GBIF
+  all_coords <- rbindlist(list(OBIS_coords,GBIF_coords_names),use.names=TRUE)
+  
+  
   ## output ###################################################
+  
+  ## regional data
   fwrite(all_regspec_fr,file.path("Data","Output",paste0("DASCO_AlienRegions_",file_name_extension,".csv")),sep=";",row.names=F)
   # dat_new <- fread(file.path("Data","Output",paste0("DASCO_AlienRegions_",file_name_extension,".csv")))
   # all_regspec_fr <- readRDS(file.path("Data","FirstRecords_TerrMarRegions_min3.rds"))
+  
+  ## coordinate data
+  fwrite(all_coords,file.path("Data","Output",paste0("DASCO_AlienCoordinates_",file_name_extension,".gz")))
 
   return(all_regspec_fr)
 }
