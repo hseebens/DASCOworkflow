@@ -29,7 +29,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
   ############################################################################################
   ## decompress zip files (if they are still zipped) and extract required columns ############
   
-  for (i in 6:length(extract_files)){#
+  for (i in 1:length(extract_files)){#
     
     cat(paste0("\n ",i," Working on ",extract_files[i],"\n"))
     
