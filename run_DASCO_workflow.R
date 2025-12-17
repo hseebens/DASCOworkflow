@@ -39,14 +39,14 @@ source(file.path("R","load_functions.R")) # load all required functions
 
 ### Within this workflow, files will be downloaded and stored in these folders
 ### Note: All files in that folder will be considered as relevant files; old files should be removed
-path_to_GBIFdownloads <- file.path("path","to","GBIF","folder")
-path_to_OBISdownloads <- file.path("path","to","OBIS","folder")
+path_to_GBIFdownloads <- file.path("Data","Input")
+path_to_OBISdownloads <- file.path("Data","Input")
 # path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
 # path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-filename_inputData <- "SInAS_AlienSpeciesDB_2.4.1_Full+Taxonomy.csv"
+filename_inputData <- "SinAs_3.1.1_mini.csv"
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
@@ -61,7 +61,7 @@ column_habitat <- "habitat" # column name of year of first record of occurrence
 name_of_shapefile <- "RegionsTerrMarine_160621"
 
 ## term to be added to the names of the output files; can be blank
-file_name_extension <- "SInAS_2.4.1"
+file_name_extension <- "SInAS_3.1.1_mini"
 
 
 ## check if folders and files exist
@@ -81,9 +81,9 @@ n_accounts <- 1
 
 ## login details for first account (x=1) (the '1' in user name and email
 ## address will be replaced be account number (i.e., 1:n_accounts)
-user <- ""                                  # your gbif.org username
-pwd <- ""                                     # your gbif.org password (set the same password for all accounts for convenience)
-email <- ""                 # your email which you will recieve the download link
+user <- "karakoff"                                  # your gbif.org username
+pwd <- "Harpalus3!"                                     # your gbif.org password (set the same password for all accounts for convenience)
+email <- "lisa.heckeroth@bio.uni-giessen.de"                 # your email which you will recieve the download link
 
 
 ###################################################################################

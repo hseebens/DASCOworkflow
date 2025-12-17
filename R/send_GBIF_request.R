@@ -109,17 +109,17 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   ### account. The first is less convenient but stable, while the latter is a beta version
   
   ### identify extent of area of interest for downloading records #######################
-  regions <- st_read(dsn=file.path("Data","Input","Shapefiles"),layer=name_of_shapefile,stringsAsFactors = F)
+  regions <- st_read(dsn=file.path("Data","Input","Shapefiles"), layer=name_of_shapefile,stringsAsFactors = F)
   # regions <- regions[regions$Location=="Germany",]
   
   ## get spatial extent
   bounding_box <- st_bbox(regions)
   
   ## enlarge bounding box to also cover buffer zones
-  bounding_box[1] <- bounding_box[1] -1
-  bounding_box[2] <- bounding_box[2] -1
-  bounding_box[3] <- bounding_box[3] +1
-  bounding_box[4] <- bounding_box[4] +1
+  bounding_box[1] <- max(c(-180, bounding_box[1] -1))
+  bounding_box[2] <- max(c(-90,  bounding_box[2] -1))
+  bounding_box[3] <- min(c(180,  bounding_box[3] +1))
+  bounding_box[4] <- min(c(90,   bounding_box[4] +1))
 
   ## define WKT string to define area for GBIF request
   WKT_string <- paste('POLYGON((',
