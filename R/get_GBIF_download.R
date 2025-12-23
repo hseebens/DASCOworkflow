@@ -7,14 +7,21 @@
 #
 # The scripts downloads GBIF files, which were requested by 'send_GBIF_request.R'
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens, Ekin Kaplan, 23.12.2025
 ##################################################################################
 
 
-get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension,overwrite=FALSE){
+get_GBIF_download <- function(path_to_GBIFdownloads,
+                              file_name_extension,
+                              overwrite=FALSE){
   
   print("If the function is not working, please check if GBIF API finished processing.")
   
+  if (length(list.files(path_to_GBIFdownloads))>0){
+    stop(paste0("Download folder ", path_to_GBIFdownloads, " is not empty. Please provide an empty folder in path_to_GBIFdownloads to avoid loosing files."))
+  }
+  
+  ## clean files in download folder
   unlink(paste0(path_to_GBIFdownloads,"/*"))
 
   # the loaded file is called 'file_downloads'
@@ -23,7 +30,7 @@ get_GBIF_download <- function(path_to_GBIFdownloads,file_name_extension,overwrit
   load(file=file.path("Data","Output",file_name)) # loads file named 'file_downloads'
 
   for (i in 1:length(file_downloads)){
-    occ_download_get(file_downloads[[i]],overwrite=overwrite,path=path_to_GBIFdownloads)
+    occ_download_get(file_downloads[[i]], overwrite=overwrite, path=path_to_GBIFdownloads)
   }
   
   ## alternative if previous does not work, execute the following and copy-paste output to command line

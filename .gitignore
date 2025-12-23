@@ -3,5 +3,8 @@
 .RData
 .Ruserdata
 *.gz
+*.zip
+*.rds
+*.csv
 /Data/Output/
 RegionsTerrMarine_160621_Germany*

@@ -9,7 +9,7 @@
 # package CoordinateCleaner. The 'outlier' test is memory and time consuming, and
 # might be switched off.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens, Ekin Kaplan, 23.12.2025
 ##################################################################################
 
 
@@ -137,6 +137,7 @@ clean_GBIF_records <- function(
             }
           }
           dat_cleaned <- rbindlist(dat_cleaned_sub)
+          
         } else {
           
           dat_cleaned <- clean_coordinates(dat_sub_sub, 
@@ -144,7 +145,6 @@ clean_GBIF_records <- function(
                                            value ="clean",
                                            tests = tests_for_cleaning,
                                            outliers_method = "mad") # this outlier methods is more robust compared to the default 'quantile'
-          
         }
          
         # intermediate saving of file (just for safety, files can be removed if everything works)

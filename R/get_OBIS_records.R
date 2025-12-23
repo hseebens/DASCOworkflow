@@ -26,6 +26,7 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
   FullTaxaList <- fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
 
   SpecList <- sort(unique(FullTaxaList$taxon))
+  SpecList <- SpecList[SpecList!=""]
 
   z <- 0
   out_files <- list()

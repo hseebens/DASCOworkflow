@@ -39,14 +39,15 @@ source(file.path("R","load_functions.R")) # load all required functions
 
 ### Within this workflow, files will be downloaded and stored in these folders
 ### Note: All files in that folder will be considered as relevant files; old files should be removed
-path_to_GBIFdownloads <- file.path("Data","Input")
-path_to_OBISdownloads <- file.path("Data","Input")
+path_to_GBIFdownloads <- file.path("Data","Input","GBIF")
+path_to_OBISdownloads <- file.path("Data","Input","OBIS")
 # path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
 # path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-filename_inputData <- "SinAs_3.1.1_mini.csv"
+filename_inputData <- "SInAS_3.1.1_DASCOinput.csv"
+# filename_inputData <- "SinAs_3.1.1_mini.csv"
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
@@ -61,7 +62,7 @@ column_habitat <- "habitat" # column name of year of first record of occurrence
 name_of_shapefile <- "RegionsTerrMarine_160621"
 
 ## term to be added to the names of the output files; can be blank
-file_name_extension <- "SInAS_3.1.1_mini"
+file_name_extension <- "_171225"
 
 
 ## check if folders and files exist
