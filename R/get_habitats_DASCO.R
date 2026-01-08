@@ -9,7 +9,7 @@
 # do the species reside in with four categories: Terrestrial, Freshwater, 
 # Brackish and Marine.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 30.08.2021
+# Authors: Hanno Seebens, Ekin Kaplan, 07.01.2026
 ##################################################################################
 
 
@@ -18,7 +18,7 @@ get_habitats_DASCO <- function(file_name_extension,path_to_GBIFdownloads,path_to
 
   ## load taxa list 
   GBIF_specieskeys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
-  colnames(GBIF_specieskeys) <- c("speciesKey","scientificName","canonicalName","matchType","Orig_name")
+  colnames(GBIF_specieskeys) <- c("usageKey","speciesKey","scientificName","canonicalName","matchType","Orig_name")
   # GBIF_names <- GBIF_specieskeys[,c("canonicalName","speciesKey")]
   # colnames(GBIF_names) <- c("Taxon","speciesKey")
   

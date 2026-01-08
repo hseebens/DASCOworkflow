@@ -49,7 +49,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     ## single file...
     # test_dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),nrows = 1)
     # dat <- fread(file=paste0("FirstRecordsSpec/",unzipped),select=c("speciesKey","decimalLatitude","decimalLongitude","basisOfRecord","eventDate","year","dateIdentified"),quote="")
-    dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),select=c("speciesKey","basisOfRecord","decimalLatitude","decimalLongitude"),quote="")
+    dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),select=c("usageKey","speciesKey","basisOfRecord","decimalLatitude","decimalLongitude"),quote="")
     
     # ## multiple files...
     # dat <- fread(file=paste0("FirstRecordsSpec/",unzipped),select=ind_columns,quote="")
@@ -61,7 +61,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     dat <- dat[basisOfRecord!="FOSSIL_SPECIMEN"]
 
     # dat_sub <- dat[,c("scientificName","decimalLatitude","decimalLongitude")]
-    dat_sub <- dat[,c("speciesKey","decimalLatitude","decimalLongitude")]
+    dat_sub <- dat[,c("usageKey","decimalLatitude","decimalLongitude")]
     
     #######################################################################
     ### initial cleaning of GBIF records ##################################
@@ -71,11 +71,11 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     dat_sub <- dat_sub[!ind]
     
     # remove non-numeric values
-    nonnumeric <- is.na(as.numeric(dat_sub$speciesKey)) | is.na(as.numeric(dat_sub$decimalLatitude)) | is.na(as.numeric(dat_sub$decimalLongitude))
+    nonnumeric <- is.na(as.numeric(dat_sub$usageKey)) | is.na(as.numeric(dat_sub$decimalLatitude)) | is.na(as.numeric(dat_sub$decimalLongitude))
     if (any(nonnumeric)){
       dat_sub <- dat_sub[!nonnumeric,]
       
-      dat_sub$speciesKey <- as.numeric(dat_sub$speciesKey)
+      dat_sub$usageKey <- as.numeric(dat_sub$usageKey)
       dat_sub$decimalLatitude <- as.numeric(dat_sub$decimalLatitude)
       dat_sub$decimalLongitude <- as.numeric(dat_sub$decimalLongitude)
     }
@@ -85,10 +85,10 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     dat_sub <- dat_sub[!ind,]
     
     # remove empty records
-    ind <- is.na(dat_sub$speciesKey) | is.na(dat_sub$decimalLatitude) | is.na(dat_sub$decimalLongitude)
+    ind <- is.na(dat_sub$usageKey) | is.na(dat_sub$decimalLatitude) | is.na(dat_sub$decimalLongitude)
     dat_sub <- dat_sub[!ind,]
 
-    cat(paste0("\n  ",length(unique(dat_sub$speciesKey))," species in ","GBIFrecords_",file_name_extension,"_",data_key,"-",i,".rds \n"))
+    cat(paste0("\n  ",length(unique(dat_sub$usageKey))," species in ","GBIFrecords_",file_name_extension,"_",data_key,"-",i,".rds \n"))
     
     ## output ###########
     # fwrite(dat_sub,file = file.path(path_to_GBIFdownloads,paste0("GBIFrecords_",file_name_extension,"_",data_key,"-",i,".gz")))

@@ -17,10 +17,6 @@ get_GBIF_download <- function(path_to_GBIFdownloads,
   
   print("If the function is not working, please check if GBIF API finished processing.")
   
-  if (length(list.files(path_to_GBIFdownloads))>0){
-    stop(paste0("Download folder ", path_to_GBIFdownloads, " is not empty. Please provide an empty folder in path_to_GBIFdownloads to avoid loosing files."))
-  }
-  
   ## clean files in download folder
   unlink(paste0(path_to_GBIFdownloads,"/*"))
 

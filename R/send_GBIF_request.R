@@ -12,7 +12,12 @@
 
 
 
-send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accounts = 1,user=user,pwd=pwd,email=email){
+send_GBIF_request <- function(file_name_extension,
+                              path_to_GBIFdownloads,
+                              n_accounts = 1,
+                              user=user,
+                              pwd=pwd,
+                              email=email){
   
   #######################################################################################
   ### Variables #########################################################################
@@ -42,13 +47,13 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
     if (all(colnames(specname)!="species")) next
     
     x <- x + 1
-    GBIF_speclist[[x]] <- c(specname$speciesKey,specname$scientificName,specname$canonicalName,specname$matchType,SpecNames[i])
+    GBIF_speclist[[x]] <- c(specname$usageKey, specname$speciesKey, specname$scientificName, specname$canonicalName, specname$matchType, SpecNames[i])
     
     if (x%%1000==0) print(paste(round(x/length(SpecNames),2)*100,"%"))
   }
   GBIF_species <- as.data.frame(do.call("rbind",GBIF_speclist),stringsAsFactors = F)
-  colnames(GBIF_species) <- c("speciesKey","scientificName","canonicalName","matchType","Orig_name")
-
+  colnames(GBIF_species) <- c("usageKey","speciesKey","scientificName","canonicalName","matchType","Orig_name")
+  
   ## save intermediate output ######
   fwrite(GBIF_species, file.path(path_to_GBIFdownloads,paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
   fwrite(GBIF_species, file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
@@ -62,13 +67,13 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   cat("\n Get number of records per taxon from GBIF \n")
   
   # remove entries with duplicated GBIF keys (e.g. synonyms)
-  ind <- !duplicated(GBIF_species$speciesKey)
+  ind <- !duplicated(GBIF_species$usageKey)
   GBIF_species <- GBIF_species[ind,]
   
   GBIF_species$nRecords <- 0
-  for (i in 1:length(GBIF_species$speciesKey)){
+  for (i in 1:length(GBIF_species$usageKey)){
     
-    nRecords <- try(occ_count(speciesKey=GBIF_species$speciesKey[i]))
+    nRecords <- try(occ_count(speciesKey=GBIF_species$speciesKey[i])) # just a rough proxy for sample size; the more appropriate usageKey is not accepted by occ_count
     
     if (class(nRecords)=="try-error") next
     
@@ -85,7 +90,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
   if (sum(GBIF_species$nRecords)/n_chunks > 10^7){
     n_chunks_old <- n_chunks
     n_chunks <- ceiling(sum(GBIF_species$nRecords)/(40*10^6))+1 # workflow can handle files of 40 Mio records (+1 as the loop below does not count last iteration)
-    cat(paste0("\n Number of records too high for ", n_chunks_old, " chunks. ", n_chunks-1, " chunks used instead."))
+    cat(paste0("\n Number of records too high for ", n_chunks_old, " chunks. ", n_chunks-1, " chunks used instead.\n\n"))
   }
   
   #######################################################################################
@@ -188,7 +193,7 @@ send_GBIF_request <- function(file_name_extension,path_to_GBIFdownloads,n_accoun
 
     ## send query of each chunk to GBIF #######################################
 
-    sub_keys <- subset(GBIF_species,group==j)$speciesKey
+    sub_keys <- subset(GBIF_species,group==j)$usageKey
 
     ## prepare requests for GBIF download (no execution!)
     queries[[j]] <- occ_download_prep(

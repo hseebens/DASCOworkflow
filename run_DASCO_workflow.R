@@ -10,7 +10,7 @@
 # checklist to be used, the paths for storing data and different options for 
 # the application of the workflow.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 13.06.2021
+# Authors: Hanno Seebens, Ekin Kaplan, 05.01.2026
 ##################################################################################
 
 
@@ -46,7 +46,7 @@ path_to_OBISdownloads <- file.path("Data","Input","OBIS")
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-filename_inputData <- "SInAS_3.1.1_DASCOinput.csv"
+filename_inputData <- "SInAS_3.1.1_DASCOinput.csv" # 
 # filename_inputData <- "SinAs_3.1.1_mini.csv"
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
@@ -62,14 +62,14 @@ column_habitat <- "habitat" # column name of year of first record of occurrence
 name_of_shapefile <- "RegionsTerrMarine_160621"
 
 ## term to be added to the names of the output files; can be blank
-file_name_extension <- "_171225"
+file_name_extension <- "070126"
 
 
 ## check if folders and files exist
 if (!dir.exists(path_to_GBIFdownloads)) stop(paste0("Folder '",path_to_GBIFdownloads,"’ does not exist!"))
 if (!dir.exists(path_to_OBISdownloads)) stop(paste0("Folder '",path_to_OBISdownloads,"’ does not exist!"))
 if (!file.exists(file.path("Data","Input",filename_inputData))) stop(paste0("File '",filename_inputData,"’ could not be found in 'Input' folder!"))
- 
+
 
 ###################################################################################
 ## GBIF account details ###########################################################
@@ -85,6 +85,27 @@ n_accounts <- 1
 user <- "karakoff"                                  # your gbif.org username
 pwd <- "Harpalus3!"                                     # your gbif.org password (set the same password for all accounts for convenience)
 email <- "lisa.heckeroth@bio.uni-giessen.de"                 # your email which you will recieve the download link
+
+
+## check download folders if empty ######################
+if (length(list.files(path_to_GBIFdownloads))>0){
+  warnings(paste0("Download folder ", path_to_GBIFdownloads, " is not empty. Please provide an empty folder in path_to_GBIFdownloads to avoid loosing files."))
+}
+
+
+################################################################################
+## Create log-file to store progress, warnings and errors ######################
+
+if (file.exists(file.path("Data","Output",paste0("Logfile_", file_name_extension, ".txt")))){
+  sink(file.path("Data", "Output", paste("Logfile_", file_name_extension, ".txt", sep="")), append=TRUE) # Oeffne log-file wenn bereits vorhanden,
+} else {
+  sink(file.path("Data", "Output", paste("Logfile_", file_name_extension, ".txt", sep="")), append=FALSE) # erstelle neues log-file
+}
+
+cat(paste0("********************************************** ", Sys.time(), " ********************************************** \n"))
+cat(paste0("Name of run: ", file_name_extension," \n"))
+cat(paste0("Name of input file: ", filename_inputData," \n"))
+cat(paste0("Name of shapefile:", name_of_shapefile, " \n"))
 
 
 ###################################################################################
@@ -145,13 +166,13 @@ get_OBIS_records(path_to_OBISdownloads,
 
 clean_GBIF_records(path_to_GBIFdownloads,
                    file_name_extension,
-                   thin_records=FALSE)
+                   thin_records=TRUE)
 
 ### clean OBIS records ############################################################
 
 clean_OBIS_records(path_to_OBISdownloads,
                    file_name_extension,
-                   thin_records=FALSE)
+                   thin_records=TRUE)
 
 
 ###################################################################################
@@ -160,9 +181,9 @@ clean_OBIS_records(path_to_OBISdownloads,
 ## get habitat information for taxa (terrestrial, freshwater, marine, brackish)
 get_habitats_DASCO(file_name_extension,path_to_GBIFdownloads,path_to_OBISdownloads)
 
-## Assign coordinates to different realms (terrestrial, freshwater, marine)
-## depending on geographic location and additional tests
-## realm_extension <- TRUE
+# Assign coordinates to different realms (terrestrial, freshwater, marine)
+# depending on geographic location and additional tests
+# realm_extension <- TRUE
 
 # Region shapefile requires a consistent structure for marine and terrestrial polygons !!!!!
 
@@ -179,4 +200,13 @@ coords_to_regions_OBIS(name_of_shapefile,
 ## 5. produce final output of the DASCO workflow #######################
 ## add first records per region (requires 'eventDate' column) ##########
 dat <- final_DASCO_output(file_name_extension)
+
+
+
+## Closing log file  ###########################################################
+cat(paste0("\n************************************************************************************************************ \n"))
+cat(paste0("End of run ", identifier," \n"))
+cat(paste0("********************************************** ", Sys.time(), " ********************************************** \n"))
+
+sink()
 
