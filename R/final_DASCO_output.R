@@ -7,7 +7,7 @@
 #
 # This script adds event dates (i.e., years of first record) to the final data set.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 07.01.2026
+# Authors: Hanno Seebens with support by Ekin Kaplan, 07.01.2026
 ##################################################################################
 
 
@@ -32,37 +32,38 @@ final_DASCO_output <- function(
   all_records_spec <- fread(file.path("Data","Output",paste0("DASCO_GBIFregions_",file_name_extension,".csv")))
 
   GBIF_keys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
-  GBIF_keys <- unique(GBIF_keys[,c("usageKey","scientificName")])
+  GBIF_keys <- unique(GBIF_keys[,c("taxonKey","scientificName")])
+  # colnames(GBIF_keys) <- c("taxonKey", "scientificName") # name_backbone() only provides usageKey while the GBIF download contains taxonkey; thus, usageKey need to be renamed to taxonKey for merge files.
   
   SpecRegionData_keys <- merge(SpecRegionData,GBIF_keys,by="scientificName",all.x=T)
   
   ## create empty dummy variables to ensure proper merging; if records exists, these files are overwritten further down
-  all_regspec_fr_GBIF <- data.frame(location=character(),scientificName=character(),usageKey=integer(),Realm=character(),eventDate=integer())
-  marine_regspec_fr_GBIF <- data.frame(MEOW=character(),scientificName=character(),usageKey=integer(),Realm=character(),eventDate=integer())
-  terr_regspec_fr_GBIF <- data.frame(location=character(),scientificName=character(),usageKey=integer(),Realm=character(),eventDate=integer())
+  all_regspec_fr_GBIF <- data.frame(location=character(),scientificName=character(),taxonKey=integer(),Realm=character(),eventDate=integer())
+  marine_regspec_fr_GBIF <- data.frame(MEOW=character(),scientificName=character(),taxonKey=integer(),Realm=character(),eventDate=integer())
+  terr_regspec_fr_GBIF <- data.frame(location=character(),scientificName=character(),taxonKey=integer(),Realm=character(),eventDate=integer())
 
   ## add first records to marine species-regions combination #######################
   colnames(all_records_spec)[colnames(all_records_spec)=="location"] <- "MEOW"
   # if (any(grepl("FirstRecord",colnames(all_records_spec)))) all_records_spec <- all_records_spec[,-grep("FirstRecord",colnames(regs_species))]
   col_names <- colnames(meow_records)[which(colnames(meow_records)!="scientificName")]
-  marine_regs_species_GBIF <- merge(all_records_spec,meow_records[,..col_names],by=c("usageKey","MEOW"),all.x=T)
+  marine_regs_species_GBIF <- merge(all_records_spec,meow_records[,..col_names],by=c("taxonKey","MEOW"),all.x=T)
   marine_regs_species_GBIF <- subset(marine_regs_species_GBIF,Realm=="marine")
   
   if (nrow(marine_regs_species_GBIF)>0){
     marine_regs_species_GBIF$eventDate[is.na(marine_regs_species_GBIF$eventDate)] <- 2500 ## dummy variable to keep records in aggregate
-    marine_regspec_fr_GBIF <- aggregate(eventDate ~ MEOW + scientificName + usageKey + Realm,data=marine_regs_species_GBIF,FUN=min) # + Source
+    marine_regspec_fr_GBIF <- aggregate(eventDate ~ MEOW + scientificName + taxonKey + Realm,data=marine_regs_species_GBIF,FUN=min) # + Source
     marine_regspec_fr_GBIF$eventDate[marine_regspec_fr_GBIF$eventDate==2500] <- NA # remove dummy variable
   }
   
   ## add first records to terrestrial species-regions combination #######################
   colnames(all_records_spec)[colnames(all_records_spec)=="MEOW"] <- "location"
   col_names <- colnames(all_records_spec)[which(colnames(all_records_spec)!="scientificName")]
-  terr_regs_species_GBIF <- merge(unique(all_records_spec[,..col_names]),SpecRegionData_keys,by=c("usageKey","location"),all.y=T)
+  terr_regs_species_GBIF <- merge(unique(all_records_spec[,..col_names]),SpecRegionData_keys,by=c("taxonKey","location"),all.y=T)
   terr_regs_species_GBIF <- subset(terr_regs_species_GBIF,Realm!="marine")
   
   if (nrow(terr_regs_species_GBIF)>0){
     terr_regs_species_GBIF$eventDate[is.na(terr_regs_species_GBIF$eventDate)] <- 2500 ## dummy variable to keep records in aggregate
-    terr_regspec_fr_GBIF <- aggregate(eventDate ~ location + scientificName + usageKey + Realm,data=terr_regs_species_GBIF,FUN=min)# + Source
+    terr_regspec_fr_GBIF <- aggregate(eventDate ~ location + scientificName + taxonKey + Realm,data=terr_regs_species_GBIF,FUN=min)# + Source
     terr_regspec_fr_GBIF$eventDate[terr_regspec_fr_GBIF$eventDate==2500] <- NA
   }
   
@@ -136,31 +137,31 @@ final_DASCO_output <- function(
 
   
   ## combine GBIF and OBIS coordinate data ########################################################
-  ## get usageKey (need to replaced by taxon names to obtain a match with OBIS)
+  ## get taxonKey (need to replaced by taxon names to obtain a match with OBIS)
   GBIF_coords <- fread(file=file.path("Data","Output",paste0("DASCO_GBIFCoords_",file_name_extension,".gz")))
   GBIF_keys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
 
   ## GBIF keys without duplications
-  GBIF_keys_dupl <- duplicated(GBIF_keys$usageKey)
-  dupl_spec <- GBIF_keys$usageKey[GBIF_keys_dupl]
-  GBIF_keys_noDupl <- GBIF_keys[!GBIF_keys$usageKey%in%dupl_spec,c("usageKey","canonicalName")]
+  GBIF_keys_dupl <- duplicated(GBIF_keys$taxonKey)
+  dupl_spec <- GBIF_keys$taxonKey[GBIF_keys_dupl]
+  GBIF_keys_noDupl <- GBIF_keys[!GBIF_keys$taxonKey%in%dupl_spec,c("taxonKey","canonicalName")]
   
   ## merge GBIF_coords with keys ignoring duplicated keys for now
-  GBIF_coords_names <- merge(GBIF_coords,GBIF_keys_noDupl,by="usageKey",all.x=T)
+  GBIF_coords_names <- merge(GBIF_coords,GBIF_keys_noDupl,by="taxonKey",all.x=T)
   
-  ## usageKeys without a taxon name yet (due to duplicated entries because of e.g. sub-species)
-  GBIF_keys_left <- unique(GBIF_coords_names$usageKey[is.na(GBIF_coords_names$canonicalName)])
+  ## taxonKeys without a taxon name yet (due to duplicated entries because of e.g. sub-species)
+  GBIF_keys_left <- unique(GBIF_coords_names$taxonKey[is.na(GBIF_coords_names$canonicalName)])
 
-  ## get taxon names for duplicated usageKeys from GBIF
+  ## get taxon names for duplicated taxonKeys from GBIF
   GBIF_keys_left <- as.data.frame(GBIF_keys_left)
-  colnames(GBIF_keys_left) <- "usageKey"
+  colnames(GBIF_keys_left) <- "taxonKey"
   GBIF_keys_left$taxon <- NA
   for (i in 1:nrow(GBIF_keys_left)){
-    specname <- occ_search(usageKey=GBIF_keys_left[i,1],limit=1)$data$species
-    GBIF_keys_left$taxon[GBIF_keys_left$usageKey==GBIF_keys_left[i,1]] <- specname
+    specname <- occ_search(taxonKey=GBIF_keys_left[i,1],limit=1)$data$species
+    GBIF_keys_left$taxon[GBIF_keys_left$taxonKey==GBIF_keys_left[i,1]] <- specname
     if (i%%100==0) cat(paste(round(i/nrow(GBIF_keys_left),2)*100,"%\n"))
   }
-  GBIF_coords_names <- merge(GBIF_coords_names,GBIF_keys_left,by="usageKey",all.x=T)
+  GBIF_coords_names <- merge(GBIF_coords_names,GBIF_keys_left,by="taxonKey",all.x=T)
   
   ## fill column taxon with all names (needed to match OBIS)
   GBIF_coords_names$taxon[is.na(GBIF_coords_names$taxon)] <- GBIF_coords_names$canonicalName[is.na(GBIF_coords_names$taxon)]
@@ -170,7 +171,7 @@ final_DASCO_output <- function(
 
   ## prepare file for matching with OBIS
   GBIF_coords_names[,canonicalName:=NULL]
-  GBIF_coords_names[,usageKey:=NULL]
+  GBIF_coords_names[,taxonKey:=NULL]
   GBIF_coords_names[,Database:="GBIF"]
   
   ## OBIS coordinates

@@ -3,30 +3,26 @@
 # This script is part of the workflow DASCO to Downscale Alien Species Checklists
 # using Occurrence records from GBIF and OBIS.
 #
-# The DASCO workflow has been published as ..., which has to be cited when used.
+# The script prepares and sends requests for the GBIF API to download occurrence
+# records of provided taxa. It is designed to handle large quantatities of data.
 #
+# Using multiple GBIF accounts is currently disabled.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens with support by Ekin Kaplan, 08.01.2026
 ##################################################################################
-
-
 
 
 send_GBIF_request <- function(file_name_extension,
                               path_to_GBIFdownloads,
-                              n_accounts = 1,
+                              n_chunks=3,
                               user=user,
                               pwd=pwd,
                               email=email){
   
   #######################################################################################
-  ### Variables #########################################################################
-  
-  # n_chunks <- 21 # select one without n_accounts if the alternative approache with only one account is used 
-  n_chunks <- n_accounts * 3       # number of chunks to divide the species records nearly equally
+  ## Number of requests sent to GBIF API for downloading occurrence data
   # note that GBIF API only allows 3 simultaneous downloads per account
-  # so, for example, you need to open 7 accounts to simultaneously request
-  # the data in 21 chunks 
+  # n_chunks <- 3       # number of chunks to divide the species records nearly equally, will be checked below
 
   #######################################################################################
   ## load species list to be downloaded #################################################
@@ -52,7 +48,7 @@ send_GBIF_request <- function(file_name_extension,
     if (x%%1000==0) print(paste(round(x/length(SpecNames),2)*100,"%"))
   }
   GBIF_species <- as.data.frame(do.call("rbind",GBIF_speclist),stringsAsFactors = F)
-  colnames(GBIF_species) <- c("usageKey","speciesKey","scientificName","canonicalName","matchType","Orig_name")
+  colnames(GBIF_species) <- c("taxonKey","speciesKey","scientificName","canonicalName","matchType","Orig_name") # usageKey renamed to taxonKey! usageKey does only exist for name_backbone() while all other rgbif functions used in DASCO required taxonKey and both seems equal. 
   
   ## save intermediate output ######
   fwrite(GBIF_species, file.path(path_to_GBIFdownloads,paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
@@ -67,13 +63,13 @@ send_GBIF_request <- function(file_name_extension,
   cat("\n Get number of records per taxon from GBIF \n")
   
   # remove entries with duplicated GBIF keys (e.g. synonyms)
-  ind <- !duplicated(GBIF_species$usageKey)
+  ind <- !duplicated(GBIF_species$taxonKey)
   GBIF_species <- GBIF_species[ind,]
   
   GBIF_species$nRecords <- 0
-  for (i in 1:length(GBIF_species$usageKey)){
+  for (i in 1:length(GBIF_species$taxonKey)){
     
-    nRecords <- try(occ_count(speciesKey=GBIF_species$speciesKey[i])) # just a rough proxy for sample size; the more appropriate usageKey is not accepted by occ_count
+    nRecords <- try(occ_count(speciesKey=GBIF_species$taxonKey[i])) # just a rough proxy for sample size
     
     if (class(nRecords)=="try-error") next
     
@@ -184,16 +180,12 @@ send_GBIF_request <- function(file_name_extension,
 
   ## GBIF account details ##############################################################################
 
-  # user <- paste0("ekinhanno",1)                                  # your gbif.org username
-  # pwd <- "seebenskaplan1234"                                     # your gbif.org password (set the same password for all accounts for convenience)
-  # email <- paste0("ekinhanno",1,"@outlook.com" )                 # your email which you will recieve the download link
-
   queries <- list()
   for (j in unique(GBIF_species$group)) {
 
     ## send query of each chunk to GBIF #######################################
 
-    sub_keys <- subset(GBIF_species,group==j)$usageKey
+    sub_keys <- subset(GBIF_species,group==j)$taxonKey
 
     ## prepare requests for GBIF download (no execution!)
     queries[[j]] <- occ_download_prep(

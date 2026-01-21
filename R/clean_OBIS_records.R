@@ -3,13 +3,16 @@
 # This script is part of the workflow DASCO to Downscale Alien Species Checklists
 # using Occurrence records from GBIF and OBIS.
 #
-# The DASCO workflow has been published as ..., which has to be cited when used.
+# The DASCO workflow has been published and has to be cited when used:
+# Seebens H, Kaplan E (2022) DASCO: A workflow to downscale alien species 
+# checklists using occurrence records and to re-allocate species distributions 
+# across realms. NeoBiota 74: 75-91. https://doi.org/10.3897/neobiota.74.81082
 #
-# This cleans coordinates obtained from OBIS using the functionality of the 
+# This script cleans coordinates obtained from OBIS using the functionality of the 
 # package CoordinateCleaner. The 'outlier' test is memory and time consuming, and
 # might be switched off.
 #
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens with support by Ekin Kaplan, 08.01.2026
 ##################################################################################
 
 
@@ -21,6 +24,11 @@ clean_OBIS_records <- function(
   tests_for_cleaning = c("capitals","centroids", "equal","gbif","institutions","outliers","zeros")  # remove 'seas' test from default
   ){
   
+  # to remind the user of the configuration
+  if (thin_records){
+    cat("\n Record thinning is enabled!  \n\n")
+  }
+    
   # load file
   dat_sub <- fread(file.path(path_to_OBISdownloads,paste0("OBIS_CompleteDownload_",file_name_extension,".gz")))
   
@@ -71,9 +79,7 @@ clean_OBIS_records <- function(
       # thin records by removing duplicated rounded coordinates
       if (thin_records){
         dat_thinned <- list()
-        
-        cat("\n Record thinning is enabled!  \n\n")
-        
+
         for (k in 1:length(unique(dat_sub_sub$speciesid))){
           dat_spec <- subset(dat_sub_sub,speciesid==unique(dat_sub_sub$speciesid)[k])
           rounded_lat <- round(dat_spec$decimalLatitude,2) # round coordinates for thinning
