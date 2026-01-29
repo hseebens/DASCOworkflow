@@ -18,10 +18,14 @@
 # Auch enthält die Spalte NAs, welche im Merge zusammengebracht werden, 
 # was keinen Sinn ergibt.
 
+library(data.table)
+
 # setwd("C:/Users/karak/Downloads")# bisher habe ich die Dateien im Downloadordner
+setwd("C:/Users/3DScanner1/Documents/GitHub/DASCOworkflow")
 
 all_taxa <- read.csv(file.path("Data","Input","SInAS_3.1.1_FullTaxaList.csv"), header = T, sep = " ") 
 names(all_taxa)
+head(all_taxa)
 
 # Entfernung von Duplikaten in der Spalte taxonID und überprüfen auf NAs
 all_taxa <- all_taxa[!duplicated(all_taxa$taxonID), ]
@@ -32,7 +36,10 @@ all_taxa <- all_taxa[, c("scientificName", "taxonID", "class", "phylum")]
 # all_taxa$scientificName
 # Die Spalten aus all_taxa sollen mit species_by_region gemerged werden.
 species_by_region <- read.csv(file.path("Data","Input","SInAS_3.1.1.csv"), header = T, sep = " ")
-fully_merged <- merge(species_by_region, all_taxa, by = "taxonID", all.x = T)
+
+introduced_by_region <- subset(species_by_region, establishmentMeans=="introduced")
+
+fully_merged <- merge(introduced_by_region, all_taxa, by = "taxonID", all.x = T)
 # NAs in scentific Name mi taxon auffüllen
 
 # Für den Testdurchlauf will ich nur die ersten 100 Zeilen.
@@ -42,4 +49,4 @@ fully_merged <- merge(species_by_region, all_taxa, by = "taxonID", all.x = T)
 # setwd("C:/Users/karak/Documents/Masterarbeit/Orientierung/DASCOworkflow-master")
 # write.csv(final_test_input, file.path("Data", "Input","SinAs_3.1.1_mini.csv"))
 
-# fwrite(fully_merged, file.path("Data","Input","SInAS_3.1.1_DASCOinput.csv"))
+# fwrite(fully_merged, file.path("Data","Input","SInAS_3.1.1_DASCOintroduced.csv"))

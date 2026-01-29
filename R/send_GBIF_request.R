@@ -80,7 +80,7 @@ send_GBIF_request <- function(file_name_extension,
   
   ## save intermediate output #############################
   fwrite(GBIF_species, file.path("Data","Output","Intermediate",paste0("SpeciesGBIFnRecords_",file_name_extension,".csv")))
-  # GBIF_species <- fread(file.path("Data","Output","Intermediate","SpeciesGBIFnRecords.csv"))
+  # GBIF_species <- fread(file.path("Data","Output","Intermediate",paste0("SpeciesGBIFnRecords_",file_name_extension,".csv")))
   
   ## re-assess number of chunks regarding handling in the workflow
   if (sum(GBIF_species$nRecords)/n_chunks > 10^7){

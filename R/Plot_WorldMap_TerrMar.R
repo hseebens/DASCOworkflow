@@ -7,7 +7,8 @@ library(shape)
 library(data.table)
 library(RColorBrewer)
 
-setwd("/home/hanno/Bioinvasion/DASCO/DASCOworkflow/")
+# setwd("/home/hanno/Bioinvasion/DASCO/DASCOworkflow/")
+# setwd("~/GitHub/DASCOworkflow")
 
 source("../../SpatialSpread/owncolleg.r") # adjusted color legend
 source(file.path("R","standardise_location_names.R")) # standardise location names (for matching with shapefile)
@@ -19,7 +20,7 @@ max_mar  <- 140
 
 ### load data ###############################################################
 
-all_regspec_fr <- fread("Data/Output/DASCO_AlienRegions_SInAS_2.4.1.csv")
+all_regspec_fr <- fread("Data/Output/DASCO_AlienRegions_080126.csv")
 
 ## Polygon file of marine and terrestrial regions
 regions <- st_read(dsn="Data/Input/Shapefiles",layer="RegionsTerrMarine_160621",stringsAsFactors = F)
@@ -78,7 +79,7 @@ spatial_nspec$col[ind_marine] <- cols_mar[spatial_nspec$col_norm[ind_marine]]
 
 
 x11(width=9,height=3.3)
-# png("../Figures/Worldmap_NumberTaxa_TerrMar.png",unit="in",width=9,height=3.3,res=300)
+# png("../Figures/Worldmap_NumberTaxa_TerrMar_080126.png",unit="in",width=9,height=3.3,res=300)
 # png("../Figures/Worldmap_NumberTaxa_GRIISInvasive.png",unit="in",width=8,height=3.3,res=300)
 layout(matrix(1:3,nc=3),widths=c(0.7,0.15,0.15))
 op <- par(mar=c(0,0,0,0),las=1,cex=0.9,tck=-0.02,mgp=c(2,0.3,0))

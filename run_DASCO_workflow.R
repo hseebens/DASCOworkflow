@@ -35,7 +35,7 @@ library(rfishbase)
 ## load functions #################################################################
 source(file.path("R","load_functions.R")) # load all required functions
 
-
+# setwd(file.path("C:","Users","3DScanner1","Documents","GitHub","DASCOworkflow"))
 
 ###################################################################################
 ### Global variables ##############################################################
@@ -49,7 +49,7 @@ path_to_OBISdownloads <- file.path("Data","Input","OBIS_080126")
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-filename_inputData <- "SInAS_3.1.1_DASCOinput.csv" # 
+filename_inputData <- "SInAS_3.1.1_DASCOintroduced.csv" # 
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS

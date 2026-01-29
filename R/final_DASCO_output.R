@@ -175,10 +175,11 @@ final_DASCO_output <- function(
   # GBIF_coords_names[is.na(canonicalName),]
 
   ## prepare file for matching with OBIS
-  GBIF_coords_names[, canonicalName:=NULL]
+  colnames(GBIF_coords_names)[colnames(GBIF_coords_names)=="canonicalName"] <- "taxon" 
+  # GBIF_coords_names[, canonicalName:=NULL]
   GBIF_coords_names[, taxonKey:=NULL]
   GBIF_coords_names[, Database:="GBIF"]
-  
+
   ## OBIS coordinates
   OBIS_coords <- fread(file=file.path("Data","Output",paste0("DASCO_OBISCoords_",file_name_extension,".gz")))
   OBIS_coords[,Database:="OBIS"]

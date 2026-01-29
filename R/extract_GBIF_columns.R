@@ -19,7 +19,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
   
   allfiles <- list.files(path_to_GBIFdownloads)
   zippedfiles <- allfiles[grepl("\\.zip",allfiles)]
-  csvfiles <- allfiles[grepl("\\.csv",allfiles)]
+  # csvfiles <- allfiles[grepl("\\.csv",allfiles)]
   
   
   # extract_files <- c("0034400-200221144449610.zip")
@@ -59,7 +59,9 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     # }
     
     dat <- dat[basisOfRecord!="FOSSIL_SPECIMEN"]
-
+    dat <- dat[basisOfRecord!="LIVING_SPECIMEN"]
+    dat <- dat[basisOfRecord!="PRESERVED_SPECIMEN"]
+    
     # dat_sub <- dat[,c("scientificName","decimalLatitude","decimalLongitude")]
     dat_sub <- dat[,c("taxonKey","decimalLatitude","decimalLongitude")]
     
