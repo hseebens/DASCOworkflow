@@ -16,6 +16,8 @@
 
 get_habitats_DASCO <- function(file_name_extension,path_to_GBIFdownloads,path_to_OBISdownloads,update_sealifebase= F){
 
+  cat(paste0("\n*** Get habitat information from WoRMS and FishBase ***\n") ) # notification for the user
+  
   ## load taxa list 
   GBIF_specieskeys <- fread(file.path("Data","Output",paste0("GBIF_SpeciesKeys_",file_name_extension,".csv")))
   colnames(GBIF_specieskeys) <- c("usageKey","speciesKey","scientificName","canonicalName","matchType","Orig_name")

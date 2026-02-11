@@ -18,6 +18,8 @@ coords_to_regions_GBIF <- function(
   file_name_extension=file_name_extension
   ){
   
+  cat(paste0("\n*** Match GBIF coordinates to regions ***\n") ) # notification for the user
+  
   ### load data ###############################################################
   
   ## get GBIF species keys

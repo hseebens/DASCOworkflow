@@ -37,9 +37,28 @@ all_taxa <- all_taxa[, c("scientificName", "taxonID", "class", "phylum")]
 # Die Spalten aus all_taxa sollen mit species_by_region gemerged werden.
 species_by_region <- read.csv(file.path("Data","Input","SInAS_3.1.1.csv"), header = T, sep = " ")
 
-introduced_by_region <- subset(species_by_region, establishmentMeans=="introduced")
+## identify species introduced and native in the same region ##################
+tab <- table(species_by_region$taxonID, species_by_region$establishmentMeans)
+natint <- subset(species_by_region, establishmentMeans%in%c("native","introduced"))
+natint_logical <- aggregate(locationID ~ taxonID, FUN=function(s) s[duplicated(s)], data=natint)
 
-fully_merged <- merge(introduced_by_region, all_taxa, by = "taxonID", all.x = T)
+ind <- which(unlist(lapply(natint_logical$locationID, length))!=0)
+strict_natint <- natint_logical[ind,]
+natint_df <- cbind(rep(strict_natint$taxonID, times=unlist(lapply(strict_natint$locationID, length))), unlist(strict_natint$locationID))
+
+all_data <- list()
+for (i in 1:nrow(natint_df)){
+  locationID_single <- natint_df[i,2]
+  taxonID_single <- natint_df[i,1]
+  all_data[[i]] <- subset(species_by_region, locationID==locationID_single & taxonID==taxonID_single)
+}
+all_natint <- rbindlist(all_data)
+################################################################################
+
+# introduced_by_region <- subset(species_by_region, establishmentMeans=="introduced")
+
+fully_merged <- merge(all_natint, all_taxa, by = "taxonID", all.x = T)
+# fully_merged <- merge(introduced_by_region, all_taxa, by = "taxonID", all.x = T)
 # NAs in scentific Name mi taxon auffüllen
 
 # Für den Testdurchlauf will ich nur die ersten 100 Zeilen.
@@ -49,4 +68,4 @@ fully_merged <- merge(introduced_by_region, all_taxa, by = "taxonID", all.x = T)
 # setwd("C:/Users/karak/Documents/Masterarbeit/Orientierung/DASCOworkflow-master")
 # write.csv(final_test_input, file.path("Data", "Input","SinAs_3.1.1_mini.csv"))
 
-# fwrite(fully_merged, file.path("Data","Input","SInAS_3.1.1_DASCOintroduced.csv"))
+# fwrite(fully_merged, file.path("Data","Input","SInAS_3.1.1_DASCOnativeintroduced.csv"))

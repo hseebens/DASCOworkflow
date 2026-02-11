@@ -14,6 +14,7 @@ get_GBIF_download <- function(path_to_GBIFdownloads,
                               overwrite=FALSE){
   
   # print("If the download is not working, please check if GBIF API finished processing and download manually.")
+  cat(paste0("\n*** Get GBIF files from server ***\n") ) # notification for the user
   
   ## clean files in download folder
   # unlink(paste0(path_to_GBIFdownloads, "/*"))

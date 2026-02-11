@@ -42,14 +42,14 @@ source(file.path("R","load_functions.R")) # load all required functions
 
 ### Within this workflow, files will be downloaded and stored in these folders
 ### Note: All files in that folder will be considered as relevant files; old files should be removed
-path_to_GBIFdownloads <- file.path("Data","Input","GBIF_080126")
-path_to_OBISdownloads <- file.path("Data","Input","OBIS_080126")
+path_to_GBIFdownloads <- file.path("Data","Input","GBIF_060226")
+path_to_OBISdownloads <- file.path("Data","Input","OBIS_060226")
 # path_to_GBIFdownloads <- "/home/hanno/Storage_large/GBIF/SInASdata/Germany_200522"
 # path_to_OBISdownloads <- "/home/hanno/Storage_large/OBIS/SInASdata/Germany_200522"
 
 ## has to be stored in Data/Input/ and has to include a column named 'scientificName'
 ## for taxon names and 'Location' for region names and 'Taxon' (no authority) for habitat check
-filename_inputData <- "SInAS_3.1.1_DASCOintroduced.csv" # 
+filename_inputData <- "SInAS_3.1.1_DASCOnativeintroduced.csv" # 
 
 column_scientificName <- "scientificName" # taxon name with or without authority; require for GBIF
 column_taxonName <- "Taxon" # taxon name without authority; required for OBIS
@@ -60,8 +60,8 @@ column_habitat <- "habitat" # column name of year of first record of occurrence
 ## name of shapefile providing polygons for the new delineation
 name_of_shapefile <- "RegionsTerrMarine_160621"
 
-## term to be added to the names of the output files; can be blank
-file_name_extension <- "080126"
+## identifier to be added to the names of the output files; can be blank; a trailing "_" will be added automatically
+file_name_extension <- "NatInt060226"
 
 
 
@@ -201,7 +201,7 @@ dat <- final_DASCO_output(file_name_extension)
 
 ## Closing log file  ###########################################################
 cat(paste0("\n************************************************************************************************************ \n"))
-cat(paste0("End of run ", identifier," \n"))
+cat(paste0("End of run ", file_name_extension," \n"))
 cat(paste0("********************************************** ", Sys.time(), " ********************************************** \n"))
 
 sink()

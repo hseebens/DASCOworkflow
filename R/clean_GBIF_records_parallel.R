@@ -32,8 +32,9 @@ clean_GBIF_records <- function(
   GBIF_records_files <- allfiles[grepl("\\.rds",allfiles)]
   GBIF_records_files <- GBIF_records_files[grepl(file_name_extension, GBIF_records_files)]
   
+    
   dat_all <- list()
-  for (i in 1:length(GBIF_records_files)){ # 
+  for (i in 1:length(GBIF_records_files)){ #
     
     cat(paste0("\n ",i,": ",GBIF_records_files[i],"\n"))
     
@@ -79,8 +80,13 @@ clean_GBIF_records <- function(
       tab_rec <- cumsum(table(dat_sub$taxonKey))
       groups <- (ceiling(tab_rec/n_split))
       group_lvl <- unique(groups)
+
+      cores=detectCores()
+      cl <- makeCluster(min(c(cores[1]-1,4))) # avoid overloading your computer
+      registerDoParallel(cl)
       
-      for (j in 1:length(group_lvl)){
+      foreach(j=1:length(group_lvl), .packages=c("data.table","CoordinateCleaner"), .errorhandling = "remove") %dopar% {
+      # for (j in 1:length(group_lvl)){
         
         cat(paste0("\n ",i,": ",GBIF_records_files[i]," ",j,"/",length(group_lvl),"\n "))
         
@@ -143,7 +149,7 @@ clean_GBIF_records <- function(
             }
           }
           dat_cleaned <- rbindlist(dat_cleaned_sub)
-          
+
         } else {
           
           dat_cleaned <- clean_coordinates(dat_sub_sub, 
@@ -155,7 +161,11 @@ clean_GBIF_records <- function(
          
         # intermediate saving of file (just for safety, files can be removed if everything works)
         fwrite(dat_cleaned,file.path("Data","Output","Intermediate",paste0("GBIFrecords_Cleaned_",file_name_extension,"_",i,"_",j,".gz")))
+        
+        return()
       }
+      ## stop cluster  
+      stopCluster(cl)
       
       # collect data store to disk
       dat_sub_all <- list()
@@ -190,6 +200,7 @@ clean_GBIF_records <- function(
     
     dat_all[[i]] <- dat_cleaned
   }
+  
 
   ## in case the workflow was restarted at a later for-loop iteration, all data should be loaded again
   if (any(unlist(lapply(dat_all, length))==0)){

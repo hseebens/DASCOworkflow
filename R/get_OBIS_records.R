@@ -22,6 +22,8 @@ get_OBIS_records <- function(path_to_OBISdownloads, file_name_extension,
                                     "decimalLatitude", "scientificName")
   ){
   
+  cat(paste0("\n*** Get records from OBIS ***\n") ) # notification for the user
+  
   ### Load the Data
   FullTaxaList <- fread(file.path("Data","Output",paste0("TaxaList_Standardised_",file_name_extension,".csv")))
 

@@ -24,6 +24,8 @@ clean_OBIS_records <- function(
   tests_for_cleaning = c("capitals","centroids", "equal","gbif","institutions","outliers","zeros")  # remove 'seas' test from default
   ){
   
+  cat(paste0("\n*** Cleaning OBIS records ***\n") ) # notification for the user
+  
   # to remind the user of the configuration
   if (thin_records){
     cat("\n Record thinning is enabled!  \n\n")
