@@ -3,11 +3,11 @@
 # This script is part of the workflow DASCO to Downscale Alien Species Checklists
 # using Occurrence records from GBIF and OBIS.
 #
-# The DASCO workflow has been published as ..., which has to be cited when used.
+# The script opens GBIF downloads and extracts required information. It is 
+# designed to handle zipped files of sizes up to 10 GB. This also depends on the
+# memory of the computer used.
 #
-# The script open downloaded GBIF files and extracts required information.
-#
-# Authors: Hanno Seebens, Ekin Kaplan, 28.03.2021
+# Authors: Hanno Seebens with support by Ekin Kaplan, 08.01.2026
 ##################################################################################
 
 
@@ -19,7 +19,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
   
   allfiles <- list.files(path_to_GBIFdownloads)
   zippedfiles <- allfiles[grepl("\\.zip",allfiles)]
-  csvfiles <- allfiles[grepl("\\.csv",allfiles)]
+  # csvfiles <- allfiles[grepl("\\.csv",allfiles)]
   
   
   # extract_files <- c("0034400-200221144449610.zip")
@@ -49,7 +49,7 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     ## single file...
     # test_dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),nrows = 1)
     # dat <- fread(file=paste0("FirstRecordsSpec/",unzipped),select=c("speciesKey","decimalLatitude","decimalLongitude","basisOfRecord","eventDate","year","dateIdentified"),quote="")
-    dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),select=c("speciesKey","basisOfRecord","decimalLatitude","decimalLongitude"),quote="")
+    dat <- fread(file=file.path(path_to_GBIFdownloads,unzipped),select=c("taxonKey","basisOfRecord","decimalLatitude","decimalLongitude"),quote="")
     
     # ## multiple files...
     # dat <- fread(file=paste0("FirstRecordsSpec/",unzipped),select=ind_columns,quote="")
@@ -59,9 +59,11 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     # }
     
     dat <- dat[basisOfRecord!="FOSSIL_SPECIMEN"]
-
+    dat <- dat[basisOfRecord!="LIVING_SPECIMEN"]
+    dat <- dat[basisOfRecord!="PRESERVED_SPECIMEN"]
+    
     # dat_sub <- dat[,c("scientificName","decimalLatitude","decimalLongitude")]
-    dat_sub <- dat[,c("speciesKey","decimalLatitude","decimalLongitude")]
+    dat_sub <- dat[,c("taxonKey","decimalLatitude","decimalLongitude")]
     
     #######################################################################
     ### initial cleaning of GBIF records ##################################
@@ -71,11 +73,11 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     dat_sub <- dat_sub[!ind]
     
     # remove non-numeric values
-    nonnumeric <- is.na(as.numeric(dat_sub$speciesKey)) | is.na(as.numeric(dat_sub$decimalLatitude)) | is.na(as.numeric(dat_sub$decimalLongitude))
+    nonnumeric <- is.na(as.numeric(dat_sub$taxonKey)) | is.na(as.numeric(dat_sub$decimalLatitude)) | is.na(as.numeric(dat_sub$decimalLongitude))
     if (any(nonnumeric)){
       dat_sub <- dat_sub[!nonnumeric,]
       
-      dat_sub$speciesKey <- as.numeric(dat_sub$speciesKey)
+      dat_sub$taxonKey <- as.numeric(dat_sub$taxonKey)
       dat_sub$decimalLatitude <- as.numeric(dat_sub$decimalLatitude)
       dat_sub$decimalLongitude <- as.numeric(dat_sub$decimalLongitude)
     }
@@ -85,10 +87,10 @@ extract_GBIF_columns <- function(path_to_GBIFdownloads,file_name_extension){
     dat_sub <- dat_sub[!ind,]
     
     # remove empty records
-    ind <- is.na(dat_sub$speciesKey) | is.na(dat_sub$decimalLatitude) | is.na(dat_sub$decimalLongitude)
+    ind <- is.na(dat_sub$taxonKey) | is.na(dat_sub$decimalLatitude) | is.na(dat_sub$decimalLongitude)
     dat_sub <- dat_sub[!ind,]
 
-    cat(paste0("\n  ",length(unique(dat_sub$speciesKey))," species in ","GBIFrecords_",file_name_extension,"_",data_key,"-",i,".rds \n"))
+    cat(paste0("\n  ",length(unique(dat_sub$taxonKey))," species in ","GBIFrecords_",file_name_extension,"_",data_key,"-",i,".rds \n"))
     
     ## output ###########
     # fwrite(dat_sub,file = file.path(path_to_GBIFdownloads,paste0("GBIFrecords_",file_name_extension,"_",data_key,"-",i,".gz")))

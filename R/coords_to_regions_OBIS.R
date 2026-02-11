@@ -18,6 +18,8 @@ coords_to_regions_OBIS <- function(
   file_name_extension=file_name_extension
 ){
   
+  cat(paste0("\n*** Match OBIS coordinates to regions ***\n") ) # notification for the user
+  
   ### load data ###############################################################
   
   ## get OBIS species keys
