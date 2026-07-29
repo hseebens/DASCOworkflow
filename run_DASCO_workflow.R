@@ -67,10 +67,11 @@ file_name_extension <- "NatInt060226"
 
 ###################################################################################
 ## GBIF account details ###########################################################
+# (enter your details)
 
-user <- "karakoff"                                  # your gbif.org username
-pwd <- "Harpalus3!"                                     # your gbif.org password (set the same password for all accounts for convenience)
-email <- "lisa.heckeroth@bio.uni-giessen.de"                 # your email which you will recieve the download link
+user <- ""                                  # your gbif.org username
+pwd <- ""                                     # your gbif.org password (set the same password for all accounts for convenience)
+email <- ""                 # your email which you will recieve the download link
 
 
 ###################################################################################
